@@ -1,0 +1,436 @@
+package com.fda.aps.view.managedbean;
+
+import com.fda.aps.ADFUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import oracle.adf.view.rich.event.DialogEvent.Outcome;
+
+import javax.faces.event.ActionEvent;
+
+import javax.faces.event.ValueChangeEvent;
+
+import oracle.adf.model.binding.DCIteratorBinding;
+
+import oracle.adf.share.ADFContext;
+import oracle.adf.share.logging.ADFLogger;
+import oracle.adf.share.security.SecurityContext;
+import oracle.adf.view.rich.component.rich.data.RichTable;
+
+import oracle.adf.view.rich.component.rich.input.RichSelectBooleanCheckbox;
+import oracle.adf.view.rich.context.AdfFacesContext;
+
+import oracle.adf.view.rich.event.DialogEvent;
+
+import oracle.binding.OperationBinding;
+
+import oracle.jbo.Key;
+import oracle.jbo.Row;
+import oracle.jbo.RowIterator;
+import oracle.jbo.RowSetIterator;
+import oracle.jbo.ViewCriteria;
+import oracle.jbo.ViewObject;
+import oracle.jbo.domain.Number;
+import oracle.jbo.server.ViewObjectImpl;
+
+public class MassApprovalRejectionBean {
+    private RichTable massTbl;
+    private static List<String> rowKeyList = new ArrayList<String>();
+    private String massApproveComment;
+    private String massRejectComment;
+    
+    private static ADFLogger _logger = 
+            ADFLogger.createADFLogger(MassApprovalRejectionBean.class); 
+
+    public MassApprovalRejectionBean() {
+        super();
+    }
+
+    public void massApproveRequest(ActionEvent evt) {
+        _logger.info("Entering massApproveRequest");
+        DCIteratorBinding notificationIter =
+            ADFUtils.findIterator("AapNotificationVOIterator");
+        ViewObject notificationVO = notificationIter.getViewObject();
+
+
+        //long estimatedRowCount = notificationVO.getEstimatedRowCount();
+        OperationBinding approveOperation = null;
+        RowSetIterator notificationRSIter =
+            notificationIter.getRowSetIterator();
+        //for (int i = 0; i < estimatedRowCount; i++) {
+        for (String r : rowKeyList) {
+            Key key = new Key(new Object[] { r });
+            RowIterator rowIter =
+                notificationVO.findByAltKey("CenterItemAltKey", key, -1,
+                                            Boolean.TRUE);
+
+            if (rowIter.hasNext()) {
+
+                Row row = rowIter.next();
+
+                //Row row = notificationRSIter.getRow(key);
+                //notificationIter.getRowAtRangeIndex(i);
+                if (row != null) {
+                    System.err.println(row.getAttribute("DetailedDescription"));
+                    System.err.println(row.getAttribute("RequestId"));
+                    // if (true == row.getAttribute("RowSelected")) {
+                    if (isAcquisitionLead()) {
+                        //row.setAttribute("WfStatus", "ACQUSITION_APPROVED");
+                        approveOperation =
+                                ADFUtils.findOperation("approveAcquisitionRequest");
+                        approveOperation.getParamsMap().put("centerItemNo",
+                                                            row.getAttribute("CenterItemNo"));
+                        approveOperation.getParamsMap().put("requestId",
+                                                            row.getAttribute("RequestId"));
+                        approveOperation.execute();
+                    } else {
+                        //row.setAttribute("WfStatus", "BUDGET_APPROVED");
+                        approveOperation =
+                                ADFUtils.findOperation("approveBudgetRequest");
+                        approveOperation.getParamsMap().put("centerItemNo",
+                                                            row.getAttribute("CenterItemNo"));
+                        approveOperation.getParamsMap().put("requestId",
+                                                            row.getAttribute("RequestId"));
+                        approveOperation.execute();
+                    }
+                }
+                //}
+            }
+        }
+        OperationBinding commit = ADFUtils.findOperation("Commit");
+        commit.execute();
+
+        OperationBinding initializeDashboard =
+            ADFUtils.findOperation("initializeDashboard");
+        initializeDashboard.execute();
+    }
+
+    public void massRejectRequest(ActionEvent evt) {
+        
+        _logger.info("Entering massRejectRequest");
+        //        DCIteratorBinding notificationIter =
+        //            ADFUtils.findIterator("AapNotificationVOIterator");
+        //        ViewObject notificationVO = notificationIter.getViewObject();
+        //        long estimatedRowCount = notificationVO.getEstimatedRowCount();
+        //
+        //        for (int i = 0; i < estimatedRowCount; i++) {
+        //            Row row = notificationIter.getRowAtRangeIndex(i);
+        //            System.err.println(row.getAttribute("DetailedDescription"));
+        //            if (true == row.getAttribute("RowSelected")) {
+        //                if (isAcquisitionLead()) {
+        //                    row.setAttribute("WfStatus", "ACQUSITION_REJECTED");
+        //                } else {
+        //                    row.setAttribute("WfStatus", "BUDGET_REJECTED");
+        //                }
+        //            }
+        //        }
+        //        OperationBinding commit = ADFUtils.findOperation("Commit");
+        //        commit.execute();
+        //
+        //        OperationBinding initializeDashboard =
+        //            ADFUtils.findOperation("initializeDashboard");
+        //        initializeDashboard.execute();
+
+        DCIteratorBinding notificationIter =
+            ADFUtils.findIterator("MassApprovalRequestsVOIterator");
+        ViewObject notificationVO = notificationIter.getViewObject();
+
+
+        //long estimatedRowCount = notificationVO.getEstimatedRowCount();
+        OperationBinding rejectOperation = null;
+        RowSetIterator notificationRSIter =
+            notificationIter.getRowSetIterator();
+        //for (int i = 0; i < estimatedRowCount; i++) {
+        for (String r : rowKeyList) {
+            _logger.info("Center Line item no: "+r);
+            Key key = new Key(new Object[] { r });
+            RowIterator rowIter =
+                notificationVO.findByAltKey("CenterItemAltKey", key, -1,
+                                            Boolean.TRUE);
+
+            if (rowIter.hasNext()) {
+
+                Row row = rowIter.next();
+
+                //Row row = notificationRSIter.getRow(key);
+                //notificationIter.getRowAtRangeIndex(i);
+                if (row != null) {
+                    System.err.println(row.getAttribute("DetailedDescription"));
+                    System.err.println(row.getAttribute("RequestId"));
+                    // if (true == row.getAttribute("RowSelected")) {
+                    if (isAcquisitionLead()) {
+                        //row.setAttribute("WfStatus", "ACQUSITION_APPROVED");
+                        rejectOperation =
+                                ADFUtils.findOperation("rejectAcquisitionRequest");
+                        rejectOperation.getParamsMap().put("centerItemNo",
+                                                           row.getAttribute("CenterItemNo"));
+                        rejectOperation.getParamsMap().put("requestId",
+                                                           row.getAttribute("RequestId"));
+                        rejectOperation.execute();
+                    } else {
+                        //row.setAttribute("WfStatus", "BUDGET_APPROVED");
+                        rejectOperation =
+                                ADFUtils.findOperation("rejectAquisitionLeadRequest");
+                        rejectOperation.getParamsMap().put("centerItemNo",
+                                                           row.getAttribute("CenterItemNo"));
+                        rejectOperation.getParamsMap().put("requestId",
+                                                           row.getAttribute("RequestId"));
+                        rejectOperation.execute();
+                    }
+                }
+                //}
+            }
+        }
+        OperationBinding commit = ADFUtils.findOperation("Commit");
+        commit.execute();
+
+        OperationBinding initializeDashboard =
+            ADFUtils.findOperation("initializeDashboard");
+        initializeDashboard.execute();
+    }
+
+    public boolean isAcquisitionLead() {
+        String acquisitionLead = "false";
+
+        OperationBinding isAcquisitionLead =
+            ADFUtils.findOperation("isAcquisitionLead");
+        acquisitionLead = (String)isAcquisitionLead.execute();
+        return acquisitionLead.equalsIgnoreCase("true");
+    }
+
+    public boolean isBudgetLead() {
+        boolean acquisitionLead = false;
+
+        OperationBinding isAcquisitionLead =
+            ADFUtils.findOperation("isBudgetLead");
+        acquisitionLead =
+                ((Boolean)isAcquisitionLead.execute()).booleanValue();
+        return acquisitionLead;
+    }
+
+    public void onSelectAllClick(ValueChangeEvent valueChangeEvent) {
+        // Add event code here...
+        _logger.info("Entering onSelectAllClick");
+        RichSelectBooleanCheckbox headerChkBox =
+            (RichSelectBooleanCheckbox)valueChangeEvent.getSource();
+        if (headerChkBox.getId().equals("othdr")) {
+
+            DCIteratorBinding notificationIter =
+                ADFUtils.findIterator("AapNotificationVOIterator");
+            ViewObject notificationVO = notificationIter.getViewObject();
+            long estimatedRowCount = notificationVO.getEstimatedRowCount();
+
+            for (int i = 0; i < estimatedRowCount; i++) {
+                Row row = notificationIter.getRowAtRangeIndex(i);
+                if (row != null) {
+                    System.err.println(row.getAttribute("DetailedDescription"));
+
+                    row.setAttribute("RowSelected",
+                                     valueChangeEvent.getNewValue());
+                }
+
+
+            }
+
+
+            AdfFacesContext.getCurrentInstance().addPartialTarget(massTbl);
+        }
+    }
+
+    public void setMassTbl(RichTable massTbl) {
+        this.massTbl = massTbl;
+    }
+
+    public RichTable getMassTbl() {
+        return massTbl;
+    }
+
+    public void onSelectRequests(ValueChangeEvent evt) {
+        // Add event code here...
+        _logger.info("Entering onSelectRequests");
+        RichSelectBooleanCheckbox selected =
+            (RichSelectBooleanCheckbox)evt.getSource();
+        String canRowKey =
+            (String)selected.getAttributes().get("centerItemRowKey");
+        if ((Boolean)evt.getNewValue()) {
+            rowKeyList.add(canRowKey);
+        } else {
+            rowKeyList.remove(canRowKey);
+        }
+        for (String r : rowKeyList) {
+            System.err.println(r);
+        }
+    }
+
+    public void setMassApproveComment(String massApproveComment) {
+        this.massApproveComment = massApproveComment;
+    }
+
+    public String getMassApproveComment() {
+        return massApproveComment;
+    }
+
+    public void setMassRejectComment(String massRejectComment) {
+        this.massRejectComment = massRejectComment;
+    }
+
+    public String getMassRejectComment() {
+        return massRejectComment;
+    }
+
+    public void onMassApprove(DialogEvent dialogEvent) {
+        // Add event code here...
+        _logger.info("Entering onMassApprove");
+        ADFContext context = ADFContext.getCurrent();
+        SecurityContext securityContext = context.getSecurityContext();
+        if (dialogEvent.getOutcome().equals(Outcome.ok)) {
+            DCIteratorBinding notificationIter =
+                ADFUtils.findIterator("AapNotificationVOIterator");
+            ViewObjectImpl notificationVO = (ViewObjectImpl)notificationIter.getViewObject();
+            ViewObject commentsVO = getCommentsViewObject() ;
+
+            //long estimatedRowCount = notificationVO.getEstimatedRowCount();
+            OperationBinding approveOperation = null;
+            RowSetIterator notificationRSIter =
+                notificationIter.getRowSetIterator();
+            //for (int i = 0; i < estimatedRowCount; i++) {
+            for (String r : rowKeyList) {
+                _logger.info("onMassApprove center item no: "+r);
+                Key key = new Key(new Object[] { r });
+//                RowIterator rowIter =
+//                    notificationVO.findByAltKey("CenterItemAltKey", key, -1,
+//                                                Boolean.TRUE);
+                ViewCriteria byCenterItemNo = notificationVO.getViewCriteria("QueryByCenterItemNo");
+                notificationVO.applyViewCriteria(byCenterItemNo);
+                notificationVO.setNamedWhereClauseParam("bind_CenterItemNo", r);
+                notificationVO.executeQuery();
+                Row notifRow = notificationVO.first();
+//                if (rowIter.hasNext()) {
+//
+//                    Row row = rowIter.next();
+
+                    //Row row = notificationRSIter.getRow(key);
+                    //notificationIter.getRowAtRangeIndex(i);
+                    if (notifRow != null) {
+                        System.err.println(notifRow.getAttribute("DetailedDescription"));
+                        System.err.println(notifRow.getAttribute("RequestId"));
+                        // if (true == row.getAttribute("RowSelected")) {
+                        Row newCommentRow = commentsVO.createRow();
+                        newCommentRow.setAttribute("CommentText", massApproveComment);
+                        newCommentRow.setAttribute("RequestId", notifRow.getAttribute("RequestId"));
+                        commentsVO.insertRow(newCommentRow);
+                        String status = (String)notifRow.getAttribute("WfStatus");
+                        if ("SUBMITTED".equalsIgnoreCase(status)) {
+                            //row.setAttribute("WfStatus", "ACQUSITION_APPROVED");
+                            approveOperation =
+                                    ADFUtils.findOperation("approveAcquisitionRequest");
+                            approveOperation.getParamsMap().put("centerItemNo",
+                                                                notifRow.getAttribute("CenterItemNo"));
+                            approveOperation.getParamsMap().put("requestId",
+                                                                notifRow.getAttribute("RequestId"));
+                            approveOperation.execute();
+                        } else {
+                            //row.setAttribute("WfStatus", "BUDGET_APPROVED");
+                            approveOperation =
+                                    ADFUtils.findOperation("approveBudgetRequest");
+                            approveOperation.getParamsMap().put("centerItemNo",
+                                                                notifRow.getAttribute("CenterItemNo"));
+                            approveOperation.getParamsMap().put("requestId",
+                                                                notifRow.getAttribute("RequestId"));
+                            approveOperation.execute();
+                        }
+                    }
+                    //}
+                
+               // rowIter.reset();
+            }
+            OperationBinding commit = ADFUtils.findOperation("Commit");
+            commit.execute();
+
+            OperationBinding initializeMassApprovalRejection =
+                ADFUtils.findOperation("initializeMassApprovalRejection");
+            initializeMassApprovalRejection.execute();
+
+        }
+    }
+
+    public void onMassReject(DialogEvent dialogEvent) {
+        // Add event code here...
+        _logger.info("Entering onMassReject");
+        if (dialogEvent.getOutcome().equals(Outcome.ok)) {
+            DCIteratorBinding notificationIter =
+                ADFUtils.findIterator("AapNotificationVOIterator");
+            ViewObjectImpl notificationVO = (ViewObjectImpl)notificationIter.getViewObject();
+
+            ViewObject commentsVO = getCommentsViewObject() ;
+            //long estimatedRowCount = notificationVO.getEstimatedRowCount();
+            OperationBinding rejectOperation = null;
+            RowSetIterator notificationRSIter =
+                notificationIter.getRowSetIterator();
+            //for (int i = 0; i < estimatedRowCount; i++) {
+            for (String r : rowKeyList) {
+                _logger.info("onMassReject center item no: "+r);
+                Key key = new Key(new Object[] { r });
+                RowIterator rowIter =
+                    notificationVO.findByAltKey("CenterItemAltKey", key, -1,
+                                                Boolean.TRUE);
+                ViewCriteria byCenterItemNo = notificationVO.getViewCriteria("QueryByCenterItemNo");
+                notificationVO.applyViewCriteria(byCenterItemNo);
+                notificationVO.setNamedWhereClauseParam("bind_CenterItemNo", r);
+                notificationVO.executeQuery();
+                Row notifRow = notificationVO.first();
+
+                //if (rowIter.hasNext()) {
+
+                   // Row row = rowIter.next();
+
+                    //Row row = notificationRSIter.getRow(key);
+                    //notificationIter.getRowAtRangeIndex(i);
+                    if (notifRow != null) {
+                        System.err.println(notifRow.getAttribute("DetailedDescription"));
+                        System.err.println(notifRow.getAttribute("RequestId"));
+                        
+                        Row newCommentRow = commentsVO.createRow();
+                        newCommentRow.setAttribute("CommentText", massRejectComment);
+                        newCommentRow.setAttribute("RequestId", notifRow.getAttribute("RequestId"));
+                        commentsVO.insertRow(newCommentRow);
+                        // if (true == row.getAttribute("RowSelected")) {
+                        if (isAcquisitionLead()) {
+                            //row.setAttribute("WfStatus", "ACQUSITION_APPROVED");
+                            rejectOperation =
+                                    ADFUtils.findOperation("rejectAcquisitionRequest");
+                            rejectOperation.getParamsMap().put("centerItemNo",
+                                                               notifRow.getAttribute("CenterItemNo"));
+                            rejectOperation.getParamsMap().put("requestId",
+                                                               notifRow.getAttribute("RequestId"));
+                            rejectOperation.execute();
+                        } else {
+                            //row.setAttribute("WfStatus", "BUDGET_APPROVED");
+                            rejectOperation =
+                                    ADFUtils.findOperation("rejectAquisitionLeadRequest");
+                            rejectOperation.getParamsMap().put("centerItemNo",
+                                                               notifRow.getAttribute("CenterItemNo"));
+                            rejectOperation.getParamsMap().put("requestId",
+                                                               notifRow.getAttribute("RequestId"));
+                            rejectOperation.execute();
+                        }
+                    }
+                    //}
+                //}
+            }
+            OperationBinding commit = ADFUtils.findOperation("Commit");
+            commit.execute();
+
+            OperationBinding initializeDashboard =
+                ADFUtils.findOperation("initializeMassApprovalRejection");
+            initializeDashboard.execute();
+
+        }
+    }
+
+    private ViewObject getCommentsViewObject(){
+        return ADFUtils.findIterator("MassCommentsVOIterator").getViewObject();    
+    }
+
+}

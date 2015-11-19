@@ -1,0 +1,1235 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="APSSearchView"
+  Version="11.1.1.64.93"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.fda.aps.model.viewobject.APSSearchView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="bindCenter"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindCenterLineNo"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindDocNo"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindDescription"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bindAwardDate"
+    Kind="viewcriteria"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="bindRequisitionNo"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bind_status"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <ViewAccessor
+    Name="WFStatusROView"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefType"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefType"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['WFS']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_WfStatus"
+    ListVOName="WFStatusROView"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_WfStatus_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="WfStatus"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery>
+    <![CDATA[SELECT 
+    AAP_REQUESTS.CTR_LN_ITM_NO CTR_LN_ITM_NO, 
+    AAP_REQUESTS.ACQUISITION_STATUS ACQUISITION_STATUS, 
+    AAP_REQUESTS.PRIORITY_LEVEL PRIORITY_LEVEL, 
+    AAP_REQUESTS.RECURRING_ITEM RECURRING_ITEM, 
+    AAP_REQUESTS.ZERO_DOLLAR_REQN ZERO_DOLLAR_REQN, 
+    AAP_REQUESTS.REQUISITION_NO REQUISITION_NO, 
+    AAP_REQUESTS.EXISTING_DOC_NO EXISTING_DOC_NO, 
+    AAP_REQUESTS.RELEASE_NUMBER RELEASE_NUMBER, 
+    AAP_REQUESTS.REQUIREMENT_TYPE REQUIREMENT_TYPE, 
+    AAP_REQUESTS.OPTION_YR_EXERCISE OPTION_YR_EXERCISE, 
+    AAP_REQUESTS.DETAILED_DESCRIPTION DETAILED_DESCRIPTION, 
+    AAP_REQUESTS.REQUIRED_AWARD_DATE REQUIRED_AWARD_DATE, 
+    AAP_REQUESTS.CURR_YR_POP_END_DATE CURR_YR_POP_END_DATE, 
+    AAP_REQUESTS.ANTICIPATED_ACTION_TYPE ANTICIPATED_ACTION_TYPE, 
+    AAP_REQUESTS.POTENTIAL_CONTRACT_TYPE POTENTIAL_CONTRACT_TYPE, 
+    AAP_REQUESTS.COMMODITY_TYPE COMMODITY_TYPE, 
+    AAP_REQUESTS.ANTICIPATED_ACQUISITION_METHOD ANTICIPATED_ACQUISITION_METHOD, 
+    AAP_REQUESTS.PRODUCT_SERVICE_CODE PRODUCT_SERVICE_CODE, 
+    AAP_REQUESTS.NAICS_CODE NAICS_CODE, 
+    AAP_REQUESTS.ESTIMATED_TOTAL_PROJ_VALUE ESTIMATED_TOTAL_PROJ_VALUE, 
+    AAP_REQUESTS.TOTAL_DLARS_FOR_CURT_FY TOTAL_DLARS_FOR_CURT_FY, 
+    AAP_REQUESTS.PROJECT_POP_START_DATE PROJECT_POP_START_DATE, 
+    AAP_REQUESTS.PROJECT_POP_END_DATE PROJECT_POP_END_DATE, 
+    AAP_REQUESTS.ANTICIPATED_POP ANTICIPATED_POP, 
+    AAP_REQUESTS.COLLABORATION_FLAG COLLABORATION_FLAG, 
+    AAP_REQUESTS.COLLABORATION_ITEM_NO COLLABORATION_ITEM_NO, 
+    AAP_REQUESTS.LEAD_MNG_CENTER LEAD_MNG_CENTER, 
+    AAP_REQUESTS.OWNER_NM_TEL_NO OWNER_NM_TEL_NO, 
+    AAP_REQUESTS.ESTIMATED_RFA_REL_DATE ESTIMATED_RFA_REL_DATE, 
+    AAP_REQUESTS.GRANTS_COMMODITY GRANTS_COMMODITY, 
+    AAP_REQUESTS.NCIBOARD_REVIEW_REQUIRED NCIBOARD_REVIEW_REQUIRED, 
+    AAP_REQUESTS.ANTICIPATED_NO_OF_AWARDS ANTICIPATED_NO_OF_AWARDS, 
+    AAP_REQUESTS.EXISTING_IAA_NUMBER EXISTING_IAA_NUMBER, 
+    AAP_REQUESTS.PURPOSE PURPOSE, 
+    AAP_REQUESTS.ESTIMATED_NUMBER_OF_ACTIONS ESTIMATED_NUMBER_OF_ACTIONS, 
+    AAP_REQUESTS.SERVICE_OR_REIMBURSABLE SERVICE_OR_REIMBURSABLE, 
+    AAP_REQUESTS.REIMBURSABLE_AMT REIMBURSABLE_AMT, 
+    AAP_REQUESTS.REIMBURSABLE_AGENCY REIMBURSABLE_AGENCY, 
+    AAP_REQUESTS.SUBMIT_FLAG SUBMIT_FLAG, 
+    AAP_REQUESTS.CENTER_ID CENTER_ID, 
+    AAP_REQUESTS.REQUEST_ID REQUEST_ID, 
+    AAP_REQUESTS.FISCAL_YEAR FISCAL_YEAR, 
+    AAP_REQUESTS.CREATED_BY CREATED_BY, 
+    AAP_REQUESTS.CREATED_DATE CREATED_DATE, 
+    AAP_REQUESTS.LAST_UPDATED_BY LAST_UPDATED_BY, 
+    AAP_REQUESTS.LAST_UPDATED_DATE LAST_UPDATED_DATE, 
+    AAP_REQUESTS.BRANCH BRANCH, 
+    AAP_REQUESTS.DIVISION DIVISION, 
+    AAP_REQUESTS.DUE_DATE DUE_DATE, 
+    AAP_REQUESTS.SUPER_OFC SUPER_OFC, 
+    AAP_REQUESTS.SUB_OFC SUB_OFC, 
+    AAP_REQUESTS.TOTAL_DLARS_CRNT_YR TOTAL_DLARS_CRNT_YR, 
+    AAP_NOTIFICATION.NOTIFICATION_ID NOTIFICATION_ID, 
+    AAP_NOTIFICATION.REQUEST_ID REQUEST_ID1, 
+    AAP_NOTIFICATION.SUBMITTED_FROM SUBMITTED_FROM, 
+    AAP_NOTIFICATION.SUBMITTED_TO SUBMITTED_TO, 
+    AAP_NOTIFICATION.WF_STATUS WF_STATUS, 
+    AAP_NOTIFICATION.CREATED_BY CREATED_BY1, 
+    AAP_NOTIFICATION.CREATED_DATE CREATED_DATE1, 
+    AAP_NOTIFICATION.LAST_UPDATED_BY LAST_UPDATED_BY1, 
+    AAP_NOTIFICATION.LAST_UPDATED_DATE LAST_UPDATED_DATE1, 
+    AAP_NOTIFICATION.CENTER_ITEM_NO CENTER_ITEM_NO, 
+    AAP_NOTIFICATION.NOTIF_COMMENT NOTIF_COMMENT 
+FROM 
+    AAP_REQUESTS, 
+    AAP_NOTIFICATION 
+WHERE 
+    AAP_REQUESTS.REQUEST_ID = AAP_NOTIFICATION.REQUEST_ID]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="CtrLnItmNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CTR_LN_ITM_NO"
+    Expression="CTR_LN_ITM_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.APSSearchView.CtrLnItmNo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AcquisitionStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACQUISITION_STATUS"
+    Expression="ACQUISITION_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PriorityLevel"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PRIORITY_LEVEL"
+    Expression="PRIORITY_LEVEL"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RecurringItem"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RECURRING_ITEM"
+    Expression="RECURRING_ITEM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ZeroDollarReqn"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ZERO_DOLLAR_REQN"
+    Expression="ZERO_DOLLAR_REQN"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RequisitionNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REQUISITION_NO"
+    Expression="REQUISITION_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.APSSearchView.RequisitionNo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExistingDocNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EXISTING_DOC_NO"
+    Expression="EXISTING_DOC_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.APSSearchView.ExistingDocNo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReleaseNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RELEASE_NUMBER"
+    Expression="RELEASE_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RequirementType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REQUIREMENT_TYPE"
+    Expression="REQUIREMENT_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OptionYrExercise"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OPTION_YR_EXERCISE"
+    Expression="OPTION_YR_EXERCISE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.APSSearchView.OptionYrExercise_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DetailedDescription"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DETAILED_DESCRIPTION"
+    Expression="DETAILED_DESCRIPTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.APSSearchView.DetailedDescription_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RequiredAwardDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="REQUIRED_AWARD_DATE"
+    Expression="REQUIRED_AWARD_DATE"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.APSSearchView.RequiredAwardDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CurrYrPopEndDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="CURR_YR_POP_END_DATE"
+    Expression="CURR_YR_POP_END_DATE"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AnticipatedActionType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ANTICIPATED_ACTION_TYPE"
+    Expression="ANTICIPATED_ACTION_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PotentialContractType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="POTENTIAL_CONTRACT_TYPE"
+    Expression="POTENTIAL_CONTRACT_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CommodityType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COMMODITY_TYPE"
+    Expression="COMMODITY_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AnticipatedAcquisitionMethod"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ANTICIPATED_ACQUISITION_METHOD"
+    Expression="ANTICIPATED_ACQUISITION_METHOD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProductServiceCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PRODUCT_SERVICE_CODE"
+    Expression="PRODUCT_SERVICE_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NaicsCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NAICS_CODE"
+    Expression="NAICS_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EstimatedTotalProjValue"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ESTIMATED_TOTAL_PROJ_VALUE"
+    Expression="ESTIMATED_TOTAL_PROJ_VALUE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalDlarsForCurtFy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_DLARS_FOR_CURT_FY"
+    Expression="TOTAL_DLARS_FOR_CURT_FY"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="com.fda.aps.model.viewobject.APSSearchView.TotalDlarsForCurtFy_FMT_FORMATTER"/>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.APSSearchView.TotalDlarsForCurtFy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProjectPopStartDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="PROJECT_POP_START_DATE"
+    Expression="PROJECT_POP_START_DATE"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProjectPopEndDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="PROJECT_POP_END_DATE"
+    Expression="PROJECT_POP_END_DATE"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AnticipatedPop"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ANTICIPATED_POP"
+    Expression="ANTICIPATED_POP"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CollaborationFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COLLABORATION_FLAG"
+    Expression="COLLABORATION_FLAG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CollaborationItemNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COLLABORATION_ITEM_NO"
+    Expression="COLLABORATION_ITEM_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LeadMngCenter"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LEAD_MNG_CENTER"
+    Expression="LEAD_MNG_CENTER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OwnerNmTelNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OWNER_NM_TEL_NO"
+    Expression="OWNER_NM_TEL_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EstimatedRfaRelDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="ESTIMATED_RFA_REL_DATE"
+    Expression="ESTIMATED_RFA_REL_DATE"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GrantsCommodity"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GRANTS_COMMODITY"
+    Expression="GRANTS_COMMODITY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NciboardReviewRequired"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NCIBOARD_REVIEW_REQUIRED"
+    Expression="NCIBOARD_REVIEW_REQUIRED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AnticipatedNoOfAwards"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ANTICIPATED_NO_OF_AWARDS"
+    Expression="ANTICIPATED_NO_OF_AWARDS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExistingIaaNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EXISTING_IAA_NUMBER"
+    Expression="EXISTING_IAA_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Purpose"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="40"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PURPOSE"
+    Expression="PURPOSE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EstimatedNumberOfActions"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ESTIMATED_NUMBER_OF_ACTIONS"
+    Expression="ESTIMATED_NUMBER_OF_ACTIONS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ServiceOrReimbursable"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SERVICE_OR_REIMBURSABLE"
+    Expression="SERVICE_OR_REIMBURSABLE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReimbursableAmt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REIMBURSABLE_AMT"
+    Expression="REIMBURSABLE_AMT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReimbursableAgency"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REIMBURSABLE_AGENCY"
+    Expression="REIMBURSABLE_AGENCY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SubmitFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="SUBMIT_FLAG"
+    Expression="SUBMIT_FLAG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CenterId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CENTER_ID"
+    Expression="CENTER_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.APSSearchView.CenterId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RequestId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="REQUEST_ID"
+    Expression="REQUEST_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FiscalYear"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="FISCAL_YEAR"
+    Expression="FISCAL_YEAR"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.APSSearchView.FiscalYear_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="40"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CREATED_BY"
+    Expression="CREATED_BY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="CREATED_DATE"
+    Expression="CREATED_DATE"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="40"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LAST_UPDATED_BY"
+    Expression="LAST_UPDATED_BY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdatedDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="LAST_UPDATED_DATE"
+    Expression="LAST_UPDATED_DATE"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Branch"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="40"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BRANCH"
+    Expression="BRANCH"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Division"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DIVISION"
+    Expression="DIVISION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DueDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="DUE_DATE"
+    Expression="DUE_DATE"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SuperOfc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="SUPER_OFC"
+    Expression="SUPER_OFC"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SubOfc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="SUB_OFC"
+    Expression="SUB_OFC"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalDlarsCrntYr"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_DLARS_CRNT_YR"
+    Expression="TOTAL_DLARS_CRNT_YR"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NotificationId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="NOTIFICATION_ID"
+    Expression="NOTIFICATION_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RequestId1"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="REQUEST_ID1"
+    Expression="REQUEST_ID1"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SubmittedFrom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SUBMITTED_FROM"
+    Expression="SUBMITTED_FROM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SubmittedTo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SUBMITTED_TO"
+    Expression="SUBMITTED_TO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="WfStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="WF_STATUS"
+    Expression="WF_STATUS"
+    SQLType="VARCHAR"
+    LOVName="LOV_WfStatus">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.APSSearchView.WfStatus_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy1"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CREATED_BY1"
+    Expression="CREATED_BY1"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedDate1"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="CREATED_DATE1"
+    Expression="CREATED_DATE1"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdatedBy1"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LAST_UPDATED_BY1"
+    Expression="LAST_UPDATED_BY1"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdatedDate1"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="LAST_UPDATED_DATE1"
+    Expression="LAST_UPDATED_DATE1"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CenterItemNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="40"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CENTER_ITEM_NO"
+    Expression="CENTER_ITEM_NO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NotifComment"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NOTIF_COMMENT"
+    Expression="NOTIF_COMMENT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="APSSearchViewCriteria"
+    ViewObjectName="com.fda.aps.model.viewobject.APSSearchView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow6"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CtrLnItmNo"
+        ViewAttribute="CtrLnItmNo"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Value=":bindCenterLineNo"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="RequisitionNo"
+        ViewAttribute="RequisitionNo"
+        Operator="CONTAINS"
+        Conjunction="OR"
+        Value=":bindRequisitionNo"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="ExistingDocNo"
+        ViewAttribute="ExistingDocNo"
+        Operator="STARTSWITH"
+        Conjunction="OR"
+        Required="Optional"
+        Value=":bindDescription"
+        IsBindVarValue="true"/>
+      <ViewCriteriaItem
+        Name="DetailedDescription"
+        ViewAttribute="DetailedDescription"
+        Operator="CONTAINS"
+        Conjunction="OR"
+        Value=":bindDescription"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="RequiredAwardDate"
+        ViewAttribute="RequiredAwardDate"
+        Operator="="
+        Conjunction="OR"
+        Value=":bindAwardDate"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="CenterId"
+        ViewAttribute="CenterId"
+        Operator="CONTAINS"
+        Conjunction="OR"
+        Value=":bindCenter"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="WfStatus"
+        ViewAttribute="WfStatus"
+        Operator="="
+        Conjunction="OR"
+        Value=":bind_status"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.fda.aps.model.APSModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

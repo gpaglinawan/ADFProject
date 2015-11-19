@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="Type" Package="oracle.adf.view.rich.event.ItemEvent"
+          BeanClass="oracle.adf.view.rich.event.ItemEvent.Type"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="true"
+                  Type="oracle.adf.view.rich.event.ItemEvent.Type"
+                  BeanClass="oracle.adf.view.rich.event.ItemEvent.Type"
+                  id="values" ReturnNodeName="Type"
+                  CollectionBeanClass="UpdateableCollection"/>
+  <MethodAccessor IsCollection="false"
+                  Type="oracle.adf.view.rich.event.ItemEvent.Type"
+                  BeanClass="oracle.adf.view.rich.event.ItemEvent.Type"
+                  id="valueOf" ReturnNodeName="Type">
+    <ParameterInfo id="p0" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+</JavaBean>

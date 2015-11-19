@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="indexPageDef"
+                Package="com.fda.aps.view.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="requesttaskflowdefinition1"
+              taskFlowId="/WEB-INF/request-task-flow-definition.xml#request-task-flow-definition"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"
+              Refresh="ifNeeded">
+      <parameters>
+        <parameter id="requestId" value="#{sessionScope.requestId}"/>
+        <parameter id="comingFrom" value="#{bindings.comingFrom.inputValue}"/>
+        <parameter id="wfStatus" value="#{bindings.wfStatus.inputValue}"/>
+      </parameters>
+    </taskFlow>
+    <taskFlow id="searchflowdefinition1" Refresh="ifNeeded"
+              taskFlowId="/WEB-INF/search-flow-definition.xml#search-flow-definition"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="requestId" value="#{sessionScope.requestId}"/>
+      </parameters>
+    </taskFlow>
+    <taskFlow id="budgetviewflowdefinition1"
+              taskFlowId="/WEB-INF/budget-view-flow-definition.xml#budget-view-flow-definition"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="adminflowdefinition1"
+              taskFlowId="/WEB-INF/admin-flow-definition.xml#admin-flow-definition"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <taskFlow id="dashboardflowdefinition1"
+              taskFlowId="/WEB-INF/dashboard-flow-definition.xml#dashboard-flow-definition"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"
+              Refresh="ifNeeded">
+      <parameters>
+        <parameter id="requestId" xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                   value=""/>
+        <parameter id="sessionReqId"
+                   xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                   value="#{sessionScope.requestId}"/>
+      </parameters>
+    </taskFlow>
+    <iterator Binds="root" RangeSize="25" DataControl="MainPageNavigation"
+              id="MainPageNavigationIterator"/>
+    <accessorIterator MasterBinding="MainPageNavigationIterator"
+                      Binds="requestId" RangeSize="25"
+                      DataControl="MainPageNavigation"
+                      BeanClass="oracle.jbo.domain.Number"
+                      id="requestIdIterator"/>
+    <taskFlow id="massapproveflowdefinition1" Refresh="ifNeeded"
+              taskFlowId="/WEB-INF/mass-approve-flow-definition.xml#mass-approve-flow-definition"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="sessionReqId"
+                   xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                   value="#{sessionScope.requestId}"/>
+      </parameters>
+    </taskFlow>
+    <iterator id="AapNotificationVOIterator" Binds="AapNotificationVO"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="requestIdIterator" id="element">
+      <AttrNames>
+        <Item Value="element"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MainPageNavigationIterator" id="comingFrom">
+      <AttrNames>
+        <Item Value="comingFrom"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="MainPageNavigationIterator" id="wfStatus">
+      <AttrNames>
+        <Item Value="wfStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="onCenterLineClick"
+                  InstanceName="MainPageNavigation.dataProvider"
+                  DataControl="MainPageNavigation" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="onCenterLineClick"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="requestId" NDValue=""
+                 NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="comingFrom" NDValue="" NDType="java.lang.String"/>
+       <NamedData NDName="wfStatus" NDValue="" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="isAcquisitionLead"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="isAcquisitionLead" IsViewObjectMethod="false"
+                  ReturnName="data.APSApplicationModuleDataControl.methodResults.isAcquisitionLead_APSApplicationModuleDataControl_dataProvider_isAcquisitionLead_result">
+      <NamedData NDName="user" NDValue="#{securityContext.userName}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="isBudgetLead"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="isBudgetLead" IsViewObjectMethod="false"
+                  ReturnName="data.APSApplicationModuleDataControl.methodResults.isBudgetLead_APSApplicationModuleDataControl_dataProvider_isBudgetLead_result">
+      <NamedData NDName="user" NDValue="#{securityContext.userName}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="AapNotificationVOIterator" id="WfStatus">
+      <AttrNames>
+        <Item Value="WfStatus"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

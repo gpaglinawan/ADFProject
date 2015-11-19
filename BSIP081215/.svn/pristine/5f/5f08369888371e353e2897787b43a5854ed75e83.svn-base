@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93"
+                id="search_flow_definition_search_flow_definition_initializeAAPSearchPageDef"
+                Package="com.fda.aps.view.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+  </executables>
+  <bindings>
+    <methodAction id="initializeAAPSearch" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setbind_UserCenter"
+                  IsViewObjectMethod="true"
+                  DataControl="APSApplicationModuleDataControl"
+                  InstanceName="APSApplicationModuleDataControl.APSSearchView">
+      <NamedData NDName="value" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

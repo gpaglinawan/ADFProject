@@ -1,0 +1,1547 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RequestsView"
+  Version="11.1.1.64.93"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FromList="AAP_REQUESTS AapRequests"
+  SelectList="AapRequests.ACQUISITION_STATUS, 
+       AapRequests.ANTICIPATED_ACQUISITION_METHOD, 
+       AapRequests.ANTICIPATED_ACTION_TYPE, 
+       AapRequests.ANTICIPATED_NO_OF_AWARDS, 
+       AapRequests.ANTICIPATED_POP, 
+       AapRequests.CENTER_ID, 
+       AapRequests.COLLABORATION_FLAG, 
+       AapRequests.COLLABORATION_ITEM_NO, 
+       AapRequests.COMMODITY_TYPE, 
+       AapRequests.CREATED_BY, 
+       AapRequests.CREATED_DATE, 
+       AapRequests.CTR_LN_ITM_NO, 
+       AapRequests.CURR_YR_POP_END_DATE, 
+       AapRequests.DETAILED_DESCRIPTION, 
+       AapRequests.ESTIMATED_NUMBER_OF_ACTIONS, 
+       AapRequests.ESTIMATED_RFA_REL_DATE, 
+       AapRequests.ESTIMATED_TOTAL_PROJ_VALUE, 
+       AapRequests.EXISTING_DOC_NO, 
+       AapRequests.EXISTING_IAA_NUMBER, 
+       AapRequests.FISCAL_YEAR, 
+       AapRequests.GRANTS_COMMODITY, 
+       AapRequests.LAST_UPDATED_BY, 
+       AapRequests.LAST_UPDATED_DATE, 
+       AapRequests.LEAD_MNG_CENTER, 
+       AapRequests.NAICS_CODE, 
+       AapRequests.NCIBOARD_REVIEW_REQUIRED, 
+       AapRequests.OPTION_YR_EXERCISE, 
+       AapRequests.OWNER_NM_TEL_NO, 
+       AapRequests.POTENTIAL_CONTRACT_TYPE, 
+       AapRequests.PRIORITY_LEVEL, 
+       AapRequests.PRODUCT_SERVICE_CODE, 
+       AapRequests.PROJECT_POP_END_DATE, 
+       AapRequests.PROJECT_POP_START_DATE, 
+       AapRequests.PURPOSE, 
+       AapRequests.RECURRING_ITEM, 
+       AapRequests.REIMBURSABLE_AGENCY, 
+       AapRequests.REIMBURSABLE_AMT, 
+       AapRequests.RELEASE_NUMBER, 
+       AapRequests.REQUEST_ID, 
+       AapRequests.REQUIRED_AWARD_DATE, 
+       AapRequests.REQUIREMENT_TYPE, 
+       AapRequests.REQUISITION_NO, 
+       AapRequests.SERVICE_OR_REIMBURSABLE, 
+       AapRequests.SUBMIT_FLAG, 
+       AapRequests.TOTAL_DLARS_FOR_CURT_FY, 
+       AapRequests.ZERO_DOLLAR_REQN, 
+       AapRequests.BRANCH, 
+       AapRequests.DIVISION, 
+       AapRequests.DUE_DATE, 
+       AapRequests.SUB_OFC, 
+       AapRequests.SUPER_OFC, 
+       AapRequests.TOTAL_DLARS_CRNT_YR, 
+       AapRequests.REQUEST_TITLE"
+  OrderBy="Created_Date DESC"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All"
+  ComponentClass="com.fda.aps.model.viewobject.RequestsViewImpl"
+  RowClass="com.fda.aps.model.viewobject.RequestsViewRowImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|Prog|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="bind_submitFlag"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bind_RequestId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bind_Center"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <ViewAccessor
+    Name="NAICSReferenceView"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefTypeAndEffectiveEndDate"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefTypeAndEffectiveEndDate"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['NAICS']]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="bind_effDate">
+        <TransientExpression><![CDATA[LastUpdatedDate]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="LeadManagingCenterLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefType"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefType"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['LMC']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ProrityLevelLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefType"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefType"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['PL']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ServiceOrReimbursableLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ServiceOrReimbursable"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="SORList"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefType"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefType"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['SOR']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="CollaborationItemLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefType"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefType"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['LMC']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="AcqisitionStatusLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefType"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefType"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['CFS']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="OptionYearLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefType"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefType"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['OYE']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="AnticipatedActionTypeLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefTypeAndEffectiveEndDate"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefTypeAndEffectiveEndDate"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['AAT']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="PotentialContractTypeLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefTypeAndEffectiveEndDate"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefTypeAndEffectiveEndDate"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['PCT']]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="bind_effDate">
+        <TransientExpression><![CDATA[LastUpdatedDate]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="RequirementTypeLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefTypeAndEffectiveEndDate"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefTypeAndEffectiveEndDate"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['RT']]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="bind_effDate">
+        <TransientExpression><![CDATA[LastUpdatedDate]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="CommodityTypeLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefTypeAndEffectiveEndDate"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefTypeAndEffectiveEndDate"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['CT']]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="bind_effDate">
+        <TransientExpression><![CDATA[LastUpdatedDate]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ProductServiceCodeLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefTypeAndEffectiveEndDate"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefTypeAndEffectiveEndDate"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['PSC']]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="bind_effDate">
+        <TransientExpression><![CDATA[LastUpdatedDate]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="CompetitionTypeLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefTypeAndEffectiveEndDate"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefTypeAndEffectiveEndDate"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['AAM']]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="bind_effDate">
+        <TransientExpression><![CDATA[LastUpdatedDate]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="EstimatedTotalProjectValueLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefType"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefType"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['ETV']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="GrantsCommodityLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefTypeAndEffectiveEndDate"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefTypeAndEffectiveEndDate"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['GC']]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="bind_effDate">
+        <TransientExpression><![CDATA[LastUpdatedDate]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="YesNoView"
+    ViewObjectName="com.fda.aps.model.viewobject.YesNoView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="FiscalYearLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefType"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefType"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['FY']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="DetailedExpensesVO"
+    ViewObjectName="com.fda.aps.model.viewobject.DetailedExpensesView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="SubOfficeLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefType"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefType"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA[TransSupOfcCode]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="SupOfficeLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefType"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefType"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['SUPOFC']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="CurrentYearProjectValueLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.ApsReferenceView">
+    <ViewCriteriaUsage
+      Name="ByRefType"
+      FullName="com.fda.aps.model.viewobject.ApsReferenceView.ByRefType"/>
+    <ParameterMap>
+      <PIMap Variable="bind_RefType">
+        <TransientExpression><![CDATA['ETV']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="EstimatedValueRangeVO"
+    ViewObjectName="com.fda.aps.model.viewobject.EstimatedValueRangeVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="EstimatedProjectValueRangeLOV"
+    ViewObjectName="com.fda.aps.model.viewobject.EstimatedValueRangeVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_AcquisitionStatus"
+    ListVOName="AcqisitionStatusLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_AcquisitionStatus_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AcquisitionStatus"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_AnticipatedAcquisitionMethod"
+    ListVOName="CompetitionTypeLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_AnticipatedAcquisitionMethod_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AnticipatedAcquisitionMethod"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_AnticipatedActionType"
+    ListVOName="AnticipatedActionTypeLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_AnticipatedActionType_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AnticipatedActionType"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TransSLANumdays"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+      <Item Value="ReferenceCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CommodityType"
+    ListVOName="CommodityTypeLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_CommodityType_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CommodityType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_GrantsCommodity"
+    ListVOName="GrantsCommodityLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_GrantsCommodity_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="GrantsCommodity"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_LeadMngCenter"
+    ListVOName="LeadManagingCenterLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_LeadMngCenter_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="LeadMngCenter"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_NaicsCode"
+    ListVOName="NAICSReferenceView"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_NaicsCode_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="NaicsCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_OptionYrExercise"
+    ListVOName="OptionYearLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_OptionYrExercise_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OptionYrExercise"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PotentialContractType"
+    ListVOName="PotentialContractTypeLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_PotentialContractType_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PotentialContractType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PriorityLevel"
+    ListVOName="ProrityLevelLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_PriorityLevel_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PriorityLevel"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ProductServiceCode"
+    ListVOName="ProductServiceCodeLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_ProductServiceCode_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ProductServiceCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RequirementType"
+    ListVOName="RequirementTypeLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_RequirementType_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RequirementType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ServiceOrReimbursable"
+    ListVOName="SORList"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ServiceOrReimbursable"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_EstimatedTotalProjValue"
+    ListVOName="EstimatedProjectValueRangeLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_EstimatedTotalProjValue_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="EstimatedTotalProjValue"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CollaborationItemNo"
+    ListVOName="CollaborationItemLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_CollaborationItemNo_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CollaborationItemNo"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="CENOCSuperOfcLOV"
+    ListVOName="SupOfficeLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="CENOCSuperOfcLOV_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SuperOfc"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TransSupOfcCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+      <Item Value="ReferenceCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="CENOCSubOfcLOV"
+    ListVOName="SubOfficeLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="CENOCSubOfcLOV_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SubOfc"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TotalDlarsCrntYr"
+    ListVOName="EstimatedValueRangeVO"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    NullValueId="LOV_TotalDlarsCrntYr_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TotalDlarsCrntYr"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ReferenceId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ReferenceDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="AapRequests"
+    Entity="com.fda.aps.model.entity.AapRequests"/>
+  <ViewAttribute
+    Name="RequestSequence"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="AcquisitionStatus"
+    PrecisionRule="true"
+    EntityAttrName="AcquisitionStatus"
+    EntityUsage="AapRequests"
+    AliasName="ACQUISITION_STATUS"
+    LOVName="LOV_AcquisitionStatus">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AnticipatedAcquisitionMethod"
+    PrecisionRule="true"
+    EntityAttrName="AnticipatedAcquisitionMethod"
+    EntityUsage="AapRequests"
+    AliasName="ANTICIPATED_ACQUISITION_METHOD"
+    LOVName="LOV_AnticipatedAcquisitionMethod">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AnticipatedActionType"
+    PrecisionRule="true"
+    EntityAttrName="AnticipatedActionType"
+    EntityUsage="AapRequests"
+    AliasName="ANTICIPATED_ACTION_TYPE"
+    LOVName="LOV_AnticipatedActionType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AnticipatedNoOfAwards"
+    PrecisionRule="true"
+    EntityAttrName="AnticipatedNoOfAwards"
+    EntityUsage="AapRequests"
+    AliasName="ANTICIPATED_NO_OF_AWARDS"/>
+  <ViewAttribute
+    Name="AnticipatedPop"
+    PrecisionRule="true"
+    EntityAttrName="AnticipatedPop"
+    EntityUsage="AapRequests"
+    AliasName="ANTICIPATED_POP">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.AnticipatedPop_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CenterId"
+    PrecisionRule="true"
+    EntityAttrName="CenterId"
+    EntityUsage="AapRequests"
+    AliasName="CENTER_ID"/>
+  <ViewAttribute
+    Name="CollaborationFlag"
+    PrecisionRule="true"
+    EntityAttrName="CollaborationFlag"
+    EntityUsage="AapRequests"
+    AliasName="COLLABORATION_FLAG"/>
+  <ViewAttribute
+    Name="CollaborationItemNo"
+    PrecisionRule="true"
+    EntityAttrName="CollaborationItemNo"
+    EntityUsage="AapRequests"
+    AliasName="COLLABORATION_ITEM_NO"
+    LOVName="LOV_CollaborationItemNo">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CommodityType"
+    PrecisionRule="true"
+    EntityAttrName="CommodityType"
+    EntityUsage="AapRequests"
+    AliasName="COMMODITY_TYPE"
+    LOVName="LOV_CommodityType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="AapRequests"
+    AliasName="CREATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="CreatedDate"
+    PrecisionRule="true"
+    EntityAttrName="CreatedDate"
+    EntityUsage="AapRequests"
+    AliasName="CREATED_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="CtrLnItmNo"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CtrLnItmNo"
+    EntityUsage="AapRequests"
+    AliasName="CTR_LN_ITM_NO">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.CtrLnItmNo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CurrYrPopEndDate"
+    PrecisionRule="true"
+    EntityAttrName="CurrYrPopEndDate"
+    EntityUsage="AapRequests"
+    AliasName="CURR_YR_POP_END_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.CurrYrPopEndDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DetailedDescription"
+    PrecisionRule="true"
+    EntityAttrName="DetailedDescription"
+    EntityUsage="AapRequests"
+    AliasName="DETAILED_DESCRIPTION">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.DetailedDescription_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EstimatedNumberOfActions"
+    PrecisionRule="true"
+    EntityAttrName="EstimatedNumberOfActions"
+    EntityUsage="AapRequests"
+    AliasName="ESTIMATED_NUMBER_OF_ACTIONS"/>
+  <ViewAttribute
+    Name="EstimatedRfaRelDate"
+    PrecisionRule="true"
+    EntityAttrName="EstimatedRfaRelDate"
+    EntityUsage="AapRequests"
+    AliasName="ESTIMATED_RFA_REL_DATE"/>
+  <ViewAttribute
+    Name="EstimatedTotalProjValue"
+    PrecisionRule="true"
+    EntityAttrName="EstimatedTotalProjValue"
+    EntityUsage="AapRequests"
+    AliasName="ESTIMATED_TOTAL_PROJ_VALUE"
+    LOVName="LOV_EstimatedTotalProjValue">
+    <Properties>
+      <SchemaBasedProperties>
+        <AUTOSUBMIT
+          Value="true"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExistingDocNo"
+    PrecisionRule="true"
+    EntityAttrName="ExistingDocNo"
+    EntityUsage="AapRequests"
+    AliasName="EXISTING_DOC_NO">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.ExistingDocNo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExistingIaaNumber"
+    PrecisionRule="true"
+    EntityAttrName="ExistingIaaNumber"
+    EntityUsage="AapRequests"
+    AliasName="EXISTING_IAA_NUMBER">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.ExistingIaaNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FiscalYear"
+    PrecisionRule="true"
+    EntityAttrName="FiscalYear"
+    EntityUsage="AapRequests"
+    AliasName="FISCAL_YEAR"/>
+  <ViewAttribute
+    Name="GrantsCommodity"
+    PrecisionRule="true"
+    EntityAttrName="GrantsCommodity"
+    EntityUsage="AapRequests"
+    AliasName="GRANTS_COMMODITY"
+    LOVName="LOV_GrantsCommodity">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="AapRequests"
+    AliasName="LAST_UPDATED_BY"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LastUpdatedDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedDate"
+    EntityUsage="AapRequests"
+    AliasName="LAST_UPDATED_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LeadMngCenter"
+    PrecisionRule="true"
+    EntityAttrName="LeadMngCenter"
+    EntityUsage="AapRequests"
+    AliasName="LEAD_MNG_CENTER"
+    LOVName="LOV_LeadMngCenter">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NaicsCode"
+    PrecisionRule="true"
+    EntityAttrName="NaicsCode"
+    EntityUsage="AapRequests"
+    AliasName="NAICS_CODE"
+    LOVName="LOV_NaicsCode">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NciboardReviewRequired"
+    PrecisionRule="true"
+    EntityAttrName="NciboardReviewRequired"
+    EntityUsage="AapRequests"
+    AliasName="NCIBOARD_REVIEW_REQUIRED">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.NciboardReviewRequired_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OptionYrExercise"
+    PrecisionRule="true"
+    EntityAttrName="OptionYrExercise"
+    EntityUsage="AapRequests"
+    AliasName="OPTION_YR_EXERCISE"
+    LOVName="LOV_OptionYrExercise">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OwnerNmTelNo"
+    PrecisionRule="true"
+    EntityAttrName="OwnerNmTelNo"
+    EntityUsage="AapRequests"
+    AliasName="OWNER_NM_TEL_NO"/>
+  <ViewAttribute
+    Name="PotentialContractType"
+    PrecisionRule="true"
+    EntityAttrName="PotentialContractType"
+    EntityUsage="AapRequests"
+    AliasName="POTENTIAL_CONTRACT_TYPE"
+    LOVName="LOV_PotentialContractType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PriorityLevel"
+    PrecisionRule="true"
+    EntityAttrName="PriorityLevel"
+    EntityUsage="AapRequests"
+    AliasName="PRIORITY_LEVEL"
+    LOVName="LOV_PriorityLevel">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProductServiceCode"
+    PrecisionRule="true"
+    EntityAttrName="ProductServiceCode"
+    EntityUsage="AapRequests"
+    AliasName="PRODUCT_SERVICE_CODE"
+    LOVName="LOV_ProductServiceCode">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProjectPopEndDate"
+    PrecisionRule="true"
+    EntityAttrName="ProjectPopEndDate"
+    EntityUsage="AapRequests"
+    AliasName="PROJECT_POP_END_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.ProjectPopEndDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProjectPopStartDate"
+    PrecisionRule="true"
+    EntityAttrName="ProjectPopStartDate"
+    EntityUsage="AapRequests"
+    AliasName="PROJECT_POP_START_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.ProjectPopStartDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Purpose"
+    PrecisionRule="true"
+    EntityAttrName="Purpose"
+    EntityUsage="AapRequests"
+    AliasName="PURPOSE"/>
+  <ViewAttribute
+    Name="RecurringItem"
+    PrecisionRule="true"
+    EntityAttrName="RecurringItem"
+    EntityUsage="AapRequests"
+    AliasName="RECURRING_ITEM"/>
+  <ViewAttribute
+    Name="ReimbursableAgency"
+    PrecisionRule="true"
+    EntityAttrName="ReimbursableAgency"
+    EntityUsage="AapRequests"
+    AliasName="REIMBURSABLE_AGENCY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.ReimbursableAgency_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReimbursableAmt"
+    PrecisionRule="true"
+    EntityAttrName="ReimbursableAmt"
+    EntityUsage="AapRequests"
+    AliasName="REIMBURSABLE_AMT">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.ReimbursableAmt_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReleaseNumber"
+    PrecisionRule="true"
+    EntityAttrName="ReleaseNumber"
+    EntityUsage="AapRequests"
+    AliasName="RELEASE_NUMBER">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.ReleaseNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RequestId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="RequestId"
+    EntityUsage="AapRequests"
+    AliasName="REQUEST_ID"/>
+  <ViewAttribute
+    Name="RequiredAwardDate"
+    PrecisionRule="true"
+    EntityAttrName="RequiredAwardDate"
+    EntityUsage="AapRequests"
+    AliasName="REQUIRED_AWARD_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.RequiredAwardDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RequirementType"
+    PrecisionRule="true"
+    EntityAttrName="RequirementType"
+    EntityUsage="AapRequests"
+    AliasName="REQUIREMENT_TYPE"
+    LOVName="LOV_RequirementType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RequisitionNo"
+    PrecisionRule="true"
+    EntityAttrName="RequisitionNo"
+    EntityUsage="AapRequests"
+    AliasName="REQUISITION_NO">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.RequisitionNo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ServiceOrReimbursable"
+    PrecisionRule="true"
+    EntityAttrName="ServiceOrReimbursable"
+    EntityUsage="AapRequests"
+    AliasName="SERVICE_OR_REIMBURSABLE"
+    LOVName="LOV_ServiceOrReimbursable">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SubmitFlag"
+    PrecisionRule="true"
+    EntityAttrName="SubmitFlag"
+    EntityUsage="AapRequests"
+    AliasName="SUBMIT_FLAG"/>
+  <ViewAttribute
+    Name="TotalDlarsForCurtFy"
+    PrecisionRule="true"
+    EntityAttrName="TotalDlarsForCurtFy"
+    EntityUsage="AapRequests"
+    AliasName="TOTAL_DLARS_FOR_CURT_FY">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="com.fda.aps.model.viewobject.RequestsView.TotalDlarsForCurtFy_FMT_FORMATTER"/>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.TotalDlarsForCurtFy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ZeroDollarReqn"
+    PrecisionRule="true"
+    EntityAttrName="ZeroDollarReqn"
+    EntityUsage="AapRequests"
+    AliasName="ZERO_DOLLAR_REQN">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.ZeroDollarReqn_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TotalAmountRemaining"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <TransientExpression><![CDATA[DetailedExpensesVO.sum('Cost')]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransProjectValueCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    Precision="255"
+    Passivate="true">
+    <Dependencies>
+      <Item
+        Value="EstimatedTotalProjValue"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Branch"
+    PrecisionRule="true"
+    EntityAttrName="Branch"
+    EntityUsage="AapRequests"
+    AliasName="BRANCH"/>
+  <ViewAttribute
+    Name="Division"
+    PrecisionRule="true"
+    EntityAttrName="Division"
+    EntityUsage="AapRequests"
+    AliasName="DIVISION"/>
+  <ViewAttribute
+    Name="DueDate"
+    PrecisionRule="true"
+    EntityAttrName="DueDate"
+    EntityUsage="AapRequests"
+    AliasName="DUE_DATE"/>
+  <ViewAttribute
+    Name="TransSLANumdays"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransReqType"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[if  (CtrLnItmNo.substring(8,9) == 'C') return 'Contract'
+else if (CtrLnItmNo.substring(8,9) == 'I') return 'IAA'
+else if (CtrLnItmNo.substring(8,9) == 'G') return 'Grant']]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.fda.aps.model.viewobject.RequestsView.TransReqType_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SubOfc"
+    PrecisionRule="true"
+    EntityAttrName="SubOfc"
+    EntityUsage="AapRequests"
+    AliasName="SUB_OFC"
+    LOVName="CENOCSubOfcLOV">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SuperOfc"
+    PrecisionRule="true"
+    EntityAttrName="SuperOfc"
+    EntityUsage="AapRequests"
+    AliasName="SUPER_OFC"
+    LOVName="CENOCSuperOfcLOV">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransSupOfcCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TotalDlarsCrntYr"
+    PrecisionRule="true"
+    EntityAttrName="TotalDlarsCrntYr"
+    EntityUsage="AapRequests"
+    AliasName="TOTAL_DLARS_CRNT_YR"
+    LOVName="LOV_TotalDlarsCrntYr">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RequestTitle"
+    PrecisionRule="true"
+    EntityAttrName="RequestTitle"
+    EntityUsage="AapRequests"
+    AliasName="REQUEST_TITLE"/>
+  <ViewCriteria
+    Name="BySubmitFlag"
+    ViewObjectName="com.fda.aps.model.viewobject.RequestsView"
+    Conjunction="AND"
+    Mode="2">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow7"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="SubmitFlag"
+        ViewAttribute="SubmitFlag"
+        Operator="="
+        Conjunction="AND"
+        Value=":bind_submitFlag"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="ByRequestId"
+    ViewObjectName="com.fda.aps.model.viewobject.RequestsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow16"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="RequestId"
+        ViewAttribute="RequestId"
+        Operator="="
+        Conjunction="AND"
+        Value=":bind_RequestId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="submittedRequestCriteria"
+    ViewObjectName="com.fda.aps.model.viewobject.RequestsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow107"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CenterId"
+        ViewAttribute="CenterId"
+        Operator="="
+        Conjunction="AND"
+        Value=":bind_Center"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="SubmitFlag"
+        ViewAttribute="SubmitFlag"
+        Operator="="
+        Conjunction="AND"
+        Value="S"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="inprogressRequestCriteria"
+    ViewObjectName="com.fda.aps.model.viewobject.RequestsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow121"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CenterId"
+        ViewAttribute="CenterId"
+        Operator="="
+        Conjunction="AND"
+        Value=":bind_Center"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="SubmitFlag"
+        ViewAttribute="SubmitFlag"
+        Operator="="
+        Conjunction="AND"
+        Value="I"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewKey
+    Name="CenterLnAltKey">
+    <AttrArray Name="EntityKeys">
+      <Item Value="CenterLnAltKey"/>
+    </AttrArray>
+  </ViewKey>
+  <ViewLinkAccessor
+    Name="PointOfContactView"
+    ViewLink="com.fda.aps.model.viewlink.RequestToPOCViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="AapNotificationView"
+    ViewLink="com.fda.aps.model.viewlink.RequestToNotificationViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="DetailedExpensesView"
+    ViewLink="com.fda.aps.model.viewlink.RequestToDetailedExpenses"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="AapCollaborationView"
+    ViewLink="com.fda.aps.model.viewlink.RequestToCollaborationViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="AapCommentsVO"
+    ViewLink="com.fda.aps.model.viewlink.RequestToCommentsViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.fda.aps.model.APSModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

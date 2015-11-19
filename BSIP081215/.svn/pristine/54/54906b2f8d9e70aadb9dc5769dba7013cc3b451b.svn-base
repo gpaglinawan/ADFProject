@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="dashboardPageDef"
+                Package="pagefragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="AapNotificationVO" RangeSize="13"
+              DataControl="APSApplicationModuleDataControl"
+              id="AapNotificationVOIterator"/>
+    <iterator Binds="InProgressRequestsView" RangeSize="13"
+              DataControl="APSApplicationModuleDataControl"
+              id="InProgressRequestsViewIterator"/>
+    <iterator Binds="CompletedStatusVO" RangeSize="13"
+              DataControl="APSApplicationModuleDataControl"
+              id="CompletedStatusVOIterator"/>
+    <searchRegion Binds="CompletedStatusVOIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="CompletedStatusVOQuery"/>
+    <iterator Binds="InProgressView" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="InProgressViewIterator"/>
+    <searchRegion Binds="InProgressViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="InProgressViewQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="AapNotificationVOIterator" id="AapNotificationVO">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.AapNotificationView"
+                      Name="AapNotificationVO0">
+        <AttrNames>
+          <Item Value="NotificationId"/>
+          <Item Value="RequestId"/>
+          <Item Value="SubmittedFrom"/>
+          <Item Value="SubmittedTo"/>
+          <Item Value="WfStatus"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+          <Item Value="CenterItemNo"/>
+          <Item Value="TotalDlarsForCurtFy"/>
+          <Item Value="DetailedDescription"/>
+          <Item Value="TransReqType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="AapNotificationVOIterator" id="RequestId">
+      <AttrNames>
+        <Item Value="RequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="onCenterLineClick" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="onCenterLineClick"
+                  IsViewObjectMethod="false" DataControl="MainPageNavigation"
+                  InstanceName="MainPageNavigation.dataProvider">
+      <NamedData NDName="requestId" NDValue="#{bindings.RequestId.inputValue}"
+                 NDType="oracle.jbo.domain.Number"/>
+       <NamedData NDName="comingFrom" NDValue="#{pageFlowScope.comingFrom}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="wfStatus" NDValue="#{pageFlowScope.wfStatus}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="InProgressRequestsViewIterator"
+          id="InProgressRequestsView">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.RequestsView"
+                      Name="InProgressRequestsView0">
+        <AttrNames>
+          <Item Value="CtrLnItmNo"/>
+          <Item Value="RequisitionNo"/>
+          <Item Value="ExistingDocNo"/>
+          <Item Value="RequiredAwardDate"/>
+          <Item Value="DetailedDescription"/>
+          <Item Value="TotalDlarsForCurtFy"/>
+          <Item Value="TransReqType"/>
+          <Item Value="RequestId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="CompletedStatusVOIterator" id="CompletedStatusVO">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.AapNotificationView"
+                      Name="CompletedStatusVO0">
+        <AttrNames>
+          <Item Value="CenterItemNo"/>
+          <Item Value="RequisitionNo"/>
+          <Item Value="ExistingDocNo"/>
+          <Item Value="NotificationId"/>
+          <Item Value="RequiredAwardDate"/>
+          <Item Value="RequestId"/>
+          <Item Value="DetailedDescription"/>
+          <Item Value="TotalDlarsForCurtFy"/>
+          <Item Value="AcquisitionStatus"/>
+          <Item Value="TransReqType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="InProgressViewIterator" id="InProgressView">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.AapNotificationView"
+                      Name="InProgressView0">
+        <AttrNames>
+          <Item Value="CenterItemNo"/>
+          <Item Value="RequisitionNo"/>
+          <Item Value="ExistingDocNo"/>
+          <Item Value="RequiredAwardDate"/>
+          <Item Value="DetailedDescription"/>
+          <Item Value="TotalDlarsForCurtFy"/>
+          <Item Value="RequestId"/>
+           <Item Value="WfStatus"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="AapNotificationVOIterator" id="Execute"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

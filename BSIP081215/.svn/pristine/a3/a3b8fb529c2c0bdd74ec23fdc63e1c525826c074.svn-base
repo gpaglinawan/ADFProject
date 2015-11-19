@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AapNotification"
+  Version="11.1.1.64.93"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="AAP_NOTIFICATION"
+  AliasName="AapNotification"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="com.fda.aps.model.entity.AapNotificationImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Access"/>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="NotificationId"
+    IsNotNull="true"
+    ColumnName="NOTIFICATION_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="AAP_NOTIFICATION"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RequestId"
+    IsNotNull="true"
+    ColumnName="REQUEST_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="AAP_NOTIFICATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SubmittedFrom"
+    Precision="50"
+    ColumnName="SUBMITTED_FROM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="AAP_NOTIFICATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SubmittedTo"
+    Precision="50"
+    ColumnName="SUBMITTED_TO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="AAP_NOTIFICATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="WfStatus"
+    Precision="50"
+    ColumnName="WF_STATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="AAP_NOTIFICATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    Precision="20"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="AAP_NOTIFICATION"
+    IsUpdateable="while_insert"
+    HistoryColumn="UserHistory">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedDate"
+    ColumnName="CREATED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="AAP_NOTIFICATION"
+    IsUpdateable="while_insert"
+    HistoryColumn="DateHistory">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedBy"
+    Precision="20"
+    ColumnName="LAST_UPDATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="AAP_NOTIFICATION"
+    HistoryColumn="UserHistory">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedDate"
+    ColumnName="LAST_UPDATED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="AAP_NOTIFICATION"
+    HistoryColumn="DateHistory">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CenterItemNo"
+    Precision="40"
+    ColumnName="CENTER_ITEM_NO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="AAP_NOTIFICATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="NotifComment"
+    Precision="100"
+    ColumnName="NOTIF_COMMENT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="AAP_NOTIFICATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="RequestsEntity"
+    Association="com.fda.aps.model.entity.AapNotificationRequestsFk1Assoc"
+    AssociationEnd="com.fda.aps.model.entity.AapNotificationRequestsFk1Assoc.RequestsEntity"
+    AssociationOtherEnd="com.fda.aps.model.entity.AapNotificationRequestsFk1Assoc.AapNotification"
+    Type="com.fda.aps.model.entity.RequestsEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="AapRequests"
+    Association="com.fda.aps.model.entity.AapNotificationRequestsFk1Assoc1"
+    AssociationEnd="com.fda.aps.model.entity.AapNotificationRequestsFk1Assoc1.AapRequests"
+    AssociationOtherEnd="com.fda.aps.model.entity.AapNotificationRequestsFk1Assoc1.AapNotification"
+    Type="com.fda.aps.model.entity.AapRequestsImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="AapNotificationPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="AAP_NOTIFICATION_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.fda.aps.model.entity.AapNotification.NotificationId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="CenterItemAltKey"
+    AltKey="true">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="AAP_NOTIFICATION"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.fda.aps.model.entity.AapNotification.CenterItemNo"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC007134">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C007134"/>
+      <Attr Name="_checkCondition" Value='"NOTIFICATION_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.fda.aps.model.entity.AapNotification.NotificationId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC007135">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C007135"/>
+      <Attr Name="_checkCondition" Value='"REQUEST_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.fda.aps.model.entity.AapNotification.RequestId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC007136">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C007136"/>
+      <Attr Name="_checkCondition" Value='"SUBMITTED_FROM" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.fda.aps.model.entity.AapNotification.SubmittedFrom"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC007137">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C007137"/>
+      <Attr Name="_checkCondition" Value='"SUBMITTED_TO" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.fda.aps.model.entity.AapNotification.SubmittedTo"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="AapNotificationRequestsFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="REQUESTS_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="AAP_NOTIFICATION_REQUESTS_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.fda.aps.model.entity.AapNotification.RequestId"/>
+    </AttrArray>
+  </Key>
+</Entity>

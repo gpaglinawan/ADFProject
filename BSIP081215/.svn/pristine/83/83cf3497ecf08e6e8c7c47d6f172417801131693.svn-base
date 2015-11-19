@@ -1,0 +1,459 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:panelGridLayout id="pgl8">
+      <af:gridRow marginTop="5px" marginBottom="5px" height="auto" id="gr1">
+        <af:gridCell marginStart="5px" width="50%" id="gc1" valign="middle">
+          <af:panelGroupLayout id="pgl4" layout="horizontal">se
+            <!--<af:selectOneChoice value="null"
+                                label="#{bindings.RequestsView.label}"
+                                shortDesc="#{bindings.RequestsView.hints.tooltip}"
+                                id="soc1" autoSubmit="true"
+                                valueChangeListener="#{pageFlowScope.budgetBean.onLineItemChanged}"
+                                unselectedLabel="Select">
+              <f:selectItems value="#{bindings.RequestsView.items}" id="si1"/>
+            </af:selectOneChoice>-->
+            <af:selectOneChoice label="#{bindings.CenterItemNoROVO.label}"
+                                valueChangeListener="#{pageFlowScope.budgetBean.onLineItemChanged}"
+                                autoSubmit="true"
+                                required="#{bindings.CenterItemNoROVO.hints.mandatory}"
+                                shortDesc="#{bindings.CenterItemNoROVO.hints.tooltip}"
+                                id="soc1"
+                                value="#{bindings.CenterItemNoROVO.inputValue}"
+                                disabled="true">
+              <f:selectItems value="#{bindings.CenterItemNoROVO.items}"
+                             id="si1"/>
+            </af:selectOneChoice>
+            <af:spacer width="20" height="10" id="s3"/>
+            <af:panelLabelAndMessage label="Total Estimated Project Value ($)"
+                                     id="plam2">
+              <!--<af:outputText value="3,345,876.00" id="ot16"/>-->
+              <af:outputText value="#{bindings.TotalDlarsForCurtFy.inputValue}"
+                             id="ot16" partialTriggers="soc1">
+                <af:convertNumber groupingUsed="true" minfractionDigits="2"/>
+              </af:outputText>
+            </af:panelLabelAndMessage>
+            <af:spacer width="10" height="10" id="s7"/>
+          </af:panelGroupLayout>
+        </af:gridCell>
+        <af:gridCell marginStart="5px" marginEnd="5px" width="50%" id="gc2">
+          <af:panelGroupLayout id="pgl9" layout="horizontal" halign="end">
+            <af:commandButton text="Enter/ Update Budget information" id="ctb1" partialSubmit="true"
+                              partialTriggers="soc1"
+                              actionListener="#{pageFlowScope.budgetBean.addBudgetDetail}"
+                              disabled="#{bindings.CenterItemNoROVO.inputValue eq null}">
+              <!--<af:showPopupBehavior triggerType="action" popupId="::p2"/>-->
+            </af:commandButton>
+            <af:spacer width="10" height="10" id="s8"/>
+            <af:commandButton text="View Request Details" id="cb6"
+                              icon="/images/aitChartGrey.png"
+                              partialTriggers="soc1"
+                              disabled="#{bindings.CenterItemNoROVO.inputValue eq null}"
+                              action="setCurrentRow" partialSubmit="true"
+                              actionListener="#{pageFlowScope.budgetBean.setCenterLineToScope}">
+              <af:setPropertyListener type="action"
+                                      to="#{pageFlowScope.requestId}"
+                                      from="#{bindings.RequestId.inputValue}"/>
+              <af:setPropertyListener from="budget"
+                                      to="#{pageFlowScope.comingFrom}"
+                                      type="action"/>
+                <af:setPropertyListener from="#{bindings.CtrLnItmNo.inputValue}"
+                                      to="#{pageFlowScope.centerItemNo}"
+                                      type="action"/>
+            </af:commandButton>
+          </af:panelGroupLayout>
+        </af:gridCell>
+      </af:gridRow>
+    </af:panelGridLayout>
+    <af:spacer width="10" height="20" id="s1"/>
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                        partialTriggers="::soc1" featuresOff="viewMenu">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t2"/>
+      </f:facet>
+      <af:table value="#{bindings.DetailedExpensesView.collectionModel}"
+                var="row" rows="#{bindings.DetailedExpensesView.rangeSize}"
+                emptyText="#{bindings.DetailedExpensesView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                fetchSize="#{bindings.DetailedExpensesView.rangeSize}"
+                rowBandingInterval="1"
+                columnStretching="column:c3"
+                selectedRowKeys="#{bindings.DetailedExpensesView.collectionModel.selectedRow}"
+                selectionListener="#{bindings.DetailedExpensesView.collectionModel.makeCurrent}"
+                rowSelection="single" id="t1" styleClass="AFStretchWidth"
+                partialTriggers=":::cb1">
+        <af:column headerText="#{bindings.DetailedExpensesView.hints.Center.label}"
+                   id="c14">
+          <af:outputText value="#{row.Center}" id="ot13"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.DetailedExpensesView.hints.FundingObjCode.name}"
+                   sortable="false"
+                   headerText="#{bindings.DetailedExpensesView.hints.FundingObjCode.label}"
+                   id="c7">
+          <af:outputText value="#{row.FundingObjCode}" id="ot2"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.DetailedExpensesView.hints.Fund.name}"
+                   sortable="false"
+                   headerText="#{bindings.DetailedExpensesView.hints.Fund.label}"
+                   id="c3">
+          <af:outputText value="#{row.Fund}" id="ot5"/>
+        </af:column>
+        <af:column headerText="#{bindings.DetailedExpensesView.hints.Bap.label}"
+                   id="c9">
+          <af:outputText value="#{row.Bap}" id="ot8"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.DetailedExpensesView.hints.Allowance.name}"
+                   sortable="false"
+                   headerText="#{bindings.DetailedExpensesView.hints.Allowance.label}"
+                   id="c1">
+          <af:outputText value="#{row.Allowance}" id="ot6"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.DetailedExpensesView.hints.SubAllowance.name}"
+                   sortable="false"
+                   headerText="#{bindings.DetailedExpensesView.hints.SubAllowance.label}"
+                   id="c4">
+          <af:outputText value="#{row.SubAllowance}" id="ot4"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.DetailedExpensesView.hints.CostCenter.name}"
+                   sortable="false"
+                   headerText="#{bindings.DetailedExpensesView.hints.CostCenter.label}"
+                   id="c2">
+          <af:outputText value="#{row.CostCenter}" id="ot7"/>
+          <f:facet name="footer">
+            <af:panelLabelAndMessage label="Amount Remaining" id="plam3"/>
+          </f:facet>
+        </af:column>
+        <af:column sortProperty="#{bindings.DetailedExpensesView.hints.Cost.name}"
+                   sortable="false"
+                   headerText="#{bindings.DetailedExpensesView.hints.Cost.label}"
+                   id="c5">
+          <af:inputText value="#{row.Cost}" id="ot3" autoSubmit="true" disabled="#{sessionScope.loggedInUserCenterId ne row.Center}">
+           <af:convertNumber groupingUsed="true" type="currency"/>
+          </af:inputText>
+          <f:facet name="footer">
+            <af:panelGroupLayout id="pgl6" layout="horizontal" halign="center">
+              <af:outputText value="#{bindings.TotAmtRem.inputValue}" id="of2" partialTriggers="ot3"/>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:column>
+        <af:column id="c10" align="center" inlineStyle="text-align:center;">
+          <af:commandImageLink id="cil2"
+                               icon="/images/deleteIcon.png" immediate="true" rendered="#{sessionScope.loggedInUserCenterId eq row.Center}"
+                               actionListener="#{bindings.removeRowWithKey.execute}"/>
+        </af:column>
+      </af:table>
+      <f:facet name="statusbar"/>
+    </af:panelCollection>
+    <af:spacer width="10" height="40" id="s4"/>
+    <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth"
+                         layout="horizontal" halign="end">
+        <af:commandButton text="Approve" id="cb11" rendered="#{securityContext.userInRole['AAPBUDGETAPPROVE']
+        and pageFlowScope.budgetBean.leadCenterBudgetUser}"
+                        actionListener="#{pageFlowScope.budgetBean.launchBudgetApprovalPopup}"/>
+      <af:spacer width="10" height="10" id="s9"/>
+      <af:commandButton text="Reject" id="cb7"
+                        partialSubmit="true"
+                         rendered="#{securityContext.userInRole['AAPBUDGETAPPROVE']
+        and pageFlowScope.budgetBean.leadCenterBudgetUser}"
+                        actionListener="#{pageFlowScope.budgetBean.launchBudgetRejectionPopup}"/>
+      <af:spacer width="20" height="10" id="s5"/>
+      <af:commandButton text="Submit" id="cb3" styleClass="navigationButton"
+                        partialSubmit="true"
+                        rendered="#{securityContext.userInRole['AAPBUDGETAPPROVE']
+        and pageFlowScope.budgetBean.leadCenterBudgetUser}"
+                        disabled="#{bindings.TotAmtRem.inputValue ne '0'}"
+                        partialTriggers="cb1 pc1:t1:ot3"
+                        actionListener="#{pageFlowScope.budgetBean.launchSubmitDetailPopup}">
+        <!--<af:showPopupBehavior popupId="p4" triggerType="action"/>-->
+      </af:commandButton>
+      <af:spacer width="20" height="10" id="s51"/>
+      <af:commandButton text="Save" id="cb14" partialSubmit="true" action="backToDashboard"
+                        actionListener="#{bindings.Commit.execute}"/>
+      <af:spacer width="20" height="10" id="s11"/>
+      <af:commandButton text="Exit" id="cb10" action="backToDashboard"
+                        partialSubmit="true"/>
+    </af:panelGroupLayout>
+    <af:popup id="p1" contentDelivery="lazyUncached"
+              binding="#{pageFlowScope.budgetBean.addBudgetDetailsPopup}">
+      <af:panelWindow id="pw1">
+        <af:panelFormLayout id="pfl1">
+          <!--<af:selectOneChoice value="#{bindings.FundingObjCode.inputValue}"
+                              label="#{bindings.FundingObjCode.label}"
+                              required="#{bindings.FundingObjCode.hints.mandatory}"
+                              shortDesc="#{bindings.FundingObjCode.hints.tooltip}"
+                              id="soc3">
+            <f:selectItems value="#{bindings.FundingObjCode.items}" id="si3"/>
+          </af:selectOneChoice>-->
+          <af:panelLabelAndMessage label="#{bindings.Bap.label}" id="plam7">
+            <af:inputText value="#{bindings.Bap.inputValue}" simple="true"
+                          required="#{bindings.Bap.hints.mandatory}"
+                          columns="#{bindings.Bap.hints.displayWidth}"
+                          maximumLength="#{bindings.Bap.hints.precision}"
+                          shortDesc="#{bindings.Bap.hints.tooltip}" id="it1">
+              <f:validator binding="#{bindings.Bap.validator}"/>
+            </af:inputText>
+             <f:facet name="end">
+                 <af:commandImageLink icon="/images/search16x16.jpg" id="i11"
+                               partialSubmit="true"
+                               actionListener="#{pageFlowScope.budgetBean.launchBap}">
+            <!--<af:showPopupBehavior popupId="p2" triggerType="action"/>-->
+          </af:commandImageLink>
+            </f:facet>
+          </af:panelLabelAndMessage>
+          <af:panelLabelAndMessage label="Fund" id="plam1">
+            <af:inputText value="#{bindings.Fund.inputValue}" simple="true"
+                          required="#{bindings.Fund.hints.mandatory}"
+                          columns="#{bindings.Fund.hints.displayWidth}"
+                          maximumLength="#{bindings.Fund.hints.precision}"
+                          shortDesc="#{bindings.Fund.hints.tooltip}" id="it6">
+              <f:validator binding="#{bindings.Fund.validator}"/>
+            </af:inputText>
+            <f:facet name="end">
+                 <af:commandImageLink icon="/images/search16x16.jpg" id="i111"
+                               partialSubmit="true"
+                               actionListener="#{pageFlowScope.budgetBean.launchFund}">
+            <!--<af:showPopupBehavior popupId="p2" triggerType="action"/>-->
+          </af:commandImageLink>
+            </f:facet>
+          </af:panelLabelAndMessage>
+          <af:panelLabelAndMessage label="Allowance" id="plam4">
+            <af:inputText value="#{bindings.Allowance.inputValue}"
+                          label="#{bindings.Allowance.hints.label}"
+                          simple="true"
+                          required="#{bindings.Allowance.hints.mandatory}"
+                          columns="#{bindings.Allowance.hints.displayWidth}"
+                          maximumLength="#{bindings.Allowance.hints.precision}"
+                          shortDesc="#{bindings.Allowance.hints.tooltip}"
+                          id="it5" styleClass="contentInputText">
+              <f:validator binding="#{bindings.Allowance.validator}"/>
+            </af:inputText>
+            <f:facet name="end">
+                 <af:commandImageLink icon="/images/search16x16.jpg" id="i1"
+                               partialSubmit="true"
+                               actionListener="#{pageFlowScope.budgetBean.launchAllowanceSearch}">
+            <!--<af:showPopupBehavior popupId="p2" triggerType="action"/>-->
+          </af:commandImageLink>
+            </f:facet>
+          </af:panelLabelAndMessage>
+         
+          <af:panelLabelAndMessage label="SubAllowance" id="plam5">
+            <af:inputText value="#{bindings.SubAllowance.inputValue}"
+                          label="#{bindings.SubAllowance.hints.label}"
+                          simple="true"
+                          required="#{bindings.SubAllowance.hints.mandatory}"
+                          columns="#{bindings.SubAllowance.hints.displayWidth}"
+                          maximumLength="#{bindings.SubAllowance.hints.precision}"
+                          shortDesc="#{bindings.SubAllowance.hints.tooltip}"
+                          id="it3" styleClass="contentInputText">
+              <f:validator binding="#{bindings.SubAllowance.validator}"/>
+            </af:inputText>
+            <f:facet name="end">
+              <af:commandImageLink id="gil1"
+               actionListener="#{pageFlowScope.budgetBean.launchSubAllowanceSearch}"
+                                partialSubmit="true"
+                              icon="/images/search16x16.jpg"/>
+            </f:facet>
+          </af:panelLabelAndMessage>
+          <af:panelLabelAndMessage label="Cost Center" id="plam6">
+            <af:inputText value="#{bindings.CostCenter.inputValue}"
+                          label="#{bindings.CostCenter.hints.label}"
+                          required="#{bindings.CostCenter.hints.mandatory}"
+                          columns="#{bindings.CostCenter.hints.displayWidth}"
+                          simple="true"
+                          maximumLength="#{bindings.CostCenter.hints.precision}"
+                          shortDesc="#{bindings.CostCenter.hints.tooltip}"
+                          id="it4" styleClass="contentInputText">
+              <f:validator binding="#{bindings.CostCenter.validator}"/>
+            </af:inputText>
+             <f:facet name="end">
+              <af:commandImageLink id="gil11"
+               actionListener="#{pageFlowScope.budgetBean.launchCostCenter}"
+                                partialSubmit="true"
+                              icon="/images/search16x16.jpg"/>
+            </f:facet>
+          </af:panelLabelAndMessage>
+          <af:inputText value="#{bindings.Cost.inputValue}"
+                        label="#{bindings.Cost.hints.label} ($)"
+                        required="#{bindings.Cost.hints.mandatory}"
+                        columns="#{bindings.Cost.hints.displayWidth}"
+                        maximumLength="#{bindings.Cost.hints.precision}"
+                        shortDesc="#{bindings.Cost.hints.tooltip}" id="it2"
+                        styleClass="contentInputText">
+            <!--<f:validator binding="#{bindings.Cost.validator}"/>-->
+            <af:convertNumber groupingUsed="true" type="currency"/>
+          </af:inputText>
+          <f:facet name="footer">
+            <af:panelGroupLayout id="pgl2" layout="horizontal" halign="end">
+              <af:commandButton text="Save" id="cb1"
+                                styleClass="navigationButton"
+                                partialSubmit="true"
+                                actionListener="#{pageFlowScope.budgetBean.onSaveBudgetDetail}"/>
+              <af:commandButton text="Exit" id="cb2"
+                                styleClass="navigationButton"
+                                partialSubmit="true"
+                                actionListener="#{pageFlowScope.budgetBean.onCancelBudgetDetails}"/>
+              <f:facet name="separator">
+                <af:spacer width="20" height="20" id="s2"/>
+              </f:facet>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:panelFormLayout>
+      </af:panelWindow>
+    </af:popup>
+    <af:popup id="p2" binding="#{pageFlowScope.budgetBean.canSearcPopup}" contentDelivery="lazyUncached" >
+      <af:dialog id="pw2" resize="off" okVisible="true"
+                 dialogListener="#{pageFlowScope.budgetBean.onOkAction}">
+        <af:panelGroupLayout id="pgl3">
+          <af:table value="#{bindings.FdaCanROVO.collectionModel}" var="row"
+                    rows="#{bindings.FdaCanROVO.rangeSize}"
+                    emptyText="#{bindings.FdaCanROVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.FdaCanROVO.rangeSize}"
+                    rowBandingInterval="1"
+                    scrollPolicy="page"  autoHeightRows="0"
+                    filterModel="#{bindings.FdaCanROVOQuery.queryDescriptor}"
+                    queryListener="#{bindings.FdaCanROVOQuery.processQuery}"
+                    filterVisible="true" varStatus="vs"
+                    selectionListener="#{bindings.FdaCanROVO.collectionModel.makeCurrent}"
+                    rowSelection="multiple" id="t3"
+                    binding="#{pageFlowScope.budgetBean.canSearchTable}"
+                    styleClass="AFStretchWidth">
+            <af:column headerText="#{bindings.FdaCanROVO.hints.Center.label}"
+                       id="c13">
+              <af:outputText value="#{row.Center}" id="ot9"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.FdaCanROVO.hints.FdaFund.name}"
+                       filterable="true" sortable="true" width="200"
+                       headerText="#{bindings.FdaCanROVO.hints.FdaFund.label}"
+                       id="c6">
+              <af:outputText value="#{row.FdaFund} - #{row.FdaFundDescription}" id="ot10"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.FdaCanROVO.hints.FdaBap.name}"
+                       filterable="true" sortable="true" width="200"
+                       headerText="#{bindings.FdaCanROVO.hints.FdaBap.label}"
+                       id="c17">
+              <af:outputText value="#{row.FdaBap}" id="ot14"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.FdaCanROVO.hints.FdaAllowance.name}"
+                       filterable="true" sortable="true" width="200"
+                       headerText="#{bindings.FdaCanROVO.hints.FdaAllowance.label}"
+                       id="c12">
+              <af:outputText value="#{row.FdaAllowance} - #{row.FdaAllowanceDescription}" id="ot12"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.FdaCanROVO.hints.FdaSubAllowance.name}"
+                       filterable="true" sortable="true" width="200"
+                       headerText="#{bindings.FdaCanROVO.hints.FdaSubAllowance.label}"
+                       id="c15">
+              <af:outputText value="#{row.FdaSubAllowance} - #{row.FdaSubAllowanceDescription}" id="ot1"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.FdaCanROVO.hints.FdaCostCenter.name}"
+                       filterable="true" sortable="true" width="200"
+                       headerText="#{bindings.FdaCanROVO.hints.FdaCostCenter.label}"
+                       id="c11">
+              <af:outputText value="#{row.FdaCostCenter} - #{row.FdaCostCenterDescription}" id="ot11"/>
+            </af:column>
+            <af:column id="c8" inlineStyle="text-align:center;" align="center"
+                       headerText="Select">
+              <af:selectBooleanCheckbox simple="true" valueChangeListener="#{pageFlowScope.budgetBean.onSelectCan}" 
+                                        label="Label 1" id="sbc1" value="false">
+                                        <af:clientAttribute name="canRowKey" value="#{row.Can}"/>
+                                        </af:selectBooleanCheckbox>
+            </af:column>
+          </af:table>
+        </af:panelGroupLayout>
+      </af:dialog>
+    </af:popup>
+    <af:popup id="p3" binding="#{pageFlowScope.budgetBean.budgetRejectPopup}" contentDelivery="lazyUncached">
+      <af:panelWindow id="pw4">
+        <af:panelFormLayout id="pfl3">
+         <af:outputText value="Are you sure you want to reject this request?"
+                         id="ot151"/>
+          <af:inputText value="#{bindings.CommentText.inputValue}"
+                        label="#{bindings.CommentText.hints.label}"
+                        required="#{bindings.CommentText.hints.mandatory}"
+                        columns="40"
+                        maximumLength="#{bindings.CommentText.hints.precision}"
+                        shortDesc="#{bindings.CommentText.hints.tooltip}"
+                        id="it7" rows="5">
+            <f:validator binding="#{bindings.CommentText.validator}"/>
+          </af:inputText>
+          <f:facet name="footer">
+            <af:panelGroupLayout id="pgl10" layout="horizontal" halign="end">
+              <af:commandButton text="Ok" id="cb8" action="backToDashboard"
+                                actionListener="#{pageFlowScope.budgetBean.rejectAcquistionLeadRequest}"/>
+              <af:commandButton text="Cancel" id="cb9"
+                                actionListener="#{pageFlowScope.budgetBean.cancelBudgetRejectPopup}"/>
+                 <f:facet name="separator">
+                <af:spacer width="20" height="10" id="s61"/>
+              </f:facet>
+            </af:panelGroupLayout>
+          </f:facet>
+         
+        </af:panelFormLayout>
+      </af:panelWindow>
+    </af:popup>
+    <af:popup id="p4" binding="#{pageFlowScope.budgetBean.confirmSubmitPopup}"
+                contentDelivery="lazyUncached">
+      <af:panelWindow id="pw3">
+        <af:panelFormLayout id="pfl2">
+          <af:outputText value="Are you sure you want to submit this request?"
+                         id="ot15"/>
+          <af:inputText value="#{bindings.CommentText.inputValue}"
+                        label="#{bindings.CommentText.hints.label}"
+                        required="#{bindings.CommentText.hints.mandatory}"
+                        columns="40"
+                        maximumLength="#{bindings.CommentText.hints.precision}"
+                        shortDesc="#{bindings.CommentText.hints.tooltip}"
+                        id="it8" rows="5">
+            <f:validator binding="#{bindings.CommentText.validator}"/>
+          </af:inputText>
+          <f:facet name="footer">
+            <af:panelGroupLayout id="pgl7" layout="horizontal" halign="end">
+              <af:commandButton text="Ok" id="cb4" styleClass="navigationButton"
+                                partialSubmit="true"
+                                actionListener="#{pageFlowScope.budgetBean.submitDetailToBudgetLead}"
+                                action="backToDashboard"/>
+              <af:commandButton text="Cancel" id="cb5"
+                                styleClass="navigationButton"
+                                partialSubmit="true"
+                                actionListener="#{pageFlowScope.budgetBean.cancelBudgetDetailSubmit}"/>
+              <f:facet name="separator">
+                <af:spacer width="20" height="10" id="s6"/>
+              </f:facet>
+            </af:panelGroupLayout>
+          </f:facet>
+        
+        </af:panelFormLayout>
+      </af:panelWindow>
+    </af:popup>
+     <af:popup id="p5"  binding="#{pageFlowScope.budgetBean.budgetApprovePopup}" contentDelivery="lazyUncached">
+      <af:panelWindow id="pw5">
+        <af:panelFormLayout id="pfl4">
+          <af:outputText value="Are you sure you want to approve this request?" id="ot221"/>
+          <af:inputText value="#{bindings.CommentText.inputValue}"
+                        label="#{bindings.CommentText.hints.label}"
+                        required="#{bindings.CommentText.hints.mandatory}"
+                        columns="40"
+                        rows="5"
+                        maximumLength="#{bindings.CommentText.hints.precision}"
+                        shortDesc="#{bindings.CommentText.hints.tooltip}"
+                        id="it9">
+            <f:validator binding="#{bindings.CommentText.validator}"/>
+          </af:inputText>
+          <f:facet name="footer">
+            <af:panelGroupLayout id="pgl11" layout="horizontal" halign="end">
+              <af:commandButton text="Ok" id="cb12"  action="backToDashboard"
+                                actionListener="#{pageFlowScope.budgetBean.approveBudgetInformation}"/>
+              <af:commandButton text="Cancel" id="cb13"
+                                actionListener="#{pageFlowScope.budgetBean.cancelBudgetApprovePopup}"/>
+              <f:facet name="separator">
+                <af:spacer width="20" height="10" id="s10"/>
+              </f:facet>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:panelFormLayout>
+      </af:panelWindow>
+    </af:popup>
+  </af:panelGroupLayout>
+</jsp:root>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<skins xmlns="http://myfaces.apache.org/trinidad/skin">
+
+  <skin>
+     <id>aps.basic.desktop</id>
+     <family>aps-basic</family>
+     <extends>skyros</extends>
+     <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
+     <style-sheet-name>css/aps-basic.css</style-sheet-name>
+      
+  </skin>
+</skins>
+

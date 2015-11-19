@@ -1,0 +1,98 @@
+package com.fda.aps.view.managedbean;
+
+import com.fda.aps.ADFUtils;
+
+import com.fda.aps.JSFUtils;
+
+import javax.faces.event.ActionEvent;
+
+import oracle.adf.model.binding.DCIteratorBinding;
+import oracle.adf.view.rich.component.rich.RichPopup;
+
+import oracle.adf.view.rich.context.AdfFacesContext;
+import oracle.adf.view.rich.event.DialogEvent;
+import oracle.adf.view.rich.event.DialogListener;
+
+import oracle.binding.OperationBinding;
+
+import oracle.jbo.Row;
+import oracle.jbo.ViewObject;
+import oracle.jbo.domain.Date;
+
+public class AdminBean {
+    private RichPopup slaPopup;
+    private RichPopup addSlaPopup;
+
+    public AdminBean() {
+        super();
+    }
+
+    public void onClickOk(DialogEvent evt) {
+        // Add event code here...
+        String launchType = (String)AdfFacesContext.getCurrentInstance().getViewScope().get("launchType");
+        
+        if ("addSLA".equalsIgnoreCase(launchType)){
+                String actionType = (String)JSFUtils.resolveExpression("#{bindings.ActionType.inputValue}");
+                oracle.jbo.domain.Number slaDays = (oracle.jbo.domain.Number)JSFUtils.resolveExpression("#{bindings.SlaDays.inputValue}");
+                Date cutOffDate = (Date)JSFUtils.resolveExpression("#{bindings.CutOffDate.inputValue}");
+                OperationBinding addSla = ADFUtils.findOperation("addSLA");
+                addSla.getParamsMap().put("description", actionType);
+                addSla.getParamsMap().put("slaDays", slaDays);
+                addSla.getParamsMap().put("cutoffDate", cutOffDate);
+                addSla.execute();    
+        }
+        //ADFUtils.hidePopup(slaPopup);
+    }
+
+    public void setSlaPopup(RichPopup slaPopup) {
+        this.slaPopup = slaPopup;
+    }
+
+    public RichPopup getSlaPopup() {
+        return slaPopup;
+    }
+
+    public void launchSLAPopup(ActionEvent actionEvent) {
+        // Add event code here...
+        ADFUtils.showPopup(slaPopup);
+    }
+    
+    public void launchAddSLAPopup(ActionEvent actionEvent) {
+        // Add event code here...
+        DCIteratorBinding referenceIter = ADFUtils.findIterator("ApsReferenceViewIterator");
+        ViewObject refVO = referenceIter.getViewObject();
+        Row newRefRow = refVO.createRow();
+        refVO.insertRow(newRefRow);
+        refVO.setCurrentRow(newRefRow);
+        
+        DCIteratorBinding slaCutOffIter = ADFUtils.findIterator("AapSlaCutoffdateVO1Iterator");
+        ViewObject slaCutOffVO = slaCutOffIter.getViewObject();
+        Row newSLARow = slaCutOffVO.createRow();
+        slaCutOffVO.insertRow(newSLARow);
+        slaCutOffVO.setCurrentRow(newSLARow);
+        
+        
+        
+        ADFUtils.showPopup(addSlaPopup);
+    }
+
+    public void setAddSlaPopup(RichPopup addSlaPopup) {
+        this.addSlaPopup = addSlaPopup;
+    }
+
+    public RichPopup getAddSlaPopup() {
+        return addSlaPopup;
+    }
+
+    public void onClickAddSla(DialogEvent dialogEvent) {
+        // Add event code here...
+        String actionType = (String)JSFUtils.resolveExpression("#{bindings.ActionType1.inputValue}");
+        oracle.jbo.domain.Number slaDays = (oracle.jbo.domain.Number)JSFUtils.resolveExpression("#{bindings.SlaDays1.inputValue}");
+        Date cutOffDate = (Date)JSFUtils.resolveExpression("#{bindings.CutOffDate1.inputValue}");
+        OperationBinding addSla = ADFUtils.findOperation("addSLA");
+        addSla.getParamsMap().put("description", actionType);
+        addSla.getParamsMap().put("slaDays", slaDays);
+        addSla.getParamsMap().put("cutoffDate", cutOffDate);
+        addSla.execute(); 
+    }
+}

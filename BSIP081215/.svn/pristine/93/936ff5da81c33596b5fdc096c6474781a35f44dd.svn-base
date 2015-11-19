@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="ItemListener" Package="oracle.adf.view.rich.event"
+          BeanClass="oracle.adf.view.rich.event.ItemListener"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="false" Type="void" id="processItemEvent"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="oracle.adf.view.rich.event.ItemEvent"
+                   isStructured="true"/>
+  </MethodAccessor>
+</JavaBean>

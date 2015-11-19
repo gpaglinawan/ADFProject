@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="MainPageNavigation" Package="com.fda.aps"
+          BeanClass="com.fda.aps.MainPageNavigation" isJavaBased="true">
+  <Attribute Name="comingFrom" Type="java.lang.String"/>
+  <Attribute Name="wfStatus" Type="java.lang.String"/>
+  <Attribute Name="submitFlag" Type="java.lang.String"/>
+  <AccessorAttribute id="mainTab" IsCollection="false"
+                     BeanClass="oracle.adf.view.rich.component.rich.layout.RichPanelTabbed"
+                     CollectionBeanClass="UpdateableSingleValue"/>
+  <AccessorAttribute id="requestId" IsCollection="true"
+                     Type="oracle.jbo.domain.Number"
+                     CollectionBeanClass="UpdateableSingleValue">
+    <Attribute Name="element" Type="oracle.jbo.domain.Number"/>
+  </AccessorAttribute>
+  <MethodAccessor IsCollection="false" Type="void"
+                  id="returnFromRequestCreation" ReturnNodeName="Return"/>
+  <MethodAccessor IsCollection="false" Type="void" id="onCenterLineClick"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="requestId" Type="oracle.jbo.domain.Number"
+                   isStructured="false"/>
+    <ParameterInfo id="comingFrom" Type="java.lang.String"
+                   isStructured="false"/>
+    <ParameterInfo id="wfStatus" Type="java.lang.String" isStructured="false"/>
+    <ParameterInfo id="submitFlag" Type="java.lang.String"
+                   isStructured="false"/>
+  </MethodAccessor>
+  <ConstructorMethod IsCollection="true" Type="com.fda.aps.MainPageNavigation"
+                     BeanClass="com.fda.aps.MainPageNavigation"
+                     id="MainPageNavigation"/>
+</JavaBean>

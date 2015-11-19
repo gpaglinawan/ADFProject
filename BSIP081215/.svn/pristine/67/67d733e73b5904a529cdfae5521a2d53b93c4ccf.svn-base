@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93"
+                id="mass_approve_flow_definition_mass_approve_flow_definition_initializeDashboardPageDef"
+                Package="com.fda.aps.view.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="initializeDashboard" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="initializeDashboard"
+                  IsViewObjectMethod="false"
+                  DataControl="APSApplicationModuleDataControl"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider">
+      <NamedData NDName="user" NDValue="#{securityContext.userName}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:train value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
+              id="t1"/>
+    <af:region value="#{bindings.budgetviewflowdefinition1.regionModel}"
+               id="r1"/>
+  </af:panelGroupLayout>
+</jsp:root>

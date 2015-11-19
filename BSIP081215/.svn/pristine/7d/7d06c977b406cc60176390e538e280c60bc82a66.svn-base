@@ -1,0 +1,11 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="com.fda.aps.model.appmodule.APSApplicationModule">
+      <AppModuleConfig name="14FD353C72C" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory" DBconnection="jdbc/APSConnectionDS" IsLazyLoadingTrue="true" JDBCName="APSConnection" jbo.project="com.fda.aps.model.APSModel" BC4JConfigName="APSApplicationModuleLocal" DeployPlatform="LOCAL" ApplicationName="com.fda.aps.model.appmodule.APSApplicationModule">
+         <Database jbo.SQLBuilder="Oracle" jbo.locking.mode="optimistic" jbo.TypeMapEntries="Oracle"/>
+         <Security AppModuleJndiName="com.fda.aps.model.appmodule.APSApplicationModule"/>
+         <Tester FullProxyInterfaceName="com.fda.aps.model.appmodule.common.APSApplicationModule"/>
+         <Custom JDBCDataSource="jdbc/APSConnectionDS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

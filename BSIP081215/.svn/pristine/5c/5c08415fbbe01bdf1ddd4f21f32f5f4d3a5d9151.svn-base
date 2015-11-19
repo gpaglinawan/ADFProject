@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="massapprovalPageDef"
+                Package="pagefragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="AapNotificationVO" RangeSize="20"
+              DataControl="APSApplicationModuleDataControl"
+              id="AapNotificationVOIterator"/>
+    <searchRegion Binds="AapNotificationVOIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="AapNotificationVOQuery"/>
+    <iterator id="SubmittedRequestsViewIterator" Binds="SubmittedRequestsView"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+    <iterator id="MassCommentsVOIterator" Binds="MassCommentsVO"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="AapNotificationVOIterator" id="AapNotificationVO">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.AapNotificationView"
+                      Name="AapNotificationVO0">
+        <AttrNames>
+          <Item Value="CenterItemNo"/>
+          <Item Value="ExistingDocNo"/>
+          <Item Value="RequisitionNo"/>
+          <Item Value="RequiredAwardDate"/>
+          <Item Value="SubmittedFrom"/>
+          <Item Value="DetailedDescription"/>
+          <Item Value="WfStatus"/>
+          <Item Value="EstimatedTotalProjValue"/>
+          <Item Value="RowSelected"/>
+          <Item Value="TotalDlarsForCurtFy"/>
+          <Item Value="RequestId"/>
+          <Item Value="NotificationId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="isAcquisitionLead"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="isAcquisitionLead" IsViewObjectMethod="false"
+                  ReturnName="data.APSApplicationModuleDataControl.methodResults.isAcquisitionLead_APSApplicationModuleDataControl_dataProvider_isAcquisitionLead_result">
+      <NamedData NDName="user" NDValue="#{securityContext.userName}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="initializeDashboard"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="initializeDashboard" IsViewObjectMethod="false">
+      <NamedData NDName="user" NDValue="#{securityContext.userName}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="approveAcquisitionRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="approveAcquisitionRequest"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.APSApplicationModuleDataControl.methodResults.approveAcquisitionRequest_APSApplicationModuleDataControl_dataProvider_approveAcquisitionRequest_result">
+      <NamedData NDName="centerItemNo"
+                 NDValue=""
+                 NDType="java.lang.String"/>
+      <NamedData NDName="requestId" NDValue=""
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="approveBudgetRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="approveBudgetRequest" IsViewObjectMethod="false">
+      <NamedData NDName="centerItemNo"
+                 NDValue=""
+                 NDType="java.lang.String"/>
+      <NamedData NDName="requestId" NDValue=""
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <action id="Commit" DataControl="APSApplicationModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <attributeValues IterBinding="AapNotificationVOIterator" id="RequestId">
+      <AttrNames>
+        <Item Value="RequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AapNotificationVOIterator" id="CenterItemNo">
+      <AttrNames>
+        <Item Value="CenterItemNo"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="rejectAcquisitionRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="rejectAcquisitionRequest"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="centerItemNo" NDType="java.lang.String"/>
+      <NamedData NDName="requestId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="rejectAquisitionLeadRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="rejectAquisitionLeadRequest"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="centerItemNo" NDType="java.lang.String"/>
+      <NamedData NDName="requestId" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

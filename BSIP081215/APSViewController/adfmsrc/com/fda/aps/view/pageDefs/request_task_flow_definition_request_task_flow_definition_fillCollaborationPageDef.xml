@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93"
+                id="request_task_flow_definition_request_task_flow_definition_fillCollaborationPageDef"
+                Package="com.fda.aps.view.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="AapCollaborationViewIterator" Binds="AapCollaborationView"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <methodAction id="getCollaborationList"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getCollaborationList" IsViewObjectMethod="false"
+                  ReturnName="data.APSApplicationModuleDataControl.methodResults.getCollaborationList_APSApplicationModuleDataControl_dataProvider_getCollaborationList_result">
+      <NamedData NDName="requestId" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

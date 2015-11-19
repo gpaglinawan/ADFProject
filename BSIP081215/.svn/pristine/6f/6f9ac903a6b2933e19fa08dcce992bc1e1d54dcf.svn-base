@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout layout="vertical" id="pgl1" halign="left">
+    <af:panelGroupLayout layout="vertical" id="searchpgl"
+                         styleClass="searchpgl">
+      <af:panelHeader text="Request Search" id="ph1">
+        <af:query id="qryId1" headerText=" " disclosed="true"
+                  styleClass="searchpgl"
+                  value="#{bindings.APSSearchViewCriteriaQuery.queryDescriptor}"
+                  model="#{bindings.APSSearchViewCriteriaQuery.queryModel}"
+                  queryListener="#{bindings.APSSearchViewCriteriaQuery.processQuery}"
+                  maxColumns="2" rows="3" modeChangeVisible="true"
+                  queryOperationListener="#{bindings.APSSearchViewCriteriaQuery.processQueryOperation}"
+                  resultComponentId="::resId1" saveQueryMode="hidden"
+                  resetButtonText="Clear"/>
+      </af:panelHeader>
+      <af:table value="#{bindings.APSSearchView.collectionModel}" var="row"
+                rows="#{bindings.APSSearchView.rangeSize}"
+                emptyText="#{bindings.APSSearchView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                fetchSize="#{bindings.APSSearchView.rangeSize}"
+                rowBandingInterval="1"
+                filterModel="#{bindings.APSSearchViewCriteriaQuery.queryDescriptor}"
+                queryListener="#{bindings.APSSearchViewCriteriaQuery.processQuery}"
+                filterVisible="true" varStatus="vs"
+                selectedRowKeys="#{bindings.APSSearchView.collectionModel.selectedRow}"
+                selectionListener="#{bindings.APSSearchView.collectionModel.makeCurrent}"
+                rowSelection="single" id="resId1" styleClass="AFStretchWidth"
+                columnStretching="column:resId1c5">
+        <af:column sortProperty="#{bindings.APSSearchView.hints.CtrLnItmNo.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.APSSearchView.hints.CtrLnItmNo.label}"
+                   id="resId1c1">
+          <af:commandLink text="#{row.CtrLnItmNo}" id="cl1"
+                          action="toRequestDetail" partialSubmit="true"
+                          actionListener="#{pageFlowScope.requestDetail.setSearchLineItemCode}">
+            <af:setPropertyListener from="search"
+                                    to="#{pageFlowScope.comingFrom}"
+                                    type="action"/>
+            <af:setPropertyListener from="#{row.CtrLnItmNo}"
+                                    to="#{pageFlowScope.centerItemNo}"
+                                    type="action"/>
+          </af:commandLink>
+        </af:column>
+        <af:column sortProperty="#{bindings.APSSearchView.hints.RequisitionNo.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.APSSearchView.hints.RequisitionNo.label}"
+                   id="resId1c2">
+          <af:outputText value="#{row.RequisitionNo}" id="ot7"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.APSSearchView.hints.ExistingDocNo.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.APSSearchView.hints.ExistingDocNo.label}"
+                   id="resId1c3">
+          <af:outputText value="#{row.ExistingDocNo}" id="ot1"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.APSSearchView.hints.RequiredAwardDate.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.APSSearchView.hints.RequiredAwardDate.label}"
+                   id="resId1c4">
+          <f:facet name="filter">
+            <af:inputDate value="#{vs.filterCriteria.RequiredAwardDate}"
+                          id="id1"/>
+          </f:facet>
+          <af:outputText value="#{row.RequiredAwardDate}" id="ot2">
+            <af:convertDateTime pattern="#{bindings.APSSearchView.hints.RequiredAwardDate.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.APSSearchView.hints.DetailedDescription.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.APSSearchView.hints.DetailedDescription.label}"
+                   id="resId1c5">
+          <af:outputText value="#{row.DetailedDescription}" id="ot4"/>
+        </af:column>
+        <af:column headerText="#{bindings.APSSearchView.hints.WfStatus.label}"
+                   id="c3">
+          <af:outputText value="#{row.WfStatus}" id="ot6"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.APSSearchView.hints.TotalDlarsForCurtFy.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.APSSearchView.hints.TotalDlarsForCurtFy.label}"
+                   id="resId1c6">
+          <af:outputText value="#{row.TotalDlarsForCurtFy}" id="ot3">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.APSSearchView.hints.TotalDlarsForCurtFy.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="#{bindings.APSSearchView.hints.FiscalYear.label}"
+                   id="c1">
+          <af:outputText value="#{row.FiscalYear}" id="ot5">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.APSSearchView.hints.FiscalYear.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column id="c2" align="center">
+          <af:commandImageLink id="cil1" partialSubmit="true"
+                               action="toRequestDetail"
+                               actionListener="#{pageFlowScope.requestDetail.cloneSearchedRequest}"
+                               text="Copy Request">
+            <af:setPropertyListener from="#{row.RequestId}"
+                                    to="#{pageFlowScope.reqId}" type="action"/>
+            <af:setPropertyListener to="#{pageFlowScope.comingFrom}"
+                                    type="action" from="search"/>
+            <af:setPropertyListener to="#{pageFlowScope.fromCreate}"
+                                    type="action" from="N"/>
+            <af:setPropertyListener to="#{pageFlowScope.createType}"
+                                    type="action" from="clone"/>
+          </af:commandImageLink>
+        </af:column>
+      </af:table>
+    </af:panelGroupLayout>
+  </af:panelGroupLayout>
+</jsp:root>

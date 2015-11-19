@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE JboProject SYSTEM "jbo_03_01.dtd">
+<!---->
+<JboProject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="APSModel"
+  Version="11.1.1.64.93"
+  SeparateXMLFiles="true"
+  PackageName="com.fda.aps.model">
+  <DesignTime>
+    <Attr Name="_jprName" Value="../../../../../APSModel.jpr"/>
+    <Attr Name="_NamedConnection" Value="APSConnection"/>
+    <Attr Name="_appModuleNames0"
+      Value="com.fda.aps.model.appmodule.APSApplicationModule"/>
+  </DesignTime>
+  <Containee
+    Name="appmodule"
+    PackageName="com.fda.aps.model.appmodule"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_AM" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="entity"
+    PackageName="com.fda.aps.model.entity"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+      <Attr Name="_AS" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="viewlink"
+    PackageName="com.fda.aps.model.viewlink"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VL" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="viewobject"
+    PackageName="com.fda.aps.model.viewobject"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+</JboProject>

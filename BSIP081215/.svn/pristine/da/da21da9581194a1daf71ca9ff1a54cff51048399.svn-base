@@ -1,0 +1,195 @@
+# 
+com.fda.aps.model.appmodule.APSApplicationModule_LABEL=Aps Application Module
+com.fda.aps.model.viewobject.RequestSummary_LABEL=Request Summary
+com.fda.aps.model.viewobject.RequestsView.CtrLnItmNo_LABEL=Control Item Number
+
+
+
+
+com.fda.aps.model.viewobject.RequestsView.AcquisitionStatus_LABEL=Acquisition\u00A0Status
+
+com.fda.aps.model.viewobject.RequestsView.PriorityLevel_LABEL=Priority\u00A0Level
+
+com.fda.aps.model.viewobject.RequestsView.RecurringItem_LABEL=Recurring\u00A0Item
+
+com.fda.aps.model.viewobject.RequestsView.ZeroDollarReqn_LABEL=Zero Dollar Requisition
+
+
+com.fda.aps.model.viewobject.RequestsView.RequisitionNo_LABEL=Requisition No
+
+
+com.fda.aps.model.viewobject.RequestsView.ExistingDocNo_LABEL=Contract No
+
+
+com.fda.aps.model.viewobject.RequestsView.ReleaseNumber_LABEL=Order Number
+
+
+
+com.fda.aps.model.viewobject.RequestsView.RequirementType_LABEL=Requirement\u00A0Type
+
+com.fda.aps.model.viewobject.RequestsView.OptionYrExercise_LABEL=Option\u00A0Year\u00A0Exercise
+
+com.fda.aps.model.viewobject.RequestsView.DetailedDescription_LABEL=Detailed Description
+
+
+
+com.fda.aps.model.viewobject.RequestsView.RequiredAwardDate_LABEL=Required Award Date
+
+
+com.fda.aps.model.viewobject.RequestsView.CurrYrPopEndDate_LABEL=Current Year End Date
+
+
+
+com.fda.aps.model.viewobject.RequestsView.AnticipatedActionType_LABEL=Anticipated\u00A0Action\u00A0Type
+
+com.fda.aps.model.viewobject.RequestsView.PotentialContractType_LABEL=Potential\u00A0Contract\u00A0Type
+
+com.fda.aps.model.viewobject.RequestsView.CommodityType_LABEL=Commodity\u00A0Type
+
+com.fda.aps.model.viewobject.RequestsView.AnticipatedAcquisitionMethod_LABEL=Anticipated\u00A0Acquisition\u00A0Method
+
+com.fda.aps.model.viewobject.RequestsView.ProductServiceCode_LABEL=Product\u00A0Service\u00A0Code
+
+com.fda.aps.model.viewobject.RequestsView.NaicsCode_LABEL=NAICS\u00A0Code
+
+
+com.fda.aps.model.viewobject.RequestsView.TotalDlarsForCurtFy_LABEL=Actual Funding Amount for the Current FY
+
+
+
+
+com.fda.aps.model.viewobject.RequestsView.ProjectPopStartDate_LABEL=Period of Performance Start Date
+
+
+
+
+com.fda.aps.model.viewobject.RequestsView.ProjectPopEndDate_LABEL=Period of Performance End Date
+
+
+
+com.fda.aps.model.viewobject.RequestsView.AnticipatedPop_LABEL=Place of Performance
+
+
+
+com.fda.aps.model.viewobject.RequestsView.CollaborationFlag_LABEL=Collaboration
+com.fda.aps.model.viewobject.RequestsView.CollaborationItemNo_LABEL=Collaboration\u00A0Item\u00A0Number(s)
+
+com.fda.aps.model.viewobject.RequestsView.LeadMngCenter_LABEL=Lead/Managing\u00A0Center
+
+com.fda.aps.model.viewobject.RequestsView.OwnerNmTelNo_LABEL=Owner Name and Tel No
+com.fda.aps.model.viewobject.RequestsView.EstimatedRfaRelDate_LABEL=Estimated\u00A0RFA\u00A0Release\u00A0Date
+
+com.fda.aps.model.viewobject.RequestsView.GrantsCommodity_LABEL=Grants\u00A0Commodity
+
+com.fda.aps.model.viewobject.RequestsView.NciboardReviewRequired_LABEL=NCI Board Review Required
+
+
+
+com.fda.aps.model.viewobject.RequestsView.AnticipatedNoOfAwards_LABEL=Anticipated\u00A0Number\u00A0of\u00A0Awards
+
+com.fda.aps.model.viewobject.RequestsView.ExistingIaaNumber_LABEL=Existing Document No
+
+com.fda.aps.model.viewobject.RequestsView.EstimatedNumberOfActions_LABEL=Estimate\u00A0Number\u00A0of\u00A0Actions
+
+com.fda.aps.model.viewobject.RequestsView.ServiceOrReimbursable_LABEL=Service\u00A0or\u00A0Reimbursable
+
+com.fda.aps.model.viewobject.RequestsView.ReimbursableAmt_LABEL=Reimbursable Amount
+
+
+com.fda.aps.model.viewobject.RequestsView.ReimbursableAgency_LABEL=Reimbursable Agency
+
+
+com.fda.aps.model.viewobject.APSSearchView_LABEL=Aps Search View
+com.fda.aps.model.viewobject.APSSearchView.CtrLnItmNo_LABEL=Center Item No
+
+com.fda.aps.model.viewobject.APSSearchView.RequisitionNo_LABEL=Requisition No
+com.fda.aps.model.viewobject.APSSearchView.ExistingDocNo_LABEL=Document Number
+com.fda.aps.model.viewobject.APSSearchView.OptionYrExercise_LABEL=Option Year
+com.fda.aps.model.viewobject.APSSearchView.RequiredAwardDate_LABEL=Required Award Date
+com.fda.aps.model.viewobject.APSSearchView.TotalDlarsForCurtFy_LABEL=Amount
+com.fda.aps.model.viewobject.APSSearchView.CenterId_LABEL=Center
+com.fda.aps.model.viewobject.APSSearchView.DetailedDescription_LABEL=Description
+com.fda.aps.model.viewobject.DetailedExpensesView.CenterItmNo_LABEL=Center Item No
+
+com.fda.aps.model.viewobject.DetailedExpensesView.FundingObjCode_LABEL=Funding Object Code
+
+
+com.fda.aps.model.viewobject.DetailedExpensesView.SubAllowance_LABEL=Sub Allowance
+com.fda.aps.model.viewobject.DetailedExpensesView.CostCenter_LABEL=Cost Center
+com.fda.aps.model.viewobject.CANSearch_LABEL=Can Search
+com.fda.aps.model.viewobject.ServiceOrReimbursable_LABEL=Service Or Reimbursable
+com.fda.aps.model.viewobject.ServiceOrReimbursable.SL_0_0=Service
+com.fda.aps.model.viewobject.ServiceOrReimbursable.SL_0_1=S
+com.fda.aps.model.viewobject.ServiceOrReimbursable.SL_1_0=Reimbursable
+com.fda.aps.model.viewobject.ServiceOrReimbursable.SL_1_1=R
+com.fda.aps.model.viewobject.YesNoView_LABEL=Yes No View
+com.fda.aps.model.viewobject.YesNoView.SL_0_0=Yes
+com.fda.aps.model.viewobject.YesNoView.SL_0_1=Y
+com.fda.aps.model.viewobject.YesNoView.SL_1_0=No
+com.fda.aps.model.viewobject.YesNoView.SL_1_1=N
+com.fda.aps.model.viewlink.RequestToPOCViewLink_LABEL=Request To Poc View Link
+com.fda.aps.model.viewobject.PointOfContactView.PocFirstName_LABEL=First Name
+
+com.fda.aps.model.viewobject.PointOfContactView.PocLastName_LABEL=Last Name
+
+com.fda.aps.model.viewobject.PointOfContactView.PocEmail_LABEL=Email
+
+com.fda.aps.model.viewobject.PointOfContactView.PocTel_LABEL=Tel No
+
+com.fda.aps.model.viewobject.CenterItemViewRO_LABEL=Center Item View Ro
+com.fda.aps.model.viewobject.CenterItemViewRO.Referencecode_LABEL=Center
+com.fda.aps.model.viewobject.CenterItemViewRO.Referencecode_TOOLTIP=Please select center
+com.fda.aps.model.viewobject.ActionTypeViewRO_LABEL=Action Type View Ro
+com.fda.aps.model.viewobject.ActionTypeViewRO.ReferenceCode_LABEL=Action Type
+com.fda.aps.model.viewobject.ActionTypeViewRO.ReferenceCode_TOOLTIP=Select action type
+com.fda.aps.model.viewobject.FiscalYearRO_LABEL=Fiscal Year Ro
+com.fda.aps.model.viewobject.FiscalYearRO.Referencecode_LABEL=Fiscal Year
+com.fda.aps.model.viewlink.RequestToNotificationViewLink_LABEL=Request To Notification View Link
+com.fda.aps.model.viewlink.RequestToDetailedExpenses_LABEL=Request To Detailed Expenses
+com.fda.aps.model.viewobject.InProcessRequests_LABEL=In Process Requests
+com.fda.aps.model.viewobject.InProcessRequests.CtrLnItmNo_LABEL=Center Item Number
+com.fda.aps.model.viewobject.InProcessRequests.RequisitionNo_LABEL=Requisition No
+com.fda.aps.model.viewobject.InProcessRequests.ExistingDocNo_LABEL=Existing Document No
+com.fda.aps.model.viewobject.InProcessRequests.DetailedDescription_LABEL=Detailed Description
+com.fda.aps.model.viewobject.InProcessRequests.RequiredAwardDate_LABEL=Required Award Date
+com.fda.aps.model.viewobject.InProcessRequests.TotalDlarsForCurtFy_LABEL=Estimated Total Dollars for Current FY
+com.fda.aps.model.viewobject.AapNotificationView.CenterItemNo_LABEL=Center Item No
+com.fda.aps.model.viewobject.AapNotificationView.SubmittedFrom_LABEL=Requestor
+com.fda.aps.model.viewobject.AapNotificationView.WfStatus_LABEL=Workflow Status
+com.fda.aps.model.viewobject.SecurityGroupsMappingROView_LABEL=Security Groups Mapping Ro View
+com.fda.aps.model.viewobject.AapNotificationView.NotifComment_LABEL=Comment
+com.fda.aps.model.viewobject.CenterItemNoROVO_LABEL=Center Item No Rovo
+com.fda.aps.model.viewobject.DetailedExpensesView.Bap_LABEL=BAP
+com.fda.aps.model.viewobject.CANSearch.CostCenterDesc_LABEL=Cost Center
+com.fda.aps.model.viewobject.APSSearchView.WfStatus_LABEL=Status
+com.fda.aps.model.viewobject.CenterItemNoROVO.CenterItemNo_LABEL=Center Item No
+com.fda.aps.model.viewobject.AapNotificationView.RowSelected_LABEL=Select
+com.fda.aps.model.viewobject.AapNotificationView.ExistingDocNo_LABEL=Existing Document No
+com.fda.aps.model.viewobject.AapNotificationView.RequisitionNo_LABEL=Requisition No
+com.fda.aps.model.viewobject.AapNotificationView.RequiredAwardDate_LABEL=Requested Award Date
+com.fda.aps.model.viewobject.AapNotificationView.DetailedDescription_LABEL=Detailed Description
+com.fda.aps.model.viewobject.AapNotificationView.TotalDlarsForCurtFy_LABEL=Total Dollars for Current FY
+com.fda.aps.model.viewobject.AapNotificationView.TotalDlarsForCurtFy_FMT_FORMATTER=oracle.jbo.format.DefaultCurrencyFormatter
+com.fda.aps.model.viewobject.RequestsView.TransReqType_LABEL=Request Type
+com.fda.aps.model.viewobject.AapNotificationView.TransReqType_LABEL=Request Type
+com.fda.aps.model.viewobject.APSSearchView.FiscalYear_LABEL=Fiscal Year
+com.fda.aps.model.viewobject.RequestsView.TotalDlarsForCurtFy_FMT_FORMATTER=oracle.jbo.format.DefaultCurrencyFormatter
+com.fda.aps.model.viewobject.AapEmployeeView.FirstName_LABEL=First Name
+com.fda.aps.model.viewobject.AapEmployeeView.LastName_LABEL=Last Name
+com.fda.aps.model.viewobject.AapEmployeeView.MdlIntlName_LABEL=MI
+com.fda.aps.model.viewobject.AapEmployeeView.EmpNum_LABEL=Employee ID
+com.fda.aps.model.viewobject.FdaAapCanROVO.FdaFund_LABEL=Fund
+com.fda.aps.model.viewobject.FdaAapCanROVO.FdaAllowance_LABEL=Allowance
+com.fda.aps.model.viewobject.FdaAapCanROVO.FdaSubAllowance_LABEL=Sub Allowance
+com.fda.aps.model.viewobject.FdaAapCanROVO.FdaCostCenter_LABEL=Cost Center
+com.fda.aps.model.viewlink.ReferenceToSLALink_LABEL=Reference To Sla Link
+com.fda.aps.model.viewobject.DetailedExpensesView.Cost_LABEL=Cost ($)
+com.fda.aps.model.viewobject.APSSearchView.TotalDlarsForCurtFy_FMT_FORMATTER=oracle.jbo.format.DefaultCurrencyFormatter
+com.fda.aps.model.viewlink.RequestToCollaborationViewLink_LABEL=Request To Collaboration View Link
+com.fda.aps.model.viewlink.RequestToCommentsViewLink_LABEL=Request To Comments View Link
+com.fda.aps.model.viewobject.AapCommentsVO.CommentText_LABEL=Comment
+com.fda.aps.model.viewobject.AapCommentsVO.CreatedBy_LABEL=Created By
+
+com.fda.aps.model.viewobject.AapCommentsVO.CreatedDate_LABEL=Created Date
+com.fda.aps.model.viewobject.EstimatedValueRangeVO_LABEL=Estimated Value Range Vo
+com.fda.aps.model.viewobject.SearchCollabCenterVO_LABEL=Search Collab Center Vo

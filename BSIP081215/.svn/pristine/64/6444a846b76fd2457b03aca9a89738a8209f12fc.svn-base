@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                        featuresOff="viewMenu">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar"></f:facet>
+      <f:facet name="statusbar"/>
+      <af:table value="#{bindings.AapNotificationVO.collectionModel}" var="row"
+                rows="#{bindings.AapNotificationVO.rangeSize}"
+                emptyText="#{bindings.AapNotificationVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                fetchSize="#{bindings.AapNotificationVO.rangeSize}"
+                rowBandingInterval="1" styleClass="AFStretchWidth"
+                filterModel="#{bindings.AapNotificationVOQuery.queryDescriptor}"
+                queryListener="#{bindings.AapNotificationVOQuery.processQuery}"
+                filterVisible="false" varStatus="vs" autoHeightRows="0"
+                selectionListener="#{bindings.AapNotificationVO.collectionModel.makeCurrent}"
+                rowSelection="multiple" id="t1" columnStretching="column:c6"
+                partialTriggers=":::d1 :::d2"
+                binding="#{pageFlowScope.massApprovalBean.massTbl}">
+        <af:column sortProperty="#{bindings.AapNotificationVO.hints.CenterItemNo.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.AapNotificationVO.hints.CenterItemNo.label}"
+                   id="c2">
+          <af:outputText value="#{row.CenterItemNo}" id="ot8"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.AapNotificationVO.hints.ExistingDocNo.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.AapNotificationVO.hints.ExistingDocNo.label}"
+                   id="c8">
+          <af:outputText value="#{row.ExistingDocNo}" id="ot1"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.AapNotificationVO.hints.RequisitionNo.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.AapNotificationVO.hints.RequisitionNo.label}"
+                   id="c7">
+          <af:outputText value="#{row.RequisitionNo}" id="ot2"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.AapNotificationVO.hints.RequiredAwardDate.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.AapNotificationVO.hints.RequiredAwardDate.label}"
+                   id="c3">
+          <f:facet name="filter">
+            <af:inputDate value="#{vs.filterCriteria.RequiredAwardDate}"
+                          id="id1"/>
+          </f:facet>
+          <af:outputText value="#{row.RequiredAwardDate}" id="ot5">
+            <af:convertDateTime pattern="#{bindings.AapNotificationVO.hints.RequiredAwardDate.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.AapNotificationVO.hints.SubmittedFrom.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.AapNotificationVO.hints.SubmittedFrom.label}"
+                   id="c5">
+          <af:outputText value="#{row.SubmittedFrom}" id="ot6"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.AapNotificationVO.hints.DetailedDescription.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.AapNotificationVO.hints.DetailedDescription.label}"
+                   id="c6">
+          <af:outputText value="#{row.DetailedDescription}" id="ot3"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.AapNotificationVO.hints.WfStatus.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.AapNotificationVO.hints.WfStatus.label}"
+                   id="c4">
+          <af:outputText value="#{row.WfStatus}" id="ot4"/>
+        </af:column>
+        <af:column headerText="#{bindings.AapNotificationVO.hints.TotalDlarsForCurtFy.label}"
+                   id="c1" inlineStyle="text-align:right;">
+          <af:outputText value="#{row.TotalDlarsForCurtFy}" id="ot7">
+            <af:convertNumber groupingUsed="true"
+                              pattern="#{bindings.AapNotificationVO.hints.TotalDlarsForCurtFy.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="Select"
+                   id="c9" inlineStyle="text-align:center;" align="center">
+          
+          <af:selectBooleanCheckbox  id="ot9"
+                                    autoSubmit="true"
+                                    simple="true"
+                                    valueChangeListener="#{pageFlowScope.massApprovalBean.onSelectRequests}">
+            <af:clientAttribute name="centerItemRowKey"
+                                value="#{row.CenterItemNo}"/>
+          </af:selectBooleanCheckbox>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+    <af:spacer width="10" height="40" id="s3"/>
+    <af:panelGroupLayout id="pgl4" styleClass="AFStretchWidth"
+                         layout="horizontal" halign="end">
+      <af:commandButton text="Approve" id="cb5" partialSubmit="true">
+        <af:showPopupBehavior popupId="p1" triggerType="action"/>
+      </af:commandButton>
+      <af:spacer width="20" height="10" id="s4"/>
+      <af:commandButton text="Reject" id="cb6" partialSubmit="true">
+        <af:showPopupBehavior popupId="p2" triggerType="action"/>
+      </af:commandButton>
+    </af:panelGroupLayout>
+    <af:popup id="p1" contentDelivery="lazyUncached">
+      <af:dialog id="d1" dialogListener="#{pageFlowScope.massApprovalBean.onMassApprove}">
+        <af:panelFormLayout id="pfl1">
+          <af:inputText label="Comment" id="it1" rows="5" columns="40"
+                        value="#{pageFlowScope.massApprovalBean.massApproveComment}"
+                        autoSubmit="true"/>
+          <f:facet name="footer">
+            <af:panelGroupLayout id="pgl2" layout="horizontal" halign="end">
+              <!--<af:commandButton text="Submit" id="cb1"
+                                partialSubmit="true"/>-->
+              <!--<af:commandButton text="Cancel" id="cb2"
+                                partialSubmit="true"/>-->
+              <f:facet name="separator">
+                <af:spacer width="20" height="20" id="s2"/>
+              </f:facet>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:panelFormLayout>
+      </af:dialog>
+    </af:popup>
+    <af:popup id="p2" contentDelivery="lazyUncached">
+      <af:dialog id="d2" dialogListener="#{pageFlowScope.massApprovalBean.onMassReject}">
+        <af:panelFormLayout id="pfl2">
+          <af:inputText label="Comment" id="it2" rows="5" columns="40"
+                        value="#{pageFlowScope.massApprovalBean.massRejectComment}"
+                        autoSubmit="true"/>
+          <f:facet name="footer">
+            <af:panelGroupLayout id="pgl3" layout="horizontal" halign="end">
+              <!--<af:commandButton text="Submit" id="cb3"
+                              partialSubmit="true"/>-->
+              <!--<af:commandButton text="Cancel" id="cb4"
+                              partialSubmit="true"/>-->
+              <f:facet name="separator">
+                <af:spacer width="20" height="20" id="s1"/>
+              </f:facet>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:panelFormLayout>
+      </af:dialog>
+    </af:popup>
+  </af:panelGroupLayout>
+</jsp:root>

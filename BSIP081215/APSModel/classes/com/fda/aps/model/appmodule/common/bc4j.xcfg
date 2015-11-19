@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="com.fda.aps.model.appmodule.APSApplicationModule">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="com.fda.aps.model.APSModel" name="APSApplicationModuleLocal" ApplicationName="com.fda.aps.model.appmodule.APSApplicationModule">
+         <Database jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="com.fda.aps.model.appmodule.APSApplicationModule"/>
+         <Custom JDBCDataSource="jdbc/APSConnectionDS"/>
+      </AppModuleConfig>
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="com.fda.aps.model.APSModel" name="APSApplicationModuleShared" ApplicationName="com.fda.aps.model.appmodule.APSApplicationModule">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="1" jbo.ampool.resetnontransactionalstate="false"/>
+         <Database jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="com.fda.aps.model.appmodule.APSApplicationModule"/>
+         <Custom JDBCDataSource="jdbc/APSConnectionDS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

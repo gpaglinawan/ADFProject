@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplateDef var="attrs">
+    <af:xmlContent>
+      <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+        <display-name>AAPPageTeamplate</display-name>
+        <facet>
+          <description>Main Content Block</description>
+          <facet-name>mainContent</facet-name>
+        </facet>
+        <facet>
+          <description>menubar</description>
+          <facet-name>menu</facet-name>
+        </facet>
+        <attribute>
+          <attribute-name>contentWidth</attribute-name>
+          <attribute-class>java.lang.String</attribute-class>
+          <default-value>900px</default-value>
+        </attribute>
+        <attribute>
+          <attribute-name>showNavigation</attribute-name>
+          <attribute-class>java.lang.Boolean</attribute-class>
+          <default-value>#{true}</default-value>
+        </attribute>
+      </component>
+    </af:xmlContent>
+    <af:form id="pt_f1">
+      <af:panelStretchLayout id="pt_psl1" topHeight="0px" bottomHeight="0px">
+        <f:facet name="center">
+          <af:panelGroupLayout id="pt_pgl1" layout="scroll" halign="center">
+            <af:panelStretchLayout id="pt_psl2"
+                                   inlineStyle="min-height:590px; width: 1160px;"
+                                   topHeight="60px" dimensionsFrom="children"
+                                   bottomHeight="90px">
+              <f:facet name="center">
+                <af:facetRef facetName="mainContent"/>
+              </f:facet>
+              <f:facet name="start">
+                <af:facetRef facetName="menu"/>
+              </f:facet>
+              <f:facet name="top">
+                <af:panelGroupLayout id="pt_pgl2" halign="start">
+                  <af:outputFormatted value="Food and Drug Administration - Advance Acquisition Plan"
+                                      inlineStyle="font-size:xx-large;"
+                                      id="pt_of1"/>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelStretchLayout>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:panelStretchLayout>
+    </af:form>
+  </af:pageTemplateDef>
+</jsp:root>

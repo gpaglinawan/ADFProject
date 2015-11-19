@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93"
+                id="request_task_flow_definition_request_task_flow_definition_executeSubmittedRequestPageDef"
+                Package="com.fda.aps.view.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="executeSubmittedRequest" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="executeSubmittedRequest"
+                  IsViewObjectMethod="false"
+                  DataControl="APSApplicationModuleDataControl"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider">
+      <NamedData NDName="requestId" NDValue="#{pageFlowScope.requestId}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

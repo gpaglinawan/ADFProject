@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="requestPageDef"
+                Package="pagefragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variable Name="derivedCenter" Type="java.lang.String" DefaultValue="#{pageFlowScope.centerCode}"/>
+    </variableIterator>
+    <iterator Binds="SubmittedRequestsView" RangeSize="30"
+              DataControl="APSApplicationModuleDataControl"
+              id="SubmittedRequestsViewIterator"/>
+    <searchRegion Binds="SubmittedRequestsViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SubmittedRequestsViewQuery"/>
+    <iterator Binds="CenterReferenceView" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="CenterReferenceViewIterator"/>
+    <iterator Binds="CenterItemViewRO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="CenterItemViewROIterator"/>
+    <iterator Binds="ActionTypeViewRO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="ActionTypeViewROIterator"/>
+    <iterator Binds="FiscalYearRO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="FiscalYearROIterator"/>
+    <iterator id="RequestsViewIterator" Binds="RequestsView"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+    <iterator id="StartDateSetupVOIterator" Binds="StartDateSetupVO"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SubmittedRequestsViewIterator"
+          id="SubmittedRequestsView">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.RequestsView"
+                      Name="SubmittedRequestsView0">
+        <AttrNames>
+          <Item Value="CtrLnItmNo"/>
+          <Item Value="RequisitionNo"/>
+          <Item Value="ExistingDocNo"/>
+          <Item Value="RequiredAwardDate"/>
+          <Item Value="DetailedDescription"/>
+          <Item Value="TotalDlarsForCurtFy"/>
+          <Item Value="RequestId"/>
+          <Item Value="RequestTitle"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="CenterReferenceViewIterator"
+                     id="ReferenceCode">
+      <AttrNames>
+        <Item Value="ReferenceCode"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="createNewRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createNewRequest" IsViewObjectMethod="false">
+      <NamedData NDName="centerCode" NDType="java.lang.String"/>
+      <NamedData NDName="actionType" NDType="java.lang.String"/>
+      <NamedData NDName="fiscalYear" NDType="java.lang.String"/>
+    </methodAction>
+    <list IterBinding="CenterItemViewROIterator" ListOperMode="navigation"
+          ListIter="CenterItemViewROIterator" id="CenterItemViewRO"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="Referencecode"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="ActionTypeViewROIterator" ListOperMode="navigation"
+          ListIter="ActionTypeViewROIterator" id="ActionTypeViewRO"
+          DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="ReferenceCode"/>
+      </AttrNames>
+    </list>
+    <attributeValues IterBinding="FiscalYearROIterator" id="Referencecode">
+      <AttrNames>
+        <Item Value="Referencecode"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="cloneRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="cloneRequest" IsViewObjectMethod="false">
+      <NamedData NDName="requestId" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="CenterId">
+      <AttrNames>
+        <Item Value="derivedCenter"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="setbind_Type" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setbind_Type"
+                  IsViewObjectMethod="true"
+                  DataControl="APSApplicationModuleDataControl"
+                  InstanceName="APSApplicationModuleDataControl.AapFundingObjectView">
+      <NamedData NDName="value" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getCollaborationList"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getCollaborationList" IsViewObjectMethod="false"
+                  ReturnName="data.APSApplicationModuleDataControl.methodResults.getCollaborationList_APSApplicationModuleDataControl_dataProvider_getCollaborationList_result">
+      <NamedData NDName="requestId" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

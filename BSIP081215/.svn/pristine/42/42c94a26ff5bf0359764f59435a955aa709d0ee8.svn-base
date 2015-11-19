@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="request-task-flow-definition">
+    <default-activity id="__1">isComingFromDashboard</default-activity>
+    <data-control-scope id="__55">
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__20">
+      <name id="__19">requestId</name>
+      <value>#{pageFlowScope.requestId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__59">
+      <name id="__60">comingFrom</name>
+      <value>#{pageFlowScope.comingFrom}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__98">
+      <name id="__97">wfStatus</name>
+      <value>#{pageFlowScope.wfStatus}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__35">
+      <managed-bean-name id="__33">requestDetail</managed-bean-name>
+      <managed-bean-class id="__32">com.fda.aps.view.managedbean.RequestDetailBean</managed-bean-class>
+      <managed-bean-scope id="__34">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="request">
+      <page>/pagefragments/request.jsff</page>
+    </view>
+    <view id="detail">
+      <page>/pagefragments/requestDetail.jsff</page>
+      <train-stop id="__72">
+        <display-name id="__73">Create/Edit Request</display-name>
+        <sequential>false</sequential>
+      </train-stop>
+    </view>
+    <method-call id="initializeSubmitandInprogressRequest">
+      <method>#{bindings.initializeSubmitandInprogressRequest.execute}</method>
+      <outcome id="__12">
+        <fixed-outcome>deriveCenter</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="returnFromRequestCreation">
+      <method>#{bindings.returnFromRequestCreation.execute}</method>
+      <outcome id="__21">
+        <fixed-outcome>returnFromRequestCreation</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="budget-view-flow-definition">
+      <task-flow-reference>
+        <document>/WEB-INF/budget-view-flow-definition.xml</document>
+        <id>budget-view-flow-definition</id>
+      </task-flow-reference>
+      <input-parameter id="__36">
+        <name>requestId</name>
+        <value>#{pageFlowScope.requestId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <router id="isComingFromDashboard">
+      <!--case>
+        <expression>#{pageFlowScope.comingFrom eq 'dashboard' and
+                    securityContext.userInRole['ACQUISITION_GROUP']}</expression>
+        <outcome id="__45">toRequestDetail</outcome>
+      </case-->
+      <case>
+        <expression>#{pageFlowScope.comingFrom eq 'dashboard' and
+                    (pageFlowScope.wfStatus eq 'SUBMITTED' or
+                    pageFlowScope.wfStatus eq 'MODIFIED' or
+                    pageFlowScope.wfStatus eq 'INPROGRESS')}</expression>
+        <outcome id="__45">toRequestDetail</outcome>
+      </case>
+      <!--case>
+        <expression>#{pageFlowScope.comingFrom eq 'dashboard' and
+                    securityContext.userInRole[BUDGET_GROUP]}</expression>
+        <outcome id="__50">toBudgetDetail</outcome>
+      </case-->
+      <!--case>
+        <expression>#{pageFlowScope.comingFrom eq 'dashboard' and
+                    securityContext.userInRole['BUDGET_GROUP']}</expression>
+        <outcome id="__54">toBudgetDetail</outcome>
+      </case-->
+      <case>
+        <expression>#{pageFlowScope.comingFrom eq 'dashboard' and
+                    (pageFlowScope.wfStatus eq 'ACQUSITION_APPROVED' or
+                    pageFlowScope.wfStatus eq 'BUDGET_USER_SUBMITTED')}</expression>
+        <outcome id="__54">toBudgetDetail</outcome>
+      </case>
+      <default-outcome>initializeSubmitandInprogress</default-outcome>
+    </router>
+    <method-call id="executeSubmittedRequest">
+      <method>#{bindings.executeSubmittedRequest.execute}</method>
+      <outcome id="__64">
+        <fixed-outcome>toPopulateCollaboration</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="AddPOC">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome id="__25">
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <router id="isComingFromCreate">
+      <case>
+        <expression>#{pageFlowScope.fromCreate ne 'Y'}</expression>
+        <outcome id="__43">toDetail</outcome>
+      </case>
+      <default-outcome>toAddPoc</default-outcome>
+    </router>
+    <view id="requestDetail">
+      <page>/pagefragments/requestDetail.jsff</page>
+      <train-stop id="__71">
+        <display-name id="__83">Request Approval</display-name>
+        <skip></skip>
+      </train-stop>
+    </view>
+    <view id="budgetContainer">
+      <page>/pagefragments/budgetContainer.jsff</page>
+      <train-stop id="__74">
+        <display-name id="__84">Budget Information</display-name>
+        <icon id="__88">
+          <small-icon id="__90">../images/conChartGrey.png</small-icon>
+        </icon>
+        <skip></skip>
+      </train-stop>
+    </view>
+    <view id="budgetApproval">
+      <page>/pagefragments/budgetContainer.jsff</page>
+      <train-stop id="__29">
+        <display-name id="__30">Budget Approval</display-name>
+      </train-stop>
+    </view>
+    <method-call id="deriveCenter">
+      <method>#{pageFlowScope.requestDetail.deriveCenterFromRole}</method>
+      <outcome id="__93">
+        <fixed-outcome>toRequestSummary</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="populateCollaboration">
+      <method>#{pageFlowScope.requestDetail.populateCollaboration}</method>
+      <outcome id="__100">
+        <fixed-outcome>toRequestDetailView</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="fillCollaboration">
+      <method>#{pageFlowScope.requestDetail.populateCollaboration}</method>
+      <outcome id="__99">
+        <fixed-outcome>toIsCreateBranch</fixed-outcome>
+      </outcome>
+    </method-call>
+    <train/>
+    <control-flow-rule id="__2">
+      <from-activity-id id="__3">request</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome id="__6">gotoDetail</from-outcome>
+        <to-activity-id id="__4">isComingFromCreate</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id id="__8">detail</from-activity-id>
+      <control-flow-case id="__10">
+        <from-outcome id="__11">backToSummary</from-outcome>
+        <to-activity-id id="__9">initializeSubmitandInprogressRequest</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__23">
+        <from-outcome id="__24">backToDashboard</from-outcome>
+        <to-activity-id id="__22">returnFromRequestCreation</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__76">
+        <from-outcome id="__77">gotoapprove</from-outcome>
+        <to-activity-id id="__75">requestDetail</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__86">
+        <from-outcome id="__87">gotobudgetApproval</from-outcome>
+        <to-activity-id id="__85">budgetApproval</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__94">
+        <from-outcome id="__96">gotobudget</from-outcome>
+        <to-activity-id id="__95">budgetContainer</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__39">
+      <from-activity-id id="__40">isComingFromDashboard</from-activity-id>
+      <control-flow-case id="__41">
+        <from-outcome id="__46">toRequestDetail</from-outcome>
+        <to-activity-id id="__42">executeSubmittedRequest</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__48">
+        <from-outcome id="__47">initializeSubmitandInprogress</from-outcome>
+        <to-activity-id id="__49">initializeSubmitandInprogressRequest</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__61">
+        <from-outcome id="__63">toBudgetDetail</from-outcome>
+        <to-activity-id id="__62">budget-view-flow-definition</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__65">
+      <from-activity-id id="__66">executeSubmittedRequest</from-activity-id>
+      <control-flow-case id="__68">
+        <from-outcome id="__69">toPopulateCollaboration</from-outcome>
+        <to-activity-id id="__67">populateCollaboration</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__26">
+      <from-activity-id id="__27">AddPOC</from-activity-id>
+      <control-flow-case id="__37">
+        <from-outcome id="__28">CreateInsert</from-outcome>
+        <to-activity-id id="__38">detail</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__44">
+      <from-activity-id id="__50">isComingFromCreate</from-activity-id>
+      <control-flow-case id="__53">
+        <from-outcome id="__51">toAddPoc</from-outcome>
+        <to-activity-id id="__52">AddPOC</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__56">
+        <from-outcome id="__57">toDetail</from-outcome>
+        <to-activity-id id="__58">fillCollaboration</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__78">
+      <from-activity-id id="__79">requestDetail</from-activity-id>
+      <control-flow-case id="__81">
+        <from-outcome id="__82">gotobudget</from-outcome>
+        <to-activity-id id="__80">budgetContainer</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id id="__14">deriveCenter</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome id="__16">toRequestSummary</from-outcome>
+        <to-activity-id id="__17">request</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__31">
+      <from-activity-id id="__70">initializeSubmitandInprogressRequest</from-activity-id>
+      <control-flow-case id="__91">
+        <from-outcome id="__92">deriveCenter</from-outcome>
+        <to-activity-id id="__89">deriveCenter</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__101">
+      <from-activity-id id="__102">populateCollaboration</from-activity-id>
+      <control-flow-case id="__104">
+        <from-outcome id="__105">toRequestDetailView</from-outcome>
+        <to-activity-id id="__103">detail</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__106">
+      <from-activity-id id="__107">fillCollaboration</from-activity-id>
+      <control-flow-case id="__109">
+        <from-outcome id="__110">toIsCreateBranch</from-outcome>
+        <to-activity-id id="__108">detail</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+    <visibility id="__18">
+      <url-invoke-allowed/>
+    </visibility>
+  </task-flow-definition>
+</adfc-config>

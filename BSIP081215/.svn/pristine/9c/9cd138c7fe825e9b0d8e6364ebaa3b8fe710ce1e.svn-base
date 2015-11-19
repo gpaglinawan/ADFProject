@@ -1,0 +1,11 @@
+package com.fda.aps.view.managedbean;
+
+public class SearchBean {
+    public SearchBean() {
+        super();
+    }
+    
+    public String navigateTo(){
+            return null;
+    }
+}

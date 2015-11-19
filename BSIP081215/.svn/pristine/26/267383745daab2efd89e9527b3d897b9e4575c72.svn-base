@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee">
+  <application>
+    <default-render-kit-id>oracle.adf.rich</default-render-kit-id>
+    <resource-bundle>
+      <base-name>com.fda.aps.view.AAPResourceBundle</base-name>
+      <var>aap</var>
+    </resource-bundle>
+  </application>
+  <managed-bean>
+    <managed-bean-name>aapBean</managed-bean-name>
+    <managed-bean-class>com.fda.aps.view.managedbean.AAPManagedBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>userProfile</managed-bean-name>
+    <managed-bean-class>com.fda.aps.view.managedbean.UserProfile</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <navigation-rule>
+    <from-view-id>/welcome.jspx</from-view-id>
+    <navigation-case>
+      <from-outcome>toIndex</from-outcome>
+      <to-view-id>/index.jspx</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  <navigation-rule>
+    <from-view-id>/index.jspx</from-view-id>
+    <navigation-case>
+      <from-outcome>toLogout</from-outcome>
+      <to-view-id>/logut.jspx</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  <navigation-rule>
+    <from-view-id>/logut.jspx</from-view-id>
+    <navigation-case>
+      <from-outcome>toWelcome</from-outcome>
+      <to-view-id>/welcome.jspx</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+</faces-config>

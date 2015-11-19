@@ -1,0 +1,79 @@
+package com.fda.aps;
+
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+public class AAPEmailNotification {
+    private static AAPEmailNotification emailSingleton;
+    private List<String> recipients;
+    private Properties props;
+    private Session session;
+        //= new ArrayList<String>();
+    private AAPEmailNotification() {
+        //super();
+        props = new Properties();
+        
+        props.put("mail.smtp.host", "smtp.fda.gov");
+        props.put("mail.smtp.port", "25");
+        session =
+            Session.getInstance(props,null);
+    }
+    
+    public static AAPEmailNotification getInstance(){
+        if (emailSingleton == null){
+            emailSingleton = new AAPEmailNotification();
+        }    
+        return emailSingleton;
+    }
+    
+    public void sendMessage(List<String> recipients, String messageBody,
+                            String sender, String subject){
+        
+        try {
+        
+            Message msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress(sender));
+            msg.setRecipients(Message.RecipientType.TO,
+                                  InternetAddress.parse(collectionToString(recipients,",")));
+            msg.setSubject(subject);
+            msg.setText(messageBody);
+
+            Transport.send(msg);
+
+            System.out.println("Done");
+
+        } catch (MessagingException e) {
+            e.getStackTrace();
+        }
+            
+    }
+    
+    private String collectionToString(Collection list, String delim){
+           StringBuilder strBuilder = new StringBuilder();
+           
+           if (list == null) return null;
+           
+           Iterator itr = list.iterator();
+           while(itr.hasNext()){
+              strBuilder.append((String)itr.next()) ;
+                  if(itr.hasNext()){
+                    strBuilder.append(delim) ;
+                }
+           }
+           
+           return strBuilder.toString();
+    }
+    
+    
+}

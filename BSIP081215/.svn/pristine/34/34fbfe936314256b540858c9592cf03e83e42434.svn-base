@@ -1,0 +1,209 @@
+package com.fda.aps.model;
+
+import com.fda.aps.StringUtils;
+
+import java.security.Principal;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import oracle.adf.share.ADFContext;
+
+import oracle.adf.share.security.SecurityContext;
+
+import oracle.adf.view.rich.context.AdfFacesContext;
+
+import oracle.security.jps.principals.JpsApplicationRole;
+import oracle.security.jps.service.policystore.ApplicationRole;
+
+import weblogic.security.spi.WLSGroup;
+
+import oracle.security.idm.IMException;
+import oracle.security.idm.IdentityStore;
+import oracle.security.idm.Property;
+import oracle.security.idm.PropertySet;
+import oracle.security.jps.JpsContext;
+import oracle.security.idm.User;
+
+import oracle.security.idm.UserProfile;
+import oracle.security.jps.JpsContextFactory;
+
+import oracle.security.jps.JpsException;
+import oracle.security.jps.service.idstore.IdentityStoreService;
+
+
+public class AAPModelUtils {
+    private IdentityStore idStore = null;
+    private String email;
+
+
+    public AAPModelUtils() {
+        super();
+    }
+
+    public static List<String> getLoginUserEPRoles() {
+        List<String> roles = null;
+        Set<Principal> principals =
+            ADFContext.getCurrent().getSecurityContext().getSubject().getPrincipals();
+        if (principals != null) {
+            roles = new ArrayList<String>();
+            for (Principal role : principals) {
+                if (role instanceof WLSGroup &&
+                    (role.getName().contains("ACQ") ||
+                     role.getName().contains("BDGT"))) {
+                    roles.add(role.getName());
+                }
+            }
+        }
+        return roles;
+    }
+
+    public static String getAcqnGroupFromRole(String role) {
+
+        //int idx = role.indexOf("-");
+        int startIdx = StringUtils.nthOccurrence(role, '-', 0);
+        int endIdx = StringUtils.nthOccurrence(role, '-', 1);
+        String center = role.substring(startIdx+1, endIdx-1);
+        String acquisitionGroupLead = center + "-" + "ACQ_APRV";
+        return acquisitionGroupLead;
+
+    }
+
+    public static String getAcqnLeadGroupFromRole(String role) {
+
+        //int idx = role.indexOf("-");
+        int startIdx = StringUtils.nthOccurrence(role, '-', 0);
+        int endIdx = StringUtils.nthOccurrence(role, '-', 1);
+        String center = role.substring(startIdx+1, endIdx-1);
+        String acquisitionGroupLead = center + "-" + "ACQ_APRV";
+        return acquisitionGroupLead;
+
+    }
+
+    public static String getAcqnUserFromRole(String role) {
+
+        int startIdx = StringUtils.nthOccurrence(role, '-', 0);
+        int endIdx = StringUtils.nthOccurrence(role, '-', 1);
+        String center = role.substring(startIdx+1, endIdx-1);
+        String acquisitionGroupLead = center + "-" + "ACQ_USER";
+        return acquisitionGroupLead;
+
+    }
+
+    public static String getBudgetLeadFromRole(String role) {
+
+        int startIdx = StringUtils.nthOccurrence(role, '-', 0);
+        int endIdx = StringUtils.nthOccurrence(role, '-', 1);
+        String center = role.substring(startIdx+1, endIdx-1);
+        String acquisitionGroupLead = center + "-" + "BDGT_APRV";
+        return acquisitionGroupLead;
+
+    }
+
+    public static String getBudgetUserFromRole(String role) {
+
+        int startIdx = StringUtils.nthOccurrence(role, '-', 0);
+        int endIdx = StringUtils.nthOccurrence(role, '-', 1);
+        String center = role.substring(startIdx+1, endIdx-1);
+        String acquisitionGroupLead = center + "-" + "BDGT_USER";
+        return acquisitionGroupLead;
+
+    }
+
+    public static List<String> getApplicationRoles() {
+        List<String> roles = null;
+        Set<Principal> principals =
+            ADFContext.getCurrent().getSecurityContext().getSubject().getPrincipals();
+        if (principals != null) {
+            roles = new ArrayList<String>();
+            for (Principal role : principals) {
+                if (role instanceof JpsApplicationRole) {
+                    System.err.println(role);
+                    roles.add(role.getName());
+                }
+            }
+        }
+        return roles;
+    }
+
+    public static String getCenterFromRole() {
+        String role = getLoginUserEPRoles().get(0);
+        //int dashFirstIndex = role.indexOf("-");
+        int startIdx = StringUtils.nthOccurrence(role, '-', 0);
+        int endIdx = StringUtils.nthOccurrence(role, '-', 1);
+        String center = role.substring(startIdx+1, endIdx-1);
+
+        return center;
+    }
+
+    public static String getEmail() {
+        String email = null;
+        try {
+            JpsContext jpsCtx =
+                JpsContextFactory.getContextFactory().getContext();
+            IdentityStoreService service =
+                jpsCtx.getServiceInstance(IdentityStoreService.class);
+            IdentityStore idStore = service.getIdmStore();
+            ADFContext adfCtx = ADFContext.getCurrent();
+            SecurityContext secCntx = adfCtx.getSecurityContext();
+            User user = idStore.searchUser(secCntx.getUserName());
+            if (user != null) {
+                UserProfile userProfile = user.getUserProfile();
+                PropertySet propSet = userProfile.getAllUserProperties();
+                Property prop = (Property)propSet.get("BUSINESS_EMAIL");
+                if (prop != null) {
+                    email = (String)prop.getValues().get(0);
+                }
+
+            }
+        } catch (JpsException e) {
+            e.printStackTrace();
+        } catch (IMException e) {
+            e.printStackTrace();
+        }
+        return email;
+    }
+
+    public static String deriveCenterFromRole() {
+        List<String> roles = null;
+        String center = null;
+        Set<Principal> principals =
+            ADFContext.getCurrent().getSecurityContext().getSubject().getPrincipals();
+        if (principals != null) {
+            roles = new ArrayList<String>();
+            for (Principal role : principals) {
+                if (role instanceof WLSGroup &&
+                    (role.getName().contains("ACQ") ||
+                     role.getName().contains("BDGT"))) {
+                    int dashStartIdx = StringUtils.nthOccurrence(role.getName(), '-', 0);
+                    int dashEndIdx = StringUtils.nthOccurrence(role.getName(), '-', 1);
+                    center = role.getName().substring(dashStartIdx+1, dashEndIdx-1);
+                    break;
+                }
+            }
+        }
+        //        AdfFacesContext.getCurrentInstance().getPageFlowScope().put("centerCode",
+        //                                                                    center);
+        return center;
+    }
+    
+    public static String getBudgetApproverMailDistro(){
+        String email = null;
+        String center = AAPModelUtils.getCenterFromRole();
+        if (center != null){
+            email = center+"-BDGT_APRVR@fda.hhs.gov";
+        }
+        return email;
+    }
+    
+    public static String getAcqnApproverMailDistro(){
+        String email = null;
+        String center = AAPModelUtils.getCenterFromRole();
+        if (center != null){
+            email = center+"-ACQ-APRVR@fda.hhs.gov";
+        }
+        return email;
+    }
+}

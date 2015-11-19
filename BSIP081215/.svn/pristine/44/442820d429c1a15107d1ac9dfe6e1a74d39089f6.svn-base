@@ -1,0 +1,259 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                        featuresOff="viewMenu">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t4">
+          <af:outputText value="Active Requests" id="ot11"
+                         inlineStyle="color:Blue; font-size:medium; font-weight:bold;"/>
+        </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar"/>
+      <af:table value="#{bindings.AapNotificationVO.collectionModel}" var="row"
+                rows="#{bindings.AapNotificationVO.rangeSize}"
+                scrollPolicy="page"  autoHeightRows="0" 
+                emptyText="#{bindings.AapNotificationVO.viewable ? 'No data toda display.' : 'Access Denied.'}"
+                fetchSize="#{bindings.AapNotificationVO.rangeSize}"
+                rowBandingInterval="1"
+                selectedRowKeys="#{bindings.AapNotificationVO.collectionModel.selectedRow}"
+                selectionListener="#{bindings.AapNotificationVO.collectionModel.makeCurrent}"
+                rowSelection="single" id="t1" styleClass="AFStretchWidth"
+                columnStretching="column:c12">
+        <af:column sortProperty="#{bindings.AapNotificationVO.hints.CenterItemNo.name}"
+                   sortable="true"
+                   headerText="#{bindings.AapNotificationVO.hints.CenterItemNo.label}"
+                   id="c1">
+          <!--af:outputText value="#{row.CenterItemNo}" id="ot1"/-->
+          <af:commandLink actionListener="#{bindings.onCenterLineClick.execute}"
+                          text="#{row.CenterItemNo}" partialSubmit="true"
+                          id="cl2">
+            <af:setPropertyListener to="#{pageFlowScope.comingFrom}"
+                                    type="action" from="dashboard"/>
+            <af:setPropertyListener to="#{sessionScope.requestId}" type="action"
+                                    from="#{row.RequestId}"/>
+            <af:setPropertyListener to="#{pageFlowScope.centerItemNo}"
+                                    type="action" from="#{row.CenterItemNo}"/>
+            <af:setPropertyListener to="#{pageFlowScope.wfStatus}"
+                                    type="action" from="#{row.WfStatus}"/>
+          </af:commandLink>
+          <!--<af:commandLink text="#{row.CenterItemNo}" id="cl1"
+                          partialSubmit="true" action="gotoDetail"
+                          actionListener="#{pageFlowScope.requestDetail.setLineItemCode}">
+            
+               <af:setPropertyListener to="#{pageFlowScope.centerItemNo}"
+                                    type="action" from="#{row.CenterItemNo}"/>
+                 <af:setPropertyListener to="#{pageFlowScope.comingFrom}"
+                                    type="action" from="dashboard"/> 
+          </af:commandLink>-->
+        </af:column>
+        <af:column sortProperty="#{bindings.AapNotificationVO.hints.SubmittedFrom.name}"
+                   sortable="true"
+                   headerText="#{bindings.AapNotificationVO.hints.SubmittedFrom.label}"
+                   id="c3">
+          <af:outputText value="#{row.SubmittedFrom}" id="ot2"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.AapNotificationVO.hints.WfStatus.name}"
+                   sortable="true"
+                   headerText="#{bindings.AapNotificationVO.hints.WfStatus.label}"
+                   id="c2" width="200">
+          <af:outputText value="#{row.WfStatus}" id="ot3"/>
+        </af:column>
+        <af:column headerText="Date Submitted" id="c4" width="150">
+          <af:outputText value="#{row.CreatedDate}" id="ot1">
+            <af:convertDateTime pattern="MMM dd, yyyy HH:mm:ss"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="#{bindings.AapNotificationVO.hints.DetailedDescription.label}"
+                   id="c12">
+          <af:outputText value="#{row.DetailedDescription}" id="ot13" />
+        </af:column>
+        <af:column headerText="#{bindings.AapNotificationVO.hints.TransReqType.label}"
+                   id="c14">
+          <af:outputText value="#{row.TransReqType}" id="ot16"/>
+        </af:column>
+        <af:column headerText="#{bindings.AapNotificationVO.hints.TotalDlarsForCurtFy.label}"
+                   id="c11" align="right">
+          <af:outputText value="#{row.TotalDlarsForCurtFy}" id="ot12">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.AapNotificationVO.hints.TotalDlarsForCurtFy.format}"/>
+          </af:outputText>
+        </af:column>
+      </af:table>
+      <f:facet name="secondaryToolbar">
+        <af:toolbar id="t5" stretchId="s2">
+          <af:spacer width="10" height="10" id="s2" clientComponent="true"/>
+          <af:outputText value="Total Records:#{bindings.AapNotificationVO.estimatedRowCount}" id="ot14" noWrap="true"/>
+        </af:toolbar>
+      </f:facet>
+    </af:panelCollection>
+    <af:spacer width="10" height="30" id="s1"/>
+    <af:panelCollection id="pc2" styleClass="AFStretchWidth"
+                        featuresOff="viewMenu">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t3">
+          <af:outputText value="In Process Requests" id="ot10"
+                         inlineStyle="color:Blue; font-size:medium; font-weight:bold;"/>
+        </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar"/>
+      <f:facet name="secondaryToolbar">
+        <af:toolbar id="t6" stretchId="s3">
+          <af:spacer width="10" height="10" id="s3" clientComponent="true"/>
+          <af:outputText value="Total Records:#{bindings.InProgressView.estimatedRowCount}" id="ot15"
+                         noWrap="true"/>
+        </af:toolbar>
+      </f:facet>
+      <af:table value="#{bindings.InProgressView.collectionModel}" var="row"
+                rows="#{bindings.InProgressView.rangeSize}"
+                emptyText="#{bindings.InProgressView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                fetchSize="#{bindings.InProgressView.rangeSize}"
+                rowBandingInterval="1" styleClass="AFStretchWidth"
+                scrollPolicy="page"  autoHeightRows="0" 
+                filterModel="#{bindings.InProgressViewQuery.queryDescriptor}"
+                queryListener="#{bindings.InProgressViewQuery.processQuery}"
+                filterVisible="false" varStatus="vs" columnStretching="column:c7"
+                selectedRowKeys="#{bindings.InProgressView.collectionModel.selectedRow}"
+                selectionListener="#{bindings.InProgressView.collectionModel.makeCurrent}"
+                rowSelection="single" id="t2">
+        <af:column sortProperty="#{bindings.InProgressView.hints.CenterItemNo.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.InProgressView.hints.CenterItemNo.label}"
+                   id="c6">
+                   <af:commandLink text="#{row.CenterItemNo}" id="ot5" actionListener="#{bindings.onCenterLineClick.execute}"
+                          partialSubmit="true">
+                            <af:setPropertyListener to="#{pageFlowScope.comingFrom}"
+                                    type="action" from="dashboard"/>
+                            <af:setPropertyListener to="#{sessionScope.requestId}" type="action"
+                                    from="#{row.RequestId}"/>
+                            <af:setPropertyListener to="#{pageFlowScope.centerItemNo}"
+                                    type="action" from="#{row.CenterItemNo}"/>      
+                    </af:commandLink>
+        </af:column>
+        <af:column sortProperty="#{bindings.InProgressView.hints.RequisitionNo.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.InProgressView.hints.RequisitionNo.label}"
+                   id="c8">
+          <af:outputText value="#{row.RequisitionNo}" id="ot6"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.InProgressView.hints.ExistingDocNo.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.InProgressView.hints.ExistingDocNo.label}"
+                   id="c5">
+          <af:outputText value="#{row.ExistingDocNo}" id="ot9"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.InProgressView.hints.RequiredAwardDate.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.InProgressView.hints.RequiredAwardDate.label}"
+                   id="c9">
+          <f:facet name="filter">
+            <af:inputDate value="#{vs.filterCriteria.RequiredAwardDate}"
+                          id="id1"/>
+          </f:facet>
+          <af:outputText value="#{row.RequiredAwardDate}" id="ot4">
+            <af:convertDateTime pattern="#{bindings.InProgressView.hints.RequiredAwardDate.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.InProgressView.hints.DetailedDescription.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.InProgressView.hints.DetailedDescription.label}"
+                   id="c7">
+          <af:outputText value="#{row.DetailedDescription}" id="ot7"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.InProgressView.hints.TotalDlarsForCurtFy.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.InProgressView.hints.TotalDlarsForCurtFy.label}"
+                   id="c10">
+          <af:outputText value="#{row.TotalDlarsForCurtFy}" id="ot8">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.InProgressView.hints.TotalDlarsForCurtFy.format}"/>
+          </af:outputText>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+    <af:spacer width="10" height="30" id="s4"/>
+    <af:panelCollection id="pc3" styleClass="AFStretchWidth"
+                        featuresOff="viewMenu">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t8">
+          <af:outputText value="Completed Requests" id="ot25" inlineStyle="color:Blue; font-size:medium; font-weight:bold;"/>
+        </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar"/>
+       <f:facet name="secondaryToolbar">
+        <af:toolbar id="t7" stretchId="s5">
+          <af:spacer width="10" height="10" id="s5" clientComponent="true"/>
+          <af:outputText value="Total Records:#{bindings.CompletedStatusVO.estimatedRowCount}" id="ot17"
+                         noWrap="true"/>
+        </af:toolbar>
+      </f:facet>
+      <af:table value="#{bindings.CompletedStatusVO.collectionModel}" var="row"
+                rows="#{bindings.CompletedStatusVO.rangeSize}"
+                emptyText="#{bindings.CompletedStatusVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                fetchSize="#{bindings.CompletedStatusVO.rangeSize}"
+                rowBandingInterval="1" styleClass="AFStretchWidth"
+                 scrollPolicy="page"  autoHeightRows="0" 
+                filterModel="#{bindings.CompletedStatusVOQuery.queryDescriptor}"
+                queryListener="#{bindings.CompletedStatusVOQuery.processQuery}"
+                filterVisible="false" varStatus="vs"
+                selectedRowKeys="#{bindings.CompletedStatusVO.collectionModel.selectedRow}"
+                selectionListener="#{bindings.CompletedStatusVO.collectionModel.makeCurrent}"
+                rowSelection="single" id="t71" columnStretching="column:c21">
+        <af:column sortProperty="#{bindings.CompletedStatusVO.hints.CenterItemNo.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.CompletedStatusVO.hints.CenterItemNo.label}"
+                   id="c20">
+          <af:outputText value="#{row.CenterItemNo}" id="ot20"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.CompletedStatusVO.hints.RequisitionNo.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.CompletedStatusVO.hints.RequisitionNo.label}"
+                   id="c13">
+          <af:outputText value="#{row.RequisitionNo}" id="ot18"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.CompletedStatusVO.hints.ExistingDocNo.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.CompletedStatusVO.hints.ExistingDocNo.label}"
+                   id="c16">
+          <af:outputText value="#{row.ExistingDocNo}" id="ot19"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.CompletedStatusVO.hints.RequiredAwardDate.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.CompletedStatusVO.hints.RequiredAwardDate.label}"
+                   id="c19">
+          <f:facet name="filter">
+            <af:inputDate value="#{vs.filterCriteria.RequiredAwardDate}"
+                          id="id2"/>
+          </f:facet>
+          <af:outputText value="#{row.RequiredAwardDate}" id="ot24">
+            <af:convertDateTime pattern="#{bindings.CompletedStatusVO.hints.RequiredAwardDate.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.CompletedStatusVO.hints.DetailedDescription.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.CompletedStatusVO.hints.DetailedDescription.label}"
+                   id="c21">
+          <af:outputText value="#{row.DetailedDescription}" id="ot22"/>
+        </af:column>
+        <af:column headerText="#{bindings.CompletedStatusVO.hints.TransReqType.label}"
+                   id="c18">
+          <af:outputText value="#{row.TransReqType}" id="ot26"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.CompletedStatusVO.hints.TotalDlarsForCurtFy.name}"
+                   filterable="true" sortable="true"
+                   headerText="#{bindings.CompletedStatusVO.hints.TotalDlarsForCurtFy.label}"
+                   id="c15">
+          <af:outputText value="#{row.TotalDlarsForCurtFy}" id="ot23">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.CompletedStatusVO.hints.TotalDlarsForCurtFy.format}"/>
+          </af:outputText>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+  </af:panelGroupLayout>
+</jsp:root>

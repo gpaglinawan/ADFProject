@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <Page
+      id="Page2">
+      <property
+         name="wildcard">false</property>
+      <property
+         name="y">204.44824</property>
+      <property
+         name="x">635.5</property>
+      <property
+         name="jspName">/index.jspx</property>
+   </Page>
+   <Page
+      id="Page3">
+      <property
+         name="wildcard">false</property>
+      <property
+         name="y">202.54004</property>
+      <property
+         name="x">211.67871</property>
+      <property
+         name="jspName">/welcome.jspx</property>
+   </Page>
+   <NavigationCase
+      islink="true"
+      id="NavigationCase4"
+      from="Page3"
+      to="Page2">
+      <property
+         name="fromOutcome">toIndex</property>
+      <property
+         name="description">Navigation Case</property>
+      <property
+         name="sdm:polyPoints">R50,252.67871,202.18945,593.0339,200.59766,L46</property>
+   </NavigationCase>
+   <Page
+      id="Page5">
+      <property
+         name="wildcard">false</property>
+      <property
+         name="y">358.1494</property>
+      <property
+         name="x">404.5</property>
+      <property
+         name="jspName">/logut.jspx</property>
+   </Page>
+   <NavigationCase
+      islink="true"
+      id="NavigationCase6"
+      from="Page2"
+      to="Page5">
+      <property
+         name="fromOutcome">toLogout</property>
+      <property
+         name="description">Navigation Case</property>
+      <property
+         name="sdm:polyPoints">L54,594.5,207.59766,445.5,357.79883,R50</property>
+   </NavigationCase>
+   <NavigationCase
+      islink="true"
+      id="NavigationCase7"
+      from="Page5"
+      to="Page3">
+      <property
+         name="fromOutcome">toWelcome</property>
+      <property
+         name="description">Navigation Case</property>
+      <property
+         name="sdm:polyPoints">L50,363.5,357.79883,211.67871,256.18945,B50</property>
+   </NavigationCase>
+</SDM>

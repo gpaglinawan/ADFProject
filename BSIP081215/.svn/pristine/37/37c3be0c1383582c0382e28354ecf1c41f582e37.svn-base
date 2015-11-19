@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1" title="AAP Application">
+      <af:resource type="javascript"  source="javascript/aap.js"/>
+      <!--<af:clientListener method="onloadaapPage" type="load"/>-->
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelGroupLayout id="pgl1" halign="center" layout="vertical">
+          <af:panelStretchLayout id="psl1"
+                                 inlineStyle="min-height:590px; width:1160px; background-color:RGB(225,225,225);"
+                                 topHeight="60px" dimensionsFrom="children"
+                                 bottomHeight="30px" startWidth="49px">
+            <f:facet name="bottom"/>
+            <f:facet name="center">
+              <af:panelGroupLayout id="pgl4" layout="vertical">
+                <af:panelGridLayout id="pgl5">
+                  <af:gridRow marginTop="5px" marginBottom="5px" height="auto"
+                              id="gr1">
+                    <af:gridCell marginStart="5px" width="50%" id="gc2"></af:gridCell>
+                    <af:gridCell marginStart="5px" marginEnd="5px" width="50%"
+                                 id="gc1" halign="end" valign="bottom">
+                      <af:outputText value="Welcome, #{securityContext.userName}"
+                                     id="ot1"
+                                     inlineStyle="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#003286; font-weight:bold;"/>
+                      <af:spacer width="30" height="10" id="s2"/>
+                      <af:commandLink text="Profile" id="cl1"
+                                      partialSubmit="true"
+                                      immediate="true"
+                                      actionListener="#{aapBean.launchMyProfile}"></af:commandLink>
+                      <af:spacer width="30" height="10" id="s4"/>
+                      <af:commandLink text="Logout" id="cl1o"
+                                      action="#{login.onLogout}"
+                                      immediate="true" partialSubmit="true"
+                                      inlineStyle="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#003286; font-weight:bold;"/>
+                    </af:gridCell>
+                  </af:gridRow>
+                </af:panelGridLayout>
+                <af:panelTabbed id="pt1" styleClass="pageTab AFStretchWidth"
+                                inlineStyle="height:1200.0px;"
+                                contentDelivery="lazyUncached"
+                                binding="#{navigationBean.indexTab}"
+                                childCreation="lazyUncached">
+                  <af:showDetailItem text="Dashboard" id="sdi4"
+                                     binding="#{navigationBean.dashBoardDetailItem}"
+                                     immediate="true">
+                    <af:panelGroupLayout id="pgl6" layout="scroll">
+                      <af:region value="#{bindings.dashboardflowdefinition1.regionModel}"
+                                 id="r5"/>
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="Create/Edit Request" id="sdi1"
+                                     styleClass="AFStretchWidth"
+                                     inlineStyle="height:1300.0px;"
+                                     binding="#{navigationBean.createRequestDetailItem}"
+                                     disclosureListener="#{navigationBean.onCreateRequestDisclosed}">
+                    <af:panelGroupLayout id="pgl2" layout="vertical" inlineStyle="height:1200.0px;">
+                      <af:region value="#{bindings.requesttaskflowdefinition1.regionModel}"
+                                 id="r1"
+                                 binding="#{navigationBean.requestRegion}"/>
+                      <af:spacer width="10" height="10" id="s1"/>
+                      <!--af:region value="#{bindings.budgetviewflowdefinition1.regionModel}"
+                                 id="r3"
+                                 rendered="#{securityContext.userInRole['AAP_BUDGET_USER']}"/-->
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="Mass Approval/Rejection" id="sdi5"
+                                     rendered="#{securityContext.userInRole['AAPACQNAPPROVE'] || securityContext.userInRole['AAPBUDGETAPPROVE']}"
+                                     binding="#{navigationBean.massShowDetailItem}"
+                                     disclosureListener="#{navigationBean.onMassDisclosed}">
+                    <af:panelGroupLayout id="pgl10" layout="scroll">
+                      <af:region value="#{bindings.massapproveflowdefinition1.regionModel}"
+                                 id="r3"/>
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="Search" id="sdi2"
+                                     styleClass="AFStretchWidth"
+                                     immediate="true"
+                                     inlineStyle="height:600.0px;"
+                                     binding="#{navigationBean.searchDetailItem}"
+                                     disclosureListener="#{navigationBean.onSearchDisclosed}">
+                    <af:panelGroupLayout id="pgl9" layout="scroll">
+                      <af:region value="#{bindings.searchflowdefinition1.regionModel}"
+                                 id="r2"/>
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
+                  <af:showDetailItem text="Administration" id="sdi3"
+                                    rendered="#{securityContext.userInRole['ADMIN_GROUP']}"
+                                     styleClass="AFStretchWidth"
+                                     inlineStyle="height:600.0px;">
+                    <af:region value="#{bindings.adminflowdefinition1.regionModel}"
+                               id="r4"/>
+                  </af:showDetailItem>
+                </af:panelTabbed>
+              </af:panelGroupLayout>
+            </f:facet>
+            <f:facet name="start"/>
+            <f:facet name="end"/>
+            <f:facet name="top">
+              <af:panelGroupLayout id="pgl3" layout="horizontal" halign="left"
+                                   valign="top"
+                                   inlineStyle="background-color:RGB(225,225,225);"
+                                   styleClass="AFStretchWidth">
+                <af:image source="/images/img_fdagov_fda_masthead_logo.png"
+                          shortDesc="fda logo" id="i1"/>
+                <af:spacer width="90" height="10" id="s3"/>
+                <af:outputFormatted value="Advance Acquisition Planning (AAP)"
+                                    id="of1"
+                                    inlineStyle="font-size:xx-large; color:Navy; font-family:Verdana, Arial, Helvetica, sans-serif;"/>
+              </af:panelGroupLayout>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:panelGroupLayout>
+      </af:form>
+      <af:popup id="p1">
+        <af:panelWindow id="pw1">
+          <af:panelGroupLayout id="pgl7" layout="vertical">
+            <af:outputFormatted value="Are you sure you want to logout?"
+                                id="of2"/>
+            <af:panelGroupLayout id="pgl8"/>
+          </af:panelGroupLayout>
+        </af:panelWindow>
+      </af:popup>
+      <af:popup id="p2" contentDelivery="lazyUncached"
+                binding="#{aapBean.profilePopup}">
+        <af:dialog id="d2" stretchChildren="first" title="My Profile"
+                   type="cancel">
+          <af:decorativeBox id="db1">
+            <f:facet name="center">
+              <af:panelFormLayout id="pfl1">
+                <f:facet name="footer"/>
+                <af:panelLabelAndMessage label="User Groups" id="plam1">
+                  <af:outputText value="#{sessionScope.aapBean.userGroups}"
+                                 id="ot2"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+            </f:facet>
+            <f:facet name="top"/>
+          </af:decorativeBox>
+        </af:dialog>
+      </af:popup>
+    </af:document>
+  </f:view>
+</jsp:root>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AapFundingObject"
+  Version="11.1.1.64.93"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="AAP_FUNDING_OBJECT"
+  AliasName="AapFundingObject"
+  BindingStyle="OracleName"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <AttrArray Name="_publishEvents"/>
+  </DesignTime>
+  <Attribute
+    Name="FundingObjectClassId"
+    IsNotNull="true"
+    ColumnName="FUNDING_OBJECT_CLASS_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="AAP_FUNDING_OBJECT"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FundingObjectClass"
+    IsNotNull="true"
+    Precision="100"
+    ColumnName="FUNDING_OBJECT_CLASS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="AAP_FUNDING_OBJECT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Type"
+    Precision="20"
+    ColumnName="TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="AAP_FUNDING_OBJECT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Key
+    Name="AapFundingObjectPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="AAP_FUNDING_OBJECT_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="com.fda.aps.model.entity.AapFundingObject.FundingObjectClassId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC009960">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C009960"/>
+      <Attr Name="_checkCondition"
+        Value='"FUNDING_OBJECT_CLASS_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="com.fda.aps.model.entity.AapFundingObject.FundingObjectClassId"/>
+    </AttrArray>
+  </Key>
+</Entity>

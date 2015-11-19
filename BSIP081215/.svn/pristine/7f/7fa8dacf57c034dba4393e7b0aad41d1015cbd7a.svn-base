@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="adminPageDef"
+                Package="pagefragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CutOffDateVO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="CutOffDateVOIterator"/>
+    <iterator Binds="AapSlaCutoffdateVO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="AapSlaCutoffdateVOIterator"/>
+    <iterator id="AapSlaCutoffdateVO1Iterator" Binds="AapSlaCutoffdateVO1"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+    <iterator id="ApsReferenceViewIterator" Binds="ApsReferenceView"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+    <iterator Binds="ActionTypeVO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="ActionTypeVOIterator"/>
+    <iterator Binds="NAICSVO" RangeSize="25" 
+              DataControl="APSApplicationModuleDataControl"
+              id="NAICSVOIterator"/>
+    <iterator Binds="ProductServiceCodeVO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="ProductServiceCodeVOIterator"/>
+    <iterator Binds="PotentialContractTypeVO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="PotentialContractTypeVOIterator"/>
+    <iterator Binds="RequirementType" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="RequirementTypeIterator"/>
+    <iterator Binds="CommodityTypeVO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="CommodityTypeVOIterator"/>
+    <iterator Binds="CompetitionTypeVO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="CompetitionTypeVOIterator"/>
+    <iterator Binds="StartDateSetupVO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="StartDateSetupVOIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="CutOffDateVOIterator" id="CutOffDateVO">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.ApsReferenceView"
+                      Name="CutOffDateVO0">
+        <AttrNames>
+          <Item Value="ReferenceCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="AapSlaCutoffdateVOIterator" id="AapSlaCutoffdateVO">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.AapSlaCutoffdateVO"
+                      Name="AapSlaCutoffdateVO0">
+        <AttrNames>
+          <Item Value="ActionType"/>
+          <Item Value="SlaDays"/>
+          <Item Value="CutOffDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="APSApplicationModuleDataControl"/>
+    <action IterBinding="AapSlaCutoffdateVOIterator" id="removeRowWithKey"
+            RequiresUpdateModel="false" Action="removeRowWithKey">
+      <NamedData NDName="rowKey" NDValue="#{row.rowKeyStr}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues IterBinding="AapSlaCutoffdateVOIterator" id="ActionType">
+      <AttrNames>
+        <Item Value="ActionType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AapSlaCutoffdateVOIterator" id="SlaDays">
+      <AttrNames>
+        <Item Value="SlaDays"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AapSlaCutoffdateVOIterator" id="CutOffDate">
+      <AttrNames>
+        <Item Value="CutOffDate"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="AapSlaCutoffdateVOIterator" id="createSLA"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <methodAction id="addSLA"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="addSLA" IsViewObjectMethod="false">
+      <NamedData NDName="description" NDType="java.lang.String"/>
+      <NamedData NDName="slaDays" NDType="java.lang.String"/>
+      <NamedData NDName="cutoffDate" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+    <attributeValues IterBinding="AapSlaCutoffdateVO1Iterator" id="ActionType1">
+      <AttrNames>
+        <Item Value="ActionType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AapSlaCutoffdateVO1Iterator" id="SlaDays1">
+      <AttrNames>
+        <Item Value="SlaDays"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AapSlaCutoffdateVO1Iterator" id="CutOffDate1">
+      <AttrNames>
+        <Item Value="CutOffDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="ActionTypeVOIterator" id="ActionTypeVO">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.ApsReferenceView"
+                      Name="ActionTypeVO0">
+        <AttrNames>
+          <Item Value="ReferenceDescription"/>
+           <Item Value="deletable"/>
+           <Item Value="editable"/>
+          <Item Value="EffectiveFg"/>
+          <Item Value="EffectiveEndDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="NAICSVOIterator" id="NAICSVO">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.ApsReferenceView"
+                      Name="NAICSVO0">
+        <AttrNames>
+          <Item Value="ReferenceDescription"/>
+          <Item Value="deletable"/>
+          <Item Value="editable"/>
+          <Item Value="EffectiveFg"/>
+          <Item Value="EffectiveEndDate"/>
+        </AttrNames>
+        
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="ProductServiceCodeVOIterator" id="ProductServiceCodeVO">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.ApsReferenceView"
+                      Name="ProductServiceCodeVO0">
+        <AttrNames>
+          <Item Value="ReferenceDescription"/>
+           <Item Value="deletable"/>
+           <Item Value="editable"/>
+          <Item Value="EffectiveFg"/>
+          <Item Value="EffectiveEndDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="PotentialContractTypeVOIterator"
+          id="PotentialContractTypeVO">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.ApsReferenceView"
+                      Name="PotentialContractTypeVO0">
+        <AttrNames>
+          <Item Value="ReferenceDescription"/>
+           <Item Value="deletable"/>
+           <Item Value="editable"/>
+          <Item Value="EffectiveFg"/>
+          <Item Value="EffectiveEndDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="RequirementTypeIterator" id="RequirementType">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.ApsReferenceView"
+                      Name="RequirementType0">
+        <AttrNames>
+          <Item Value="ReferenceDescription"/>
+           <Item Value="deletable"/>
+           <Item Value="editable"/>
+          <Item Value="EffectiveFg"/>
+          <Item Value="EffectiveEndDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="CommodityTypeVOIterator" id="CommodityTypeVO">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.ApsReferenceView"
+                      Name="CommodityTypeVO0">
+        <AttrNames>
+          <Item Value="ReferenceDescription"/>
+           <Item Value="deletable"/>
+          <Item Value="EffectiveFg"/>
+           <Item Value="editable"/>
+          <Item Value="EffectiveEndDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="NAICSVOIterator" id="editable">
+      <AttrNames>
+        <Item Value="editable"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction"
+            DataControl="APSApplicationModuleDataControl"/>
+    <attributeValues IterBinding="CommodityTypeVOIterator" id="editable1">
+      <AttrNames>
+        <Item Value="editable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ProductServiceCodeVOIterator" id="editable2">
+      <AttrNames>
+        <Item Value="editable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PotentialContractTypeVOIterator"
+                     id="editable3">
+      <AttrNames>
+        <Item Value="editable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ActionTypeVOIterator" id="editable4">
+      <AttrNames>
+        <Item Value="editable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RequirementTypeIterator" id="editable5">
+      <AttrNames>
+        <Item Value="editable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="NAICSVOIterator" id="deletable">
+      <AttrNames>
+        <Item Value="deletable"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="NAICSVOIterator" id="executeNaics"
+            InstanceName="APSApplicationModuleDataControl.NAICSVO"
+            DataControl="APSApplicationModuleDataControl"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action IterBinding="NAICSVOIterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="ActionTypeVOIterator"
+                     id="deletableActionType">
+      <AttrNames>
+        <Item Value="deletable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CommodityTypeVOIterator"
+                     id="deletableCommodityType">
+      <AttrNames>
+        <Item Value="deletable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ProductServiceCodeVOIterator"
+                     id="deletableServiceCode">
+      <AttrNames>
+        <Item Value="deletable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PotentialContractTypeVOIterator"
+                     id="deletableContractType">
+      <AttrNames>
+        <Item Value="deletable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RequirementTypeIterator"
+                     id="deletableRequirementType">
+      <AttrNames>
+        <Item Value="deletable"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="CompetitionTypeVOIterator" id="CompetitionTypeVO">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.ApsReferenceView"
+                      Name="CompetitionTypeVO0">
+        <AttrNames>
+          <Item Value="ReferenceDescription"/>
+          <Item Value="EffectiveEndDate"/>
+          <Item Value="deletable"/>
+           <Item Value="editable"/>
+          <Item Value="EffectiveFg"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="StartDateSetupVOIterator"
+                     id="EffectiveEndDate">
+      <AttrNames>
+        <Item Value="EffectiveEndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StartDateSetupVOIterator"
+                     id="editableStartDate">
+      <AttrNames>
+        <Item Value="editable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="StartDateSetupVOIterator"
+                     id="deletableStartDate">
+      <AttrNames>
+        <Item Value="deletable"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

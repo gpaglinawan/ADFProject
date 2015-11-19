@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1" title="AAP Application">
+      <af:resource type="javascript"  source="javascript/aap.js"/>
+      <!--<af:clientListener method="onloadaapPage" type="load"/>-->
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelGroupLayout id="pgl1" halign="center" layout="vertical">
+          <af:panelStretchLayout id="psl1"
+                                 inlineStyle="min-height:590px; width:1160px; background-color:RGB(225,225,225);"
+                                 topHeight="60px" dimensionsFrom="children"
+                                 bottomHeight="30px" startWidth="49px">
+            <f:facet name="bottom"/>
+            <f:facet name="center">
+              <af:panelGroupLayout id="pgl4" layout="vertical" halign="left" inlineStyle="width:500px;">
+                <af:separator id="s5"/>
+                <af:outputText value="WARNING **** WARNING **** WARNING" id="ot1"  
+                               inlineStyle="font-family:Calibri; font-weight:bold;"/>
+                <af:spacer width="10" height="40" id="s1"/>
+                <af:inputText value="This is a Food and Drug Administration (FDA) computer system and is provided for the processing of official U.S. Government information only.  All data contained on this computer system is owned by the FDA and may, for the purpose of protecting the rights and property of the FDA, be monitored,  intercepted, recorded, read, copied, or captured in any manner and disclosed by and to authorized personnel." id="of3"
+                              contentStyle="text-align:justify;font-family:Calibri;font-weight:bold;font-size:13.0px;" rows="5" readOnly="true" columns="76"
+                              inlineStyle="font-size:13.0px;"/>
+                <af:spacer width="10" height="20" id="s2"/>
+                <af:inputText value="USE OF THIS SYSTEM BY ANY USER, AUTHORIZED OR UNAUTHORIZED, CONSTITUTES CONSENT TO THIS MONITORING, INTERCEPTION, RECORDING, READING, COPYING, 
+OR CAPTURING AND DISCLOSURE." id="of4"
+                              contentStyle="text-align:justify;font-family:Calibri;font-weight:bold;font-size:13.0px;" rows="3" readOnly="true" columns="76"/>
+                <af:spacer width="10" height="20" id="s4"/>
+                <af:inputText  id="it1"
+                              contentStyle="text-align:justify;font-family:Calibri;font-weight:bold;font-size:13.0px;" rows="7" readOnly="true" columns="76"
+                              value="Authorized personnel may give to law enforcement officials any potential evidence of crime found on FDA computer systems. Unauthorized access  or use of this computer system and software may subject violators to criminal, civil, and/or administrative action. The standards of ethical conduct  for employees of the Executive Branch (5 C.F.R &amp;sect;2635.704) do not permit the use of government property, including computers, for other than  authorized purposes."/>
+                <af:separator id="s6"/>
+                <af:spacer width="10" height="10" id="s7"/>
+                <af:panelGroupLayout id="pgl2" layout="horizontal"
+                                     halign="end" inlineStyle="width:503px;">
+                  <af:commandButton text="Agree" id="cb1" action="toIndex"/>
+                  <af:spacer width="10" height="10" id="s8"/>
+                  <af:commandButton text="Close" id="cb2"
+                                    action="#{aapBean.closeWindow}">
+                    <af:clientListener type="action" method="closeWindow"/>
+                  </af:commandButton>
+                </af:panelGroupLayout>
+              </af:panelGroupLayout>
+            </f:facet>
+            <f:facet name="start"/>
+            <f:facet name="end"/>
+            <f:facet name="top">
+              <af:panelGroupLayout id="pgl3" layout="horizontal" halign="left"
+                                   valign="top"
+                                   inlineStyle="background-color:RGB(225,225,225);"
+                                   styleClass="AFStretchWidth">
+                <af:image source="/images/img_fdagov_fda_masthead_logo.png"
+                          shortDesc="fda logo" id="i1"/>
+                <af:spacer width="90" height="10" id="s3"/>
+                <af:outputFormatted value="Advance Acquisition Planning (AAP)"
+                                    id="of1"
+                                    inlineStyle="font-size:xx-large; color:Navy; font-family:Verdana, Arial, Helvetica, sans-serif;"/>
+              </af:panelGroupLayout>
+            </f:facet>
+          </af:panelStretchLayout>
+        </af:panelGroupLayout>
+      </af:form>
+      <af:popup id="p1">
+        <af:panelWindow id="pw1">
+          <af:panelGroupLayout id="pgl7" layout="vertical">
+            <af:outputFormatted value="Are you sure you want to logout?"
+                                id="of2"/>
+            <af:panelGroupLayout id="pgl8"/>
+          </af:panelGroupLayout>
+        </af:panelWindow>
+      </af:popup>
+      <af:popup id="p2" contentDelivery="lazyUncached"
+                binding="#{aapBean.profilePopup}">
+        <af:dialog id="d2" stretchChildren="first" title="My Profile"
+                   type="cancel">
+          <af:decorativeBox id="db1">
+            <f:facet name="center">
+              <af:panelFormLayout id="pfl1">
+                <f:facet name="footer"/>
+                <af:panelLabelAndMessage label="User Groups" id="plam1">
+                  <af:outputText value="#{sessionScope.aapBean.userGroups}"
+                                 id="ot2"/>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+            </f:facet>
+            <f:facet name="top"/>
+          </af:decorativeBox>
+        </af:dialog>
+      </af:popup>
+    </af:document>
+  </f:view>
+</jsp:root>

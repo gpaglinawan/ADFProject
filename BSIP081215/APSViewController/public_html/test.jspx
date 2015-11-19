@@ -1,0 +1,481 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:pageTemplate viewId="/template/AAPPageTeamplate.jspx" id="pt1">
+        <f:facet name="mainContent">
+          <af:panelGroupLayout layout="vertical" id="pgl2">
+            <af:panelHeader text="SubmittedRequestsView" id="ph2">
+              <af:table id="md1"
+                        rows="#{bindings.SubmittedRequestsView.rangeSize}"
+                        fetchSize="#{bindings.SubmittedRequestsView.rangeSize}"
+                        emptyText="#{bindings.SubmittedRequestsView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        var="row"
+                        value="#{bindings.SubmittedRequestsView.collectionModel}"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.SubmittedRequestsView.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.SubmittedRequestsView.collectionModel.makeCurrent}"
+                        rowSelection="single">
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.RequestSequence.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.RequestSequence.name}"
+                           sortable="false" id="c26">
+                  <af:outputText value="#{row.RequestSequence}" id="ot13"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.AcquisitionStatus.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.AcquisitionStatus.name}"
+                           sortable="false" id="c44">
+                  <af:outputText value="#{row.AcquisitionStatus}" id="ot25">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.AcquisitionStatus.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.AnticipatedAcquisitionMethod.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.AnticipatedAcquisitionMethod.name}"
+                           sortable="false" id="c48">
+                  <af:outputText value="#{row.AnticipatedAcquisitionMethod}"
+                                 id="ot49">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.AnticipatedAcquisitionMethod.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.AnticipatedActionType.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.AnticipatedActionType.name}"
+                           sortable="false" id="c38">
+                  <af:outputText value="#{row.AnticipatedActionType}" id="ot24">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.AnticipatedActionType.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.AnticipatedNoOfAwards.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.AnticipatedNoOfAwards.name}"
+                           sortable="false" id="c1">
+                  <af:outputText value="#{row.AnticipatedNoOfAwards}"
+                                 id="ot41"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.AnticipatedPop.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.AnticipatedPop.name}"
+                           sortable="false" id="c29">
+                  <af:outputText value="#{row.AnticipatedPop}" id="ot15"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.CenterId.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.CenterId.name}"
+                           sortable="false" id="c24">
+                  <af:outputText value="#{row.CenterId}" id="ot59"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.CollaborationFlag.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.CollaborationFlag.name}"
+                           sortable="false" id="c33">
+                  <af:outputText value="#{row.CollaborationFlag}" id="ot38"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.CollaborationItemNo.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.CollaborationItemNo.name}"
+                           sortable="false" id="c35">
+                  <af:outputText value="#{row.CollaborationItemNo}" id="ot44"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.CommodityType.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.CommodityType.name}"
+                           sortable="false" id="c7">
+                  <af:outputText value="#{row.CommodityType}" id="ot42">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.CommodityType.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.CreatedBy.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.CreatedBy.name}"
+                           sortable="false" id="c28">
+                  <af:outputText value="#{row.CreatedBy}" id="ot8"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.CreatedDate.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.CreatedDate.name}"
+                           sortable="false" id="c22">
+                  <af:outputText value="#{row.CreatedDate}" id="ot37">
+                    <af:convertDateTime pattern="#{bindings.SubmittedRequestsView.hints.CreatedDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.CtrLnItmNo.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.CtrLnItmNo.name}"
+                           sortable="false" id="c18">
+                  <af:outputText value="#{row.CtrLnItmNo}" id="ot26"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.CurrYrPopEndDate.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.CurrYrPopEndDate.name}"
+                           sortable="false" id="c5">
+                  <af:outputText value="#{row.CurrYrPopEndDate}" id="ot10">
+                    <af:convertDateTime pattern="#{bindings.SubmittedRequestsView.hints.CurrYrPopEndDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.DetailedDescription.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.DetailedDescription.name}"
+                           sortable="false" id="c45">
+                  <af:outputText value="#{row.DetailedDescription}" id="ot53"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.EstimatedNumberOfActions.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.EstimatedNumberOfActions.name}"
+                           sortable="false" id="c3">
+                  <af:outputText value="#{row.EstimatedNumberOfActions}"
+                                 id="ot19"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.EstimatedRfaRelDate.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.EstimatedRfaRelDate.name}"
+                           sortable="false" id="c11">
+                  <af:outputText value="#{row.EstimatedRfaRelDate}" id="ot20">
+                    <af:convertDateTime pattern="#{bindings.SubmittedRequestsView.hints.EstimatedRfaRelDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.EstimatedTotalProjValue.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.EstimatedTotalProjValue.name}"
+                           sortable="false" id="c16">
+                  <af:outputText value="#{row.EstimatedTotalProjValue}"
+                                 id="ot48"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.ExistingDocNo.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.ExistingDocNo.name}"
+                           sortable="false" id="c2">
+                  <af:outputText value="#{row.ExistingDocNo}" id="ot52"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.ExistingIaaNumber.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.ExistingIaaNumber.name}"
+                           sortable="false" id="c27">
+                  <af:outputText value="#{row.ExistingIaaNumber}" id="ot54"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.FiscalYear.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.FiscalYear.name}"
+                           sortable="false" id="c15">
+                  <af:outputText value="#{row.FiscalYear}" id="ot50">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.FiscalYear.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.GrantsCommodity.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.GrantsCommodity.name}"
+                           sortable="false" id="c34">
+                  <af:outputText value="#{row.GrantsCommodity}" id="ot27">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.GrantsCommodity.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.LastUpdatedBy.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.LastUpdatedBy.name}"
+                           sortable="false" id="c37">
+                  <af:outputText value="#{row.LastUpdatedBy}" id="ot36"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.LastUpdatedDate.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.LastUpdatedDate.name}"
+                           sortable="false" id="c4">
+                  <af:outputText value="#{row.LastUpdatedDate}" id="ot33">
+                    <af:convertDateTime pattern="#{bindings.SubmittedRequestsView.hints.LastUpdatedDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.LeadMngCenter.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.LeadMngCenter.name}"
+                           sortable="false" id="c14">
+                  <af:outputText value="#{row.LeadMngCenter}" id="ot57">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.LeadMngCenter.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.NaicsCode.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.NaicsCode.name}"
+                           sortable="false" id="c8">
+                  <af:outputText value="#{row.NaicsCode}" id="ot11">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.NaicsCode.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.NciboardReviewRequired.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.NciboardReviewRequired.name}"
+                           sortable="false" id="c31">
+                  <af:outputText value="#{row.NciboardReviewRequired}"
+                                 id="ot22"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.OptionYrExercise.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.OptionYrExercise.name}"
+                           sortable="false" id="c41">
+                  <af:outputText value="#{row.OptionYrExercise}" id="ot23">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.OptionYrExercise.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.OwnerNmTelNo.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.OwnerNmTelNo.name}"
+                           sortable="false" id="c17">
+                  <af:outputText value="#{row.OwnerNmTelNo}" id="ot2"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.PotentialContractType.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.PotentialContractType.name}"
+                           sortable="false" id="c23">
+                  <af:outputText value="#{row.PotentialContractType}" id="ot6">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.PotentialContractType.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.PriorityLevel.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.PriorityLevel.name}"
+                           sortable="false" id="c46">
+                  <af:outputText value="#{row.PriorityLevel}" id="ot55">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.PriorityLevel.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.ProductServiceCode.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.ProductServiceCode.name}"
+                           sortable="false" id="c42">
+                  <af:outputText value="#{row.ProductServiceCode}" id="ot4">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.ProductServiceCode.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.ProjectPopEndDate.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.ProjectPopEndDate.name}"
+                           sortable="false" id="c25">
+                  <af:outputText value="#{row.ProjectPopEndDate}" id="ot29">
+                    <af:convertDateTime pattern="#{bindings.SubmittedRequestsView.hints.ProjectPopEndDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.ProjectPopStartDate.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.ProjectPopStartDate.name}"
+                           sortable="false" id="c19">
+                  <af:outputText value="#{row.ProjectPopStartDate}" id="ot46">
+                    <af:convertDateTime pattern="#{bindings.SubmittedRequestsView.hints.ProjectPopStartDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.Purpose.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.Purpose.name}"
+                           sortable="false" id="c39">
+                  <af:outputText value="#{row.Purpose}" id="ot9"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.RecurringItem.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.RecurringItem.name}"
+                           sortable="false" id="c9">
+                  <af:outputText value="#{row.RecurringItem}" id="ot32"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.ReimbursableAgency.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.ReimbursableAgency.name}"
+                           sortable="false" id="c13">
+                  <af:outputText value="#{row.ReimbursableAgency}" id="ot28"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.ReimbursableAmt.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.ReimbursableAmt.name}"
+                           sortable="false" id="c40">
+                  <af:outputText value="#{row.ReimbursableAmt}" id="ot16"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.ReleaseNumber.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.ReleaseNumber.name}"
+                           sortable="false" id="c30">
+                  <af:outputText value="#{row.ReleaseNumber}" id="ot39"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.RequestId.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.RequestId.name}"
+                           sortable="false" id="c6">
+                  <af:outputText value="#{row.RequestId}" id="ot34">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.RequestId.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.RequiredAwardDate.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.RequiredAwardDate.name}"
+                           sortable="false" id="c21">
+                  <af:outputText value="#{row.RequiredAwardDate}" id="ot58">
+                    <af:convertDateTime pattern="#{bindings.SubmittedRequestsView.hints.RequiredAwardDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.RequirementType.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.RequirementType.name}"
+                           sortable="false" id="c12">
+                  <af:outputText value="#{row.RequirementType}" id="ot12">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.RequirementType.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.RequisitionNo.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.RequisitionNo.name}"
+                           sortable="false" id="c20">
+                  <af:outputText value="#{row.RequisitionNo}" id="ot17"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.ServiceOrReimbursable.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.ServiceOrReimbursable.name}"
+                           sortable="false" id="c10">
+                  <af:outputText value="#{row.ServiceOrReimbursable}" id="ot56">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.ServiceOrReimbursable.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.SubmitFlag.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.SubmitFlag.name}"
+                           sortable="false" id="c47">
+                  <af:outputText value="#{row.SubmitFlag}" id="ot30"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.TotalDlarsForCurtFy.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.TotalDlarsForCurtFy.name}"
+                           sortable="false" id="c32">
+                  <af:outputText value="#{row.TotalDlarsForCurtFy}" id="ot21">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.TotalDlarsForCurtFy.format}"/>
+                  </af:outputText>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.ZeroDollarReqn.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.ZeroDollarReqn.name}"
+                           sortable="false" id="c43">
+                  <af:outputText value="#{row.ZeroDollarReqn}" id="ot45"/>
+                </af:column>
+                 
+                <af:column headerText="#{bindings.SubmittedRequestsView.hints.TotalAmountRemaining.label}"
+                           sortProperty="#{bindings.SubmittedRequestsView.hints.TotalAmountRemaining.name}"
+                           sortable="false" id="c36">
+                  <af:outputText value="#{row.TotalAmountRemaining}" id="ot43">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.SubmittedRequestsView.hints.TotalAmountRemaining.format}"/>
+                  </af:outputText>
+                </af:column>
+              </af:table>
+            </af:panelHeader>
+            <af:panelHeader text="DetailedExpensesView" id="ph1">
+              <af:panelFormLayout partialTriggers="md1" id="pfl1">
+                <af:panelLabelAndMessage label="#{bindings.Allowance.hints.label}"
+                                         id="plam6">
+                  <af:outputText value="#{bindings.Allowance.inputValue}"
+                                 id="ot14"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.CenterItmNo.hints.label}"
+                                         id="plam10">
+                  <af:outputText value="#{bindings.CenterItmNo.inputValue}"
+                                 id="ot7"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.Cost.hints.label}"
+                                         id="plam2">
+                  <af:outputText value="#{bindings.Cost.inputValue}" id="ot31">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.Cost.format}"/>
+                  </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.CostCenter.hints.label}"
+                                         id="plam9">
+                  <af:outputText value="#{bindings.CostCenter.inputValue}"
+                                 id="ot40"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.ExpensesId.hints.label}"
+                                         id="plam5">
+                  <af:outputText value="#{bindings.ExpensesId.inputValue}"
+                                 id="ot51">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ExpensesId.format}"/>
+                  </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.Fund.hints.label}"
+                                         id="plam4">
+                  <af:outputText value="#{bindings.Fund.inputValue}" id="ot5"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.FundingObjCode.hints.label}"
+                                         id="plam11">
+                  <af:outputText value="#{bindings.FundingObjCode.inputValue}"
+                                 id="ot47"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.RequestId.hints.label}"
+                                         id="plam3">
+                  <af:outputText value="#{bindings.RequestId.inputValue}"
+                                 id="ot35">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.RequestId.format}"/>
+                  </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.SubAllowance.hints.label}"
+                                         id="plam8">
+                  <af:outputText value="#{bindings.SubAllowance.inputValue}"
+                                 id="ot18"/>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.TotalCost.hints.label}"
+                                         id="plam7">
+                  <af:outputText value="#{bindings.TotalCost.inputValue}"
+                                 id="ot3">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.TotalCost.format}"/>
+                  </af:outputText>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="#{bindings.TotAmtRem.hints.label}"
+                                         id="plam1">
+                  <af:outputText value="#{bindings.TotAmtRem.inputValue}"
+                                 id="ot1">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.TotAmtRem.format}"/>
+                  </af:outputText>
+                </af:panelLabelAndMessage>
+                <f:facet name="footer">
+                  <af:panelGroupLayout layout="horizontal" id="pgl1">
+                    <af:commandButton actionListener="#{bindings.First.execute}"
+                                      text="First"
+                                      disabled="#{!bindings.First.enabled}"
+                                      partialSubmit="true" id="cb2"/>
+                    <af:commandButton actionListener="#{bindings.Previous.execute}"
+                                      text="Previous"
+                                      disabled="#{!bindings.Previous.enabled}"
+                                      partialSubmit="true" id="cb3"/>
+                    <af:commandButton actionListener="#{bindings.Next.execute}"
+                                      text="Next"
+                                      disabled="#{!bindings.Next.enabled}"
+                                      partialSubmit="true" id="cb1"/>
+                    <af:commandButton actionListener="#{bindings.Last.execute}"
+                                      text="Last"
+                                      disabled="#{!bindings.Last.enabled}"
+                                      partialSubmit="true" id="cb4"/>
+                  </af:panelGroupLayout>
+                </f:facet>
+              </af:panelFormLayout>
+            </af:panelHeader>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="menu"/>
+      </af:pageTemplate>
+    </af:document>
+  </f:view>
+</jsp:root>

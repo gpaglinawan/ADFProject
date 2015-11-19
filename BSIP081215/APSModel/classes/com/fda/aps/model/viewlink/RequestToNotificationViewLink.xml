@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RequestToNotificationViewLink"
+  Version="11.1.1.64.93"
+  InheritPersonalization="true">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.fda.aps.model.viewlink.RequestToNotificationViewLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="RequestsView"
+    Cardinality="1"
+    Owner="com.fda.aps.model.viewobject.RequestsView"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="RequestsView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.fda.aps.model.viewobject.RequestsView.RequestId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="AapNotificationView"
+    Cardinality="-1"
+    Owner="com.fda.aps.model.viewobject.AapNotificationView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="AapNotificationView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.fda.aps.model.viewobject.AapNotificationView.RequestId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.fda.aps.model.APSModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

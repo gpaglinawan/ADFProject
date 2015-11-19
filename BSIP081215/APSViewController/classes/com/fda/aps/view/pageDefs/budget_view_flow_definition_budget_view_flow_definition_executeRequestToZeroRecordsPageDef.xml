@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93"
+                id="budget_view_flow_definition_budget_view_flow_definition_executeRequestToZeroRecordsPageDef"
+                Package="com.fda.aps.view.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="executeRequestToZeroRecords" RequiresUpdateModel="true"
+            Action="invokeMethod" MethodName="executeRequestToZeroRecords"
+            IsViewObjectMethod="false"
+            DataControl="APSApplicationModuleDataControl"
+            InstanceName="APSApplicationModuleDataControl.dataProvider"/>
+  </bindings>
+</pageDefinition>

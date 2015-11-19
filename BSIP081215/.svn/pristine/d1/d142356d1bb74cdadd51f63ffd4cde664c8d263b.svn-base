@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.64.93" id="DataBindings" SeparateXMLFiles="false"
+             Package="com.fda.aps.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/pagefragments/request.jsff"
+          usageId="com_fda_aps_view_requestPageDef"/>
+    <page path="/WEB-INF/request-task-flow-definition.xml#request-task-flow-definition@initializeSubmitandInprogressRequest"
+          usageId="com_fda_aps_view_request_task_flow_definition_request_task_flow_definition_initializeSubmitandInprogressRequestPageDef"/>
+    <page path="/index.jspx" usageId="com_fda_aps_view_indexPageDef"/>
+    <page path="/pagefragments/requestDetail.jsff"
+          usageId="com_fda_aps_view_requestDetailPageDef"/>
+    <page path="/pagefragments/search.jsff"
+          usageId="com_fda_aps_view_searchPageDef"/>
+    <page path="/pagefragments/budgetUserView.jsff"
+          usageId="com_fda_aps_view_budgetUserViewPageDef"/>
+    <page path="/pagefragments/admin.jsff"
+          usageId="com_fda_aps_view_adminPageDef"/>
+    <page path="/WEB-INF/budget-view-flow-definition.xml#budget-view-flow-definition@SetCurrentRowWithKeyValue"
+          usageId="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_SetCurrentRowWithKeyValuePageDef"/>
+    <page path="/pagefragments/dashboard.jsff"
+          usageId="com_fda_aps_view_dashboardPageDef"/>
+    <page path="/WEB-INF/dashboard-flow-definition.xml#dashboard-flow-definition@initializeNotification"
+          usageId="com_fda_aps_view_dashboard_flow_definition_dashboard_flow_definition_initializeNotificationPageDef"/>
+    <page path="/WEB-INF/dashboard-flow-definition.xml#dashboard-flow-definition@executeSubmittedRequest"
+          usageId="com_fda_aps_view_dashboard_flow_definition_dashboard_flow_definition_executeSubmittedRequestPageDef"/>
+    <page path="/test.jspx" usageId="com_fda_aps_view_testPageDef"/>
+    <page path="/WEB-INF/budget-view-flow-definition.xml#budget-view-flow-definition@executeRequestToZeroRecords"
+          usageId="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_executeRequestToZeroRecordsPageDef"/>
+    <page path="/WEB-INF/budget-view-flow-definition.xml#budget-view-flow-definition@initializeNotification"
+          usageId="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_initializeNotificationPageDef"/>
+    <page path="/WEB-INF/request-task-flow-definition.xml#request-task-flow-definition@returnFromRequestCreation"
+          usageId="com_fda_aps_view_request_task_flow_definition_request_task_flow_definition_returnFromRequestCreationPageDef"/>
+    <page path="/WEB-INF/budget-view-flow-definition.xml#budget-view-flow-definition@returnFromRequestCreation"
+          usageId="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_returnFromRequestCreationPageDef"/>
+    <page path="/WEB-INF/budget-view-flow-definition.xml#budget-view-flow-definition@SetCurrentRowWithKeyValue1"
+          usageId="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_SetCurrentRowWithKeyValue1PageDef"/>
+    <page path="/WEB-INF/budget-view-flow-definition.xml#budget-view-flow-definition@executeSubmittedRequest"
+          usageId="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_executeSubmittedRequestPageDef"/>
+    <page path="/WEB-INF/request-task-flow-definition.xml#request-task-flow-definition@executeSubmittedRequest"
+          usageId="com_fda_aps_view_request_task_flow_definition_request_task_flow_definition_executeSubmittedRequestPageDef"/>
+    <page path="/WEB-INF/budget-view-flow-definition.xml#budget-view-flow-definition@setCenterLineCurrentRow"
+          usageId="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_setCenterLineCurrentRowPageDef"/>
+    <page path="/pagefragments/massapproval.jsff"
+          usageId="com_fda_aps_view_massapprovalPageDef"/>
+    <page path="/WEB-INF/mass-approve-flow-definition.xml#mass-approve-flow-definition@initializeDashboard"
+          usageId="com_fda_aps_view_mass_approve_flow_definition_mass_approve_flow_definition_initializeDashboardPageDef"/>
+    <page path="/WEB-INF/request-task-flow-definition.xml#request-task-flow-definition@AddPOC"
+          usageId="com_fda_aps_view_request_task_flow_definition_request_task_flow_definition_CreateInsertPageDef"/>
+    <page path="/pagefragments/budgetContainer.jsff"
+          usageId="com_fda_aps_view_budgetContainerPageDef"/>
+    <page path="/WEB-INF/search-flow-definition.xml#search-flow-definition@returnFromRequestCreation"
+          usageId="com_fda_aps_view_search_flow_definition_search_flow_definition_returnFromRequestCreationPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="com_fda_aps_view_requestPageDef"
+          path="pagefragments.requestPageDef"/>
+    <page id="com_fda_aps_view_request_task_flow_definition_request_task_flow_definition_initializeSubmitandInprogressRequestPageDef"
+          path="com.fda.aps.view.pageDefs.request_task_flow_definition_request_task_flow_definition_initializeSubmitandInprogressRequestPageDef"/>
+    <page id="com_fda_aps_view_indexPageDef"
+          path="com.fda.aps.view.pageDefs.indexPageDef"/>
+    <page id="com_fda_aps_view_requestDetailPageDef"
+          path="pagefragments.requestDetailPageDef"/>
+    <page id="com_fda_aps_view_searchPageDef"
+          path="pagefragments.searchPageDef"/>
+    <page id="com_fda_aps_view_budgetUserViewPageDef"
+          path="pagefragments.budgetUserViewPageDef"/>
+    <page id="com_fda_aps_view_adminPageDef" path="pagefragments.adminPageDef"/>
+    <page id="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_SetCurrentRowWithKeyValuePageDef"
+          path="com.fda.aps.view.pageDefs.budget_view_flow_definition_budget_view_flow_definition_SetCurrentRowWithKeyValuePageDef"/>
+    <page id="com_fda_aps_view_dashboardPageDef"
+          path="pagefragments.dashboardPageDef"/>
+    <page id="com_fda_aps_view_dashboard_flow_definition_dashboard_flow_definition_initializeNotificationPageDef"
+          path="com.fda.aps.view.pageDefs.dashboard_flow_definition_dashboard_flow_definition_initializeNotificationPageDef"/>
+    <page id="com_fda_aps_view_dashboard_flow_definition_dashboard_flow_definition_executeSubmittedRequestPageDef"
+          path="com.fda.aps.view.pageDefs.dashboard_flow_definition_dashboard_flow_definition_executeSubmittedRequestPageDef"/>
+    <page id="com_fda_aps_view_testPageDef"
+          path="com.fda.aps.view.pageDefs.testPageDef"/>
+    <page id="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_executeRequestToZeroRecordsPageDef"
+          path="com.fda.aps.view.pageDefs.budget_view_flow_definition_budget_view_flow_definition_executeRequestToZeroRecordsPageDef"/>
+    <page id="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_initializeNotificationPageDef"
+          path="com.fda.aps.view.pageDefs.budget_view_flow_definition_budget_view_flow_definition_initializeNotificationPageDef"/>
+    <page id="com_fda_aps_view_request_task_flow_definition_request_task_flow_definition_returnFromRequestCreationPageDef"
+          path="com.fda.aps.view.pageDefs.request_task_flow_definition_request_task_flow_definition_returnFromRequestCreationPageDef"/>
+    <page id="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_returnFromRequestCreationPageDef"
+          path="com.fda.aps.view.pageDefs.budget_view_flow_definition_budget_view_flow_definition_returnFromRequestCreationPageDef"/>
+    <page id="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_SetCurrentRowWithKeyValue1PageDef"
+          path="com.fda.aps.view.pageDefs.budget_view_flow_definition_budget_view_flow_definition_SetCurrentRowWithKeyValue1PageDef"/>
+    <page id="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_executeSubmittedRequestPageDef"
+          path="com.fda.aps.view.pageDefs.budget_view_flow_definition_budget_view_flow_definition_executeSubmittedRequestPageDef"/>
+    <page id="com_fda_aps_view_request_task_flow_definition_request_task_flow_definition_executeSubmittedRequestPageDef"
+          path="com.fda.aps.view.pageDefs.request_task_flow_definition_request_task_flow_definition_executeSubmittedRequestPageDef"/>
+    <page id="com_fda_aps_view_budget_view_flow_definition_budget_view_flow_definition_setCenterLineCurrentRowPageDef"
+          path="com.fda.aps.view.pageDefs.budget_view_flow_definition_budget_view_flow_definition_setCenterLineCurrentRowPageDef"/>
+    <page id="com_fda_aps_view_massapprovalPageDef"
+          path="pagefragments.massapprovalPageDef"/>
+    <page id="com_fda_aps_view_mass_approve_flow_definition_mass_approve_flow_definition_initializeDashboardPageDef"
+          path="com.fda.aps.view.pageDefs.mass_approve_flow_definition_mass_approve_flow_definition_initializeDashboardPageDef"/>
+    <page id="com_fda_aps_view_request_task_flow_definition_request_task_flow_definition_CreateInsertPageDef"
+          path="com.fda.aps.view.pageDefs.request_task_flow_definition_request_task_flow_definition_CreateInsertPageDef"/>
+    <page id="com_fda_aps_view_budgetContainerPageDef"
+          path="pagefragments.budgetContainerPageDef"/>
+    <page id="com_fda_aps_view_search_flow_definition_search_flow_definition_returnFromRequestCreationPageDef"
+          path="com.fda.aps.view.pageDefs.search_flow_definition_search_flow_definition_returnFromRequestCreationPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <dc id="MainPageNavigation" path="com.fda.aps.view.MainPageNavigation"/>
+    <BC4JDataControl id="APSApplicationModuleDataControl"
+                     Package="com.fda.aps.model.appmodule"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="APSApplicationModuleLocal"
+                     syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

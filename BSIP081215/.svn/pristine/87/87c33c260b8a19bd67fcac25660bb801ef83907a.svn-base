@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="searchPageDef"
+                Package="pagefragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="APSSearchView" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="APSSearchViewIterator"/>
+    <searchRegion Criteria="APSSearchViewCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="APSSearchViewIterator"
+                  id="APSSearchViewCriteriaQuery"/>
+    <iterator id="SubmittedRequestsViewIterator" Binds="SubmittedRequestsView"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="APSSearchViewIterator" id="APSSearchView">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.APSSearchView"
+                      Name="APSSearchView0">
+        <AttrNames>
+            <Item Value="RequestId"/>
+          <Item Value="CtrLnItmNo"/>
+          <Item Value="RequisitionNo"/>
+          <Item Value="ExistingDocNo"/>
+          <Item Value="RequiredAwardDate"/>
+          <Item Value="DetailedDescription"/>
+          <Item Value="TotalDlarsForCurtFy"/>
+          <Item Value="OptionYrExercise"/>
+          <Item Value="FiscalYear"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="navigateToRequestDetail"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="navigateToRequestDetail"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="requestId" NDValue="#{row.CtrLnItmNo}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="cloneRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="cloneRequest" IsViewObjectMethod="false">
+      <NamedData NDName="requestId" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

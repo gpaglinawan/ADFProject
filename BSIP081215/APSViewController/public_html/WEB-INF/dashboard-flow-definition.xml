@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="dashboard-flow-definition">
+    <default-activity id="__1">initializeNotification</default-activity>
+    <input-parameter-definition id="__40">
+      <name id="__39">requestId</name>
+      <value>#{requestScope.newReqId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__41">
+      <name id="__42">sessionReqId</name>
+      <value>#{sessionScope.requestId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__28">
+      <managed-bean-name id="__31">requestDetail</managed-bean-name>
+      <managed-bean-class id="__30">com.fda.aps.view.managedbean.RequestDetailBean</managed-bean-class>
+      <managed-bean-scope id="__29">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="dashboard">
+      <page>/pagefragments/dashboard.jsff</page>
+    </view>
+    <method-call id="initializeNotification">
+      <method>#{bindings.initializeNotification.execute}</method>
+      <outcome id="__8">
+        <fixed-outcome>deriveCenter</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="requestDetail">
+      <page>/pagefragments/requestDetail.jsff</page>
+    </view>
+    <method-call id="executeSubmittedRequest">
+      <method>#{bindings.executeSubmittedRequest.execute}</method>
+      <outcome id="__14">
+        <fixed-outcome>toRequestDetail</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="budget-view-flow-definition">
+      <task-flow-reference>
+        <document>/WEB-INF/budget-view-flow-definition.xml</document>
+        <id>budget-view-flow-definition</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <router id="viewRouter">
+      <!--case>
+        <expression>#{securityContext.userInRole['BUDGET_GROUP'] eq true}</expression>
+        <outcome id="__26">toBudgetView</outcome>
+      </case-->
+      <case>
+        <expression>#{pageFlowScope.wfStatus eq 'ACQUSITION_APPROVED' ||
+                    pageFlowScope.wfStatus eq 'BUDGET_USER_SUBMITTED'}</expression>
+        <outcome id="__26">toBudgetView</outcome>
+      </case>
+      <default-outcome>goToSubmittedDetail</default-outcome>
+    </router>
+    <task-flow-call id="request-task-flow-definition">
+      <task-flow-reference>
+        <document>/WEB-INF/request-task-flow-definition.xml</document>
+        <id>request-task-flow-definition</id>
+      </task-flow-reference>
+      <input-parameter id="__37">
+        <name>comingFrom</name>
+        <value>#{pageFlowScope.comingFrom}</value>
+        <pass-by-value/>
+      </input-parameter>
+      <input-parameter id="__38">
+        <name>requestId</name>
+        <value>#{data.com_fda_aps_view_dashboardPageDef.RequestId.inputValue}</value>
+      </input-parameter>
+      <input-parameter id="__43">
+        <name>wfStatus</name>
+        <value>#{pageFlowScope.wfStatus}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="putCentertoSession">
+      <method>#{pageFlowScope.requestDetail.deriveCenterFromRole}</method>
+      <outcome id="__44">
+        <fixed-outcome>initializeNotification</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__15">
+      <from-activity-id id="__16">dashboard</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome id="__4">gotoDetail</from-outcome>
+        <to-activity-id id="__2">viewRouter</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__20">
+      <from-activity-id id="__21">executeSubmittedRequest</from-activity-id>
+      <control-flow-case id="__23">
+        <from-outcome id="__22">toRequestDetail</from-outcome>
+        <to-activity-id id="__24">requestDetail</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id id="__6">viewRouter</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome id="__17">goToSubmittedDetail</from-outcome>
+        <to-activity-id id="__18">request-task-flow-definition</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__19">
+        <from-outcome id="__27">toBudgetView</from-outcome>
+        <to-activity-id id="__25">budget-view-flow-definition</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__32">
+      <from-activity-id id="__33">requestDetail</from-activity-id>
+      <control-flow-case id="__34">
+        <from-outcome id="__36">backToDashboard</from-outcome>
+        <to-activity-id id="__35">dashboard</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id id="__10">putCentertoSession</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome id="__12">initializeNotification</from-outcome>
+        <to-activity-id id="__13">dashboard</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__45">
+      <from-activity-id id="__46">initializeNotification</from-activity-id>
+      <control-flow-case id="__48">
+        <from-outcome id="__49">deriveCenter</from-outcome>
+        <to-activity-id id="__47">putCentertoSession</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

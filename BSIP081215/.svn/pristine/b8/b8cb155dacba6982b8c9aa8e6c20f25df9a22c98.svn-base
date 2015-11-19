@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<task-flow-registry xmlns="http://xmlns.oracle.com/adf/controller/rc">
+   <task-flow-descriptor path="META-INF/adfc-config.xml" id="" type="" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/mass-approve-flow-definition.xml" id="mass-approve-flow-definition" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/search-flow-definition.xml" id="search-flow-definition" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="requestId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/request-task-flow-definition.xml" id="request-task-flow-definition" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="true">
+      <input-parameter name="wfStatus"/>
+      <input-parameter name="requestId"/>
+      <input-parameter name="comingFrom"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/dashboard-flow-definition.xml" id="dashboard-flow-definition" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="requestId"/>
+      <input-parameter name="sessionReqId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/admin-flow-definition.xml" id="admin-flow-definition" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/budget-view-flow-definition.xml" id="budget-view-flow-definition" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="requestId"/>
+   </task-flow-descriptor>
+</task-flow-registry>

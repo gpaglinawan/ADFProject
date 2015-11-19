@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SecurityGroupsMappingROView"
+  Version="11.1.1.64.93"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.fda.aps.model.viewobject.SecurityGroupsMappingROView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="bind_AcquisitionGroup"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="bind_BudgetGroup"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery>
+    <![CDATA[select a.acquisition_group, a.acquisition_approver,a.budget_approver,
+       a.budget_group,
+        (select group_name from aap_security_groups where security_group_id = a.budget_group ) BUDGET_GROUP_NAME, 
+        b.group_name ACQUISITION_GROUP_NAME
+from aap_acquisition_budget_mapping a, aap_security_groups b
+where a.acquisition_group = b.security_group_id
+and b.group_name = :bind_AcquisitionGroup
+UNION
+select a.acquisition_group, a.acquisition_approver,a.budget_approver,
+       a.budget_group,
+        (select group_name from aap_security_groups where security_group_id = a.budget_group ) BUDGET_GROUP_NAME, 
+        (select group_name from aap_security_groups where security_group_id = a.acquisition_group ) ACQUISITION_GROUP_NAME
+from aap_acquisition_budget_mapping a, aap_security_groups b
+where a.budget_group = b.security_group_id
+and b.group_name = :bind_BudgetGroup]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="AcquisitionGroup"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ACQUISITION_GROUP"
+    Expression="ACQUISITION_GROUP"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AcquisitionApprover"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACQUISITION_APPROVER"
+    Expression="ACQUISITION_APPROVER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BudgetApprover"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUDGET_APPROVER"
+    Expression="BUDGET_APPROVER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BudgetGroup"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="BUDGET_GROUP"
+    Expression="BUDGET_GROUP"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BudgetGroupName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BUDGET_GROUP_NAME"
+    Expression="BUDGET_GROUP_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AcquisitionGroupName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACQUISITION_GROUP_NAME"
+    Expression="ACQUISITION_GROUP_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.fda.aps.model.APSModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

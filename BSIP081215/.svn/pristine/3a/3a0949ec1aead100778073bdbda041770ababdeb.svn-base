@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="admin-flow-definition">
+    <default-activity id="__7">admin</default-activity>
+    <managed-bean id="__3">
+      <managed-bean-name id="__2">adminBean</managed-bean-name>
+      <managed-bean-class id="__4">com.fda.aps.view.managedbean.AdminBean</managed-bean-class>
+      <managed-bean-scope id="__1">view</managed-bean-scope>
+    </managed-bean>
+    <view id="admin">
+      <page>/pagefragments/admin.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

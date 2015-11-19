@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93"
+                id="budget_view_flow_definition_budget_view_flow_definition_returnFromRequestCreationPageDef"
+                Package="com.fda.aps.view.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <action id="returnFromRequestCreation" RequiresUpdateModel="true"
+            Action="invokeMethod" MethodName="returnFromRequestCreation"
+            IsViewObjectMethod="false" DataControl="MainPageNavigation"
+            InstanceName="MainPageNavigation.dataProvider"/>
+  </bindings>
+</pageDefinition>

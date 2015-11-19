@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adf-settings xmlns="http://xmlns.oracle.com/adf/settings">
+    <adf-faces-config xmlns="http://xmlns.oracle.com/adf/faces/settings">
+        <help-provider prefix="AAPHELP_">
+            <help-provider-class>oracle.adf.view.rich.help.ResourceBundleHelpProvider</help-provider-class>
+            <property>
+                <property-name>baseName</property-name>
+                <value>com.fda.aps.view.AAPResourceBundle</value>
+            </property>
+        </help-provider>
+    </adf-faces-config>
+</adf-settings>

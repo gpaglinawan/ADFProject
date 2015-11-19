@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="requestDetailPageDef"
+                Package="pagefragments" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SubmittedRequestsView" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="SubmittedRequestsViewIterator"/>
+    <iterator Binds="RequestsView" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="RequestsViewIterator"/>
+    <iterator Binds="PointOfContactView" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="PointOfContactViewIterator"/>
+    <iterator id="CommodityBranchIterator"
+              Binds="AapCommodityBranchdivisionROVO"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+    <iterator id="ApsReferenceViewIterator" Binds="ApsReferenceView"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+    <iterator Binds="AapEmployeeView" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="AapEmployeeViewIterator"/>
+    <searchRegion Binds="AapEmployeeViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="AapEmployeeViewQuery"/>
+    <iterator id="InProcessRequestsIterator" Binds="InProcessRequests"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+    <iterator id="InProgressRequestsViewIterator" Binds="InProgressRequestsView"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+    <iterator Binds="CollaborationReference" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="CollaborationReferenceIterator"/>
+    <iterator Binds="CommentsVO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="CommentsVOIterator"/>
+    <searchRegion Binds="CommentsVOIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="CommentsVOQuery"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="CtrLnItmNo">
+      <AttrNames>
+        <Item Value="CtrLnItmNo"/>
+      </AttrNames>
+    </attributeValues>
+    <!--attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="ZeroDollarReqn">
+      <AttrNames>
+        <Item Value="ZeroDollarReqn"/>
+      </AttrNames>
+    </attributeValues-->
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="RequisitionNo">
+      <AttrNames>
+        <Item Value="RequisitionNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="ExistingDocNo">
+      <AttrNames>
+        <Item Value="ExistingDocNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="ReleaseNumber">
+      <AttrNames>
+        <Item Value="ReleaseNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="DetailedDescription">
+      <AttrNames>
+        <Item Value="DetailedDescription"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="RequiredAwardDate">
+      <AttrNames>
+        <Item Value="RequiredAwardDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="CurrYrPopEndDate">
+      <AttrNames>
+        <Item Value="CurrYrPopEndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="TotalDlarsForCurtFy">
+      <AttrNames>
+        <Item Value="TotalDlarsForCurtFy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="ProjectPopStartDate">
+      <AttrNames>
+        <Item Value="ProjectPopStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="ProjectPopEndDate">
+      <AttrNames>
+        <Item Value="ProjectPopEndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="AnticipatedPop">
+      <AttrNames>
+        <Item Value="AnticipatedPop"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="CollaborationFlag">
+      <AttrNames>
+        <Item Value="CollaborationFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="OwnerNmTelNo">
+      <AttrNames>
+        <Item Value="OwnerNmTelNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="EstimatedRfaRelDate">
+      <AttrNames>
+        <Item Value="EstimatedRfaRelDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="AnticipatedNoOfAwards">
+      <AttrNames>
+        <Item Value="AnticipatedNoOfAwards"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="ExistingIaaNumber">
+      <AttrNames>
+        <Item Value="ExistingIaaNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="ReimbursableAmt">
+      <AttrNames>
+        <Item Value="ReimbursableAmt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="ReimbursableAgency">
+      <AttrNames>
+        <Item Value="ReimbursableAgency"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="SubmitFlag">
+      <AttrNames>
+        <Item Value="SubmitFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_NaicsCode" id="NaicsCode" DTSupportsMRU="true"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_LeadMngCenter" id="LeadMngCenter" DTSupportsMRU="true"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="APSApplicationModuleDataControl"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_ServiceOrReimbursable" id="ServiceOrReimbursable"
+          DTSupportsMRU="true"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_CollaborationItemNo" id="CollaborationItemNo"
+          DTSupportsMRU="true"/>
+    <button IterBinding="SubmittedRequestsViewIterator" id="CollaborationFlag1"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="CollaborationFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_AcquisitionStatus" id="AcquisitionStatus"
+          DTSupportsMRU="true"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_OptionYrExercise" id="OptionYrExercise"
+          DTSupportsMRU="true"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_AnticipatedActionType" id="AnticipatedActionType"
+          DTSupportsMRU="true"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_PotentialContractType" id="PotentialContractType"
+          DTSupportsMRU="true"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_RequirementType" id="RequirementType" DTSupportsMRU="true"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_CommodityType" id="CommodityType" DTSupportsMRU="true"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_AnticipatedAcquisitionMethod"
+          id="AnticipatedAcquisitionMethod" DTSupportsMRU="true"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_ProductServiceCode" id="ProductServiceCode"
+          DTSupportsMRU="true"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_EstimatedTotalProjValue" id="EstimatedTotalProjValue"
+          DTSupportsMRU="true"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_GrantsCommodity" id="GrantsCommodity" DTSupportsMRU="true"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="LOV_PriorityLevel" id="PriorityLevel" DTSupportsMRU="true"/>
+    <!--list IterBinding="RequestsViewIterator" StaticList="false"
+          Uses="LOV_NciboardReviewRequired" id="NciboardReviewRequired"
+          DTSupportsMRU="true"/-->
+    <!--attributeValues IterBinding="PointOfContactViewIterator" id="PocFirstName">
+      <AttrNames>
+        <Item Value="PocFirstName"/>
+      </AttrNames>
+    </attributeValues-->
+    <!--attributeValues IterBinding="PointOfContactViewIterator" id="PocLastName">
+      <AttrNames>
+        <Item Value="PocLastName"/>
+      </AttrNames>
+    </attributeValues-->
+    <!--attributeValues IterBinding="PointOfContactViewIterator" id="PocEmail">
+      <AttrNames>
+        <Item Value="PocEmail"/>
+      </AttrNames>
+    </attributeValues-->
+    <!--attributeValues IterBinding="PointOfContactViewIterator" id="PocTel">
+      <AttrNames>
+        <Item Value="PocTel"/>
+      </AttrNames>
+    </attributeValues-->
+    <action IterBinding="PointOfContactViewIterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="PointOfContactViewIterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="PointOfContactViewIterator" id="setCurrentPOCKey"
+            InstanceName="APSApplicationModuleDataControl.PointOfContactView"
+            DataControl="APSApplicationModuleDataControl"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKey" NDValue="" NDType="java.lang.String"/>
+    </action>
+    <methodAction id="isAcquisitionLead"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="isAcquisitionLead" IsViewObjectMethod="false"
+                  ReturnName="data.APSApplicationModuleDataControl.methodResults.isAcquisitionLead_APSApplicationModuleDataControl_dataProvider_isAcquisitionLead_result">
+      <NamedData NDName="user" NDValue="#{securityContext.userName}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="approveAcquisitionRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="approveAcquisitionRequest"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.APSApplicationModuleDataControl.methodResults.approveAcquisitionRequest_APSApplicationModuleDataControl_dataProvider_approveAcquisitionRequest_result">
+      <NamedData NDName="centerItemNo"
+                 NDValue="#{bindings.CtrLnItmNo.inputValue}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="requestId" NDValue="#{bindings.RequestId.inputValue}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator" id="RequestId">
+      <AttrNames>
+        <Item Value="RequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="isBudgetLead"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="isBudgetLead" IsViewObjectMethod="false"
+                  ReturnName="data.APSApplicationModuleDataControl.methodResults.isBudgetLead_APSApplicationModuleDataControl_dataProvider_isBudgetLead_result">
+      <NamedData NDName="user" NDValue="#{securityContext.userName}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="approveBudgetRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="approveBudgetRequest" IsViewObjectMethod="false">
+      <NamedData NDName="centerItemNo"
+                 NDValue="#{bindings.CtrLnItmNo.inputValue}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="requestId" NDValue="#{bindings.RequestId.inputValue}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <list IterBinding="SubmittedRequestsViewIterator" id="RecurringItem"
+          DTSupportsMRU="true" StaticList="true">
+      <AttrNames>
+        <Item Value="RecurringItem"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Yes"/>
+        <Item Value="No"/>
+      </ValueList>
+    </list>
+    <list IterBinding="SubmittedRequestsViewIterator" id="ZeroDollarReqn"
+          DTSupportsMRU="true" StaticList="true">
+      <AttrNames>
+        <Item Value="ZeroDollarReqn"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Yes"/>
+        <Item Value="No"/>
+      </ValueList>
+    </list>
+    <list IterBinding="SubmittedRequestsViewIterator"
+          id="NciboardReviewRequired1" DTSupportsMRU="true" StaticList="true">
+      <AttrNames>
+        <Item Value="NciboardReviewRequired"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Yes"/>
+        <Item Value="No"/>
+      </ValueList>
+    </list>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="TransProjectValueCode">
+      <AttrNames>
+        <Item Value="TransProjectValueCode"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="populateBranchDivisionInfo"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="populateBranchDivisionInfo"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="commodityType" NDValue="" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="populateDueDate"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="populateDueDate" IsViewObjectMethod="false">
+      <NamedData NDName="sla" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="TransSLANumdays">
+      <AttrNames>
+        <Item Value="TransSLANumdays"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="PointOfContactViewIterator"
+            id="setCurrentRowWithKeyValue"
+            InstanceName="APSApplicationModuleDataControl.PointOfContactView"
+            DataControl="APSApplicationModuleDataControl"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKeyValue">
+      <NamedData NDName="rowKey" NDType="java.lang.String"/>
+    </action>
+    <methodAction id="getReferenceByCode"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getReferenceByCode" IsViewObjectMethod="false"
+                  ReturnName="data.APSApplicationModuleDataControl.methodResults.getReferenceByCode_APSApplicationModuleDataControl_dataProvider_getReferenceByCode_result">
+      <NamedData NDName="code" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="FiscalYear">
+      <AttrNames>
+        <Item Value="FiscalYear"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="AapEmployeeViewIterator" id="AapEmployeeView">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.AapEmployeeView"
+                      Name="AapEmployeeView0">
+        <AttrNames>
+          <Item Value="EmpNum"/>
+          <Item Value="FirstName"/>
+          <Item Value="LastName"/>
+          <Item Value="MdlIntlName"/>
+          <Item Value="Email"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="PointOfContactViewIterator" id="setCurrentRowWithKey"
+            InstanceName="APSApplicationModuleDataControl.PointOfContactView"
+            DataControl="APSApplicationModuleDataControl"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKey" NDType="java.lang.String"/>
+    </action>
+    <tree IterBinding="PointOfContactViewIterator" id="PointOfContactView">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.PointOfContactView"
+                      Name="PointOfContactView0">
+        <AttrNames>
+          <Item Value="PocFirstName"/>
+          <Item Value="PocLastName"/>
+          <Item Value="PocEmail"/>
+          <Item Value="PocTel"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="PointOfContactViewIterator" id="removeRowWithKey"
+            RequiresUpdateModel="false" Action="removeRowWithKey">
+      <NamedData NDName="rowKey" NDValue="#{row.rowKeyStr}"
+                 NDType="java.lang.String"/>
+    </action>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="CENOCSuperOfcLOV" id="SuperOfc" DTSupportsMRU="true"/>
+    <list IterBinding="SubmittedRequestsViewIterator" StaticList="false"
+          Uses="CENOCSubOfcLOV" id="SubOfc" DTSupportsMRU="true"/>
+    <tree IterBinding="CollaborationReferenceIterator"
+          id="CollaborationReference">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.ApsReferenceView"
+                      Name="CollaborationReference0">
+        <AttrNames>
+          <Item Value="ReferenceDescription"/>
+          <Item Value="ReferenceId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="rejectAcquisitionRequest" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="rejectAcquisitionRequest"
+                  IsViewObjectMethod="false"
+                  DataControl="APSApplicationModuleDataControl"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider">
+      <NamedData NDName="centerItemNo" NDType="java.lang.String"
+                 NDValue="#{bindings.CtrLnItmNo.inputValue}"/>
+      <NamedData NDName="requestId" NDType="java.lang.String"
+                 NDValue="#{bindings.RequestId.inputValue}"/>
+    </methodAction>
+    <tree IterBinding="CommentsVOIterator" id="CommentsVO">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.AapCommentsVO"
+                      Name="CommentsVO0">
+        <AttrNames>
+          <Item Value="CommentText"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="CommentsVOIterator" id="CommentText">
+      <AttrNames>
+        <Item Value="CommentText"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="CommentsVOIterator" id="insertComment"
+            InstanceName="APSApplicationModuleDataControl.CommentsVO"
+            DataControl="APSApplicationModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

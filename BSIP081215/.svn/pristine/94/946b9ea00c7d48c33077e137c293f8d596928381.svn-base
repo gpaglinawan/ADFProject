@@ -1,0 +1,133 @@
+package com.fda.aps.view.managedbean;
+
+import com.fda.aps.ADFUtils;
+
+import java.util.List;
+
+import javax.el.ELContext;
+
+import javax.el.ExpressionFactory;
+
+import javax.el.MethodExpression;
+
+import javax.faces.context.FacesContext;
+
+import oracle.adf.model.BindingContext;
+import oracle.adf.model.binding.DCBindingContainer;
+import oracle.adf.share.logging.ADFLogger;
+import oracle.adf.view.rich.component.rich.RichQuery;
+import oracle.adf.view.rich.event.QueryEvent;
+import oracle.adf.view.rich.model.QueryDescriptor;
+import oracle.adf.view.rich.model.QueryModel;
+
+import oracle.jbo.ViewCriteria;
+import oracle.jbo.ViewCriteriaItem;
+import oracle.jbo.ViewCriteriaRow;
+import oracle.jbo.common.JboCompOper;
+import oracle.jbo.uicli.binding.JUSearchBindingCustomizer;
+
+public class SearchBean {
+    private RichQuery searchQuery;
+    private static ADFLogger _logger = 
+            ADFLogger.createADFLogger(SearchBean.class); 
+    public SearchBean() {
+        super();
+    }
+
+    public String navigateTo() {
+        return null;
+    }
+    
+    public void onAAPSearch(QueryEvent queryEvent){
+        _logger.info("Entering onAAPSearch");
+        QueryDescriptor qd = queryEvent.getDescriptor();
+        
+        DCBindingContainer bc =
+                    (DCBindingContainer)BindingContext.getCurrent().getCurrentBindingsEntry();
+        ViewCriteria vc = getViewCriteria(bc, qd);
+        QueryEvent queryevent = new QueryEvent(searchQuery, qd);  
+        invokeMethodExpression("#{bindings.APSSearchViewCriteriaQuery.processQuery}",  
+            Object.class, new Class[]{QueryEvent.class}, new Object[]{queryevent});
+        
+    }
+    
+    private ViewCriteriaRow createCenterCrieriaRow(ViewCriteria criteria) {
+        
+        ViewCriteriaRow criteriaRow = null;
+        criteriaRow = criteria.createViewCriteriaRow();
+        ViewCriteriaItem criteriaRowItem =
+            criteriaRow.ensureCriteriaItem("CenterId");
+        criteriaRowItem.setOperator(JboCompOper.OPER_IN);
+        criteriaRowItem.setValueMaxCardinality(1);
+        criteriaRowItem.setValueMinCardinality(1);
+        criteriaRowItem.setValue(0, ADFUtils.deriveCenterFromRole());
+        
+        return criteriaRow;
+    }
+    
+    private ViewCriteria getViewCriteria(DCBindingContainer bc,
+                                            QueryDescriptor qd) {
+           _logger.info("Entering getViewCriteria");
+           Object execBinding =  bc.findExecutableBinding("APSSearchViewCriteriaQuery"); // This will be seen in the page executable section as we have dropped for af:query
+           ViewCriteria vc =
+               JUSearchBindingCustomizer.getViewCriteria((DCBindingContainer)execBinding,
+                                                         qd.getName());
+          
+           vc.getViewObject().setNamedWhereClauseParam("bind_UserCenter", ADFUtils.deriveCenterFromRole());
+           return vc;
+
+       }
+
+
+    public void setSearchQuery(RichQuery searchQuery) {
+        this.searchQuery = searchQuery;
+    }
+
+    public RichQuery getSearchQuery() {
+        return searchQuery;
+    }
+
+    //Looking for query descriptor in a list with specified query name
+
+    private QueryDescriptor getQueryDescriptor(List<QueryDescriptor> list,
+                                               String queryname) {
+        _logger.info("Entering getQueryDescriptor");
+        QueryDescriptor result = null;
+        for (Object qd : list.toArray())
+            if (((QueryDescriptor)qd).getName().equals(queryname))
+                result = (QueryDescriptor)qd;
+        return result;
+    }
+    
+    //Selecting criteria with specified name  
+       private void  selectCriteria(String criteria) {  
+           QueryModel model = searchQuery.getModel();  
+     
+           //Looking for needed query decriptor    
+           QueryDescriptor qd = getQueryDescriptor(model.getSystemQueries(),criteria);  
+     
+           //Setting needed query descriptor as current one  
+           searchQuery.setValue(qd);          
+           model.setCurrentDescriptor(qd);  
+       }  
+       
+    private void applyCriteria(QueryDescriptor qd) {         
+           //Creating new QueryEvent  
+           QueryEvent queryevent = new QueryEvent(searchQuery, qd);  
+             
+           //And processing this event  
+           //EmpCriteriaQuery is ID attribute of the searchRegion tag in the pageDef  
+           invokeMethodExpression("#{bindings.APSSearchViewCriteriaQuery.processQuery}",  
+               Object.class, new Class[]{QueryEvent.class}, new Object[]{queryevent});  
+       }  
+         
+       //Just utility method to invoke EL expressions   
+       public Object invokeMethodExpression(String expr, Class returnType, Class[]  argClasses, Object[] arguments){   
+            _logger.info("Entering invokeMethodExpression");
+         FacesContext fc = FacesContext.getCurrentInstance();   
+         ELContext elc = fc.getELContext();  
+         ExpressionFactory exprFactory = fc.getApplication().getExpressionFactory();   
+         MethodExpression methodExpr = exprFactory.createMethodExpression(elc,expr,returnType,argClasses);      
+         return methodExpr.invoke(elc,arguments);   
+        }  
+}

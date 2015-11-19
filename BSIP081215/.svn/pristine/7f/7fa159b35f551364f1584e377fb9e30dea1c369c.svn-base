@@ -1,0 +1,912 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" styleClass="AFStretchWidth">
+    <af:panelTabbed id="pt1" styleClass="AFStretchWidth"
+                    inlineStyle="height:950px;">
+      <af:showDetailItem text="SLA Days/Cut-Off Dates Maintenance" id="sdi1">
+        <af:spacer width="10" height="10" id="s1"/>
+        <af:popup id="p3" contentDelivery="lazyUncached"
+                  binding="#{viewScope.adminBean.addSlaPopup}">
+          <af:dialog id="d2"
+                     dialogListener="#{viewScope.adminBean.onClickAddSla}">
+            <af:panelGroupLayout id="pgl6">
+              <af:panelFormLayout id="pfl3">
+                <af:inputText value="#{bindings.ActionType1.inputValue}"
+                              label="#{bindings.ActionType1.hints.label}"
+                              required="#{bindings.ActionType1.hints.mandatory}"
+                              columns="#{bindings.ActionType1.hints.displayWidth}"
+                              maximumLength="#{bindings.ActionType1.hints.precision}"
+                              shortDesc="#{bindings.ActionType1.hints.tooltip}"
+                              id="it4">
+                  <f:validator binding="#{bindings.ActionType1.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.SlaDays1.inputValue}"
+                              label="#{bindings.SlaDays1.hints.label}"
+                              required="#{bindings.SlaDays1.hints.mandatory}"
+                              columns="#{bindings.SlaDays1.hints.displayWidth}"
+                              maximumLength="#{bindings.SlaDays1.hints.precision}"
+                              shortDesc="#{bindings.SlaDays1.hints.tooltip}"
+                              id="it5">
+                  <f:validator binding="#{bindings.SlaDays1.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.SlaDays1.format}"/>
+                </af:inputText>
+                <af:inputDate value="#{bindings.CutOffDate1.inputValue}"
+                              label="#{bindings.CutOffDate1.hints.label}"
+                              required="#{bindings.CutOffDate1.hints.mandatory}"
+                              shortDesc="#{bindings.CutOffDate1.hints.tooltip}"
+                              id="id3">
+                  <f:validator binding="#{bindings.CutOffDate1.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.CutOffDate1.format}"/>
+                </af:inputDate>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="p2" contentDelivery="lazyUncached"
+                  binding="#{viewScope.adminBean.slaPopup}">
+          <af:dialog id="d1" dialogListener="#{viewScope.adminBean.onClickOk}">
+            <af:panelGroupLayout id="pgl2">
+              <af:panelFormLayout id="pfl2">
+                <af:inputText value="#{bindings.ActionType.inputValue}"
+                              label="#{bindings.ActionType.hints.label}"
+                              required="#{bindings.ActionType.hints.mandatory}"
+                              columns="#{bindings.ActionType.hints.displayWidth}"
+                              maximumLength="#{bindings.ActionType.hints.precision}"
+                              shortDesc="#{bindings.ActionType.hints.tooltip}"
+                              id="it2">
+                  <f:validator binding="#{bindings.ActionType.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.SlaDays.inputValue}"
+                              autoSubmit="true"
+                              label="#{bindings.SlaDays.hints.label}"
+                              required="#{bindings.SlaDays.hints.mandatory}"
+                              columns="#{bindings.SlaDays.hints.displayWidth}"
+                              maximumLength="#{bindings.SlaDays.hints.precision}"
+                              shortDesc="#{bindings.SlaDays.hints.tooltip}"
+                              id="it3">
+                  <f:validator binding="#{bindings.SlaDays.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.SlaDays.format}"/>
+                </af:inputText>
+                <af:inputDate value="#{bindings.CutOffDate.inputValue}"
+                              autoSubmit="true"
+                              label="#{bindings.CutOffDate.hints.label}"
+                              required="#{bindings.CutOffDate.hints.mandatory}"
+                              shortDesc="#{bindings.CutOffDate.hints.tooltip}"
+                              id="id2">
+                  <f:validator binding="#{bindings.CutOffDate.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.CutOffDate.format}"/>
+                </af:inputDate>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="p1">
+          <af:panelWindow id="pw1">
+            <af:panelGroupLayout id="pgl3" layout="vertical">
+              <af:panelFormLayout id="pfl1">
+                <f:facet name="footer">
+                  <af:group id="g1">
+                    <af:panelGroupLayout id="pgl4">
+                      <af:commandButton text="Save" id="cb2"/>
+                      <af:commandButton text="Cancel" id="cb3"/>
+                      <f:facet name="separator">
+                        <af:spacer width="20" height="30" id="s3"/>
+                      </f:facet>
+                    </af:panelGroupLayout>
+                  </af:group>
+                </f:facet>
+                <af:selectOneChoice label="Center" id="soc1">
+                  <af:selectItem label="CDER" value="CDER" id="si1"/>
+                  <af:selectItem label="CVM" value="CVM" id="si2"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice label="Acquisition Groups" id="soc2">
+                  <af:selectItem label="CDER Acquisition Grp 1"
+                                 value="CDER Acquisition Grp 1" id="si7"/>
+                  <af:selectItem label="CDER Acquisition Grp 2"
+                                 value="CDER Acquisition Grp 2" id="si8"/>
+                  <af:selectItem label="CDER Acquisition Grp 3"
+                                 value="CDER Acquisition Grp 3" id="si3"/>
+                  <af:selectItem label="CDER Acquisition Grp 4"
+                                 value="CDER Acquisition Grp 4" id="si6"/>
+                  <af:selectItem label="CDER Acquisition Grp 5"
+                                 value="CDER Acquisition Grp 5" id="si4"/>
+                  <af:selectItem label="CDER Acquisition Grp 6"
+                                 value="CDER Acquisition Grp 6" id="si5"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice label="Acquisition Group POC" id="soc4">
+                  <af:selectItem label="User 1" value="User 1" id="si12"/>
+                  <af:selectItem label="User 2" value="User 2" id="si13"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice label="Budget Groups" id="soc3">
+                  <af:selectItem label="Budget User Grp 1"
+                                 value="Budget User Grp 1" id="si10"/>
+                  <af:selectItem label="Budget User Grp 2"
+                                 value="Budget User Grp 2" id="si11"/>
+                  <af:selectItem label="Budget User Grp 3"
+                                 value="Budget User Grp 3" id="si9"/>
+                </af:selectOneChoice>
+                <af:selectOneChoice label="Budget Group POC" id="soc5">
+                  <af:selectItem label="User 11" value="User 11" id="si15"/>
+                  <af:selectItem label="User 12" value="User 12" id="si14"/>
+                </af:selectOneChoice>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:panelWindow>
+        </af:popup>
+        <af:panelGroupLayout id="pgl5" halign="end" layout="horizontal">
+          <af:commandButton text="Save" id="cb4" styleClass="navigationButton"
+                            partialSubmit="true"
+                            actionListener="#{bindings.Commit.execute}">
+            <!--<af:showPopupBehavior popupId="::p1" triggerType="action"/>-->
+          </af:commandButton>
+        </af:panelGroupLayout>
+        <af:spacer width="10" height="20" id="s4"/>
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                            featuresOff="viewMenu">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar">
+            <af:toolbar id="t2">
+              <af:commandToolbarButton text="Add" id="ctb1" partialSubmit="true"
+                                       actionListener="#{viewScope.adminBean.launchAddSLAPopup}">
+                <af:setPropertyListener from="addSLA"
+                                        to="#{viewScope.launchType}"
+                                        type="action"/>
+              </af:commandToolbarButton>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.AapSlaCutoffdateVO.collectionModel}"
+                    var="row" rows="#{bindings.AapSlaCutoffdateVO.rangeSize}"
+                    emptyText="#{bindings.AapSlaCutoffdateVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    fetchSize="#{bindings.AapSlaCutoffdateVO.rangeSize}"
+                    rowBandingInterval="1" styleClass="AFStretchWidth"
+                    columnStretching="column:c1" autoHeightRows="0"
+                    selectedRowKeys="#{bindings.AapSlaCutoffdateVO.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.AapSlaCutoffdateVO.collectionModel.makeCurrent}"
+                    rowSelection="single" id="t1" partialTriggers=":::d1 :::d2">
+            <af:column sortProperty="#{bindings.AapSlaCutoffdateVO.hints.ActionType.name}"
+                       width="400" sortable="false" headerText="Action Type"
+                       id="c1">
+              <af:outputText value="#{row.ActionType}" id="ot1"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.AapSlaCutoffdateVO.hints.SlaDays.name}"
+                       sortable="false" headerText="SLA Days" id="c3">
+              <af:inputText value="#{row.bindings.SlaDays.inputValue}"
+                            readOnly="true"
+                            label="#{bindings.AapSlaCutoffdateVO.hints.SlaDays.label}"
+                            required="#{bindings.AapSlaCutoffdateVO.hints.SlaDays.mandatory}"
+                            columns="#{bindings.AapSlaCutoffdateVO.hints.SlaDays.displayWidth}"
+                            maximumLength="#{bindings.AapSlaCutoffdateVO.hints.SlaDays.precision}"
+                            shortDesc="#{bindings.AapSlaCutoffdateVO.hints.SlaDays.tooltip}"
+                            id="it1">
+                <f:validator binding="#{row.bindings.SlaDays.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.AapSlaCutoffdateVO.hints.SlaDays.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.AapSlaCutoffdateVO.hints.CutOffDate.name}"
+                       sortable="false" headerText="Cut Off Darete" id="c2">
+              <af:inputDate value="#{row.bindings.CutOffDate.inputValue}"
+                            readOnly="true"
+                            label="#{bindings.AapSlaCutoffdateVO.hints.CutOffDate.label}"
+                            required="#{bindings.AapSlaCutoffdateVO.hints.CutOffDate.mandatory}"
+                            shortDesc="#{bindings.AapSlaCutoffdateVO.hints.CutOffDate.tooltip}"
+                            id="id1">
+                <f:validator binding="#{row.bindings.CutOffDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.AapSlaCutoffdateVO.hints.CutOffDate.format}"/>
+              </af:inputDate>
+            </af:column>
+            <af:column id="c4" align="center" inlineStyle="text-align:center;">
+              <af:commandImageLink id="cil1" icon="/images/deleteIcon.png"
+                                   actionListener="#{bindings.removeRowWithKey.execute}"/>
+            </af:column>
+            <af:column id="c5" align="center" inlineStyle="text-align:center;">
+              <af:commandImageLink id="cil2" icon="/images/edit.png">
+                <af:showPopupBehavior popupId=":::p2" triggerType="action"/>
+              </af:commandImageLink>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+        <af:spacer width="10" height="20" id="s2"/>
+      </af:showDetailItem>
+      <af:showDetailItem text="LOV Maintenance" id="sdi2"
+                         inflexibleHeight="1200">
+        <af:panelDashboard id="pd1" columns="2" rowHeight="240px;"
+                           dimensionsFrom="auto" styleClass="AFStretchWidth">
+          <af:panelBox text="Anticipated Action Type" id="pb1">
+            <f:facet name="toolbar"/>
+            <af:panelCollection id="pc2" styleClass="AFStretchWidth"
+                                featuresOff="viewMenu">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t10">
+                  <af:commandToolbarButton text="Add" id="ctb3"
+                                           actionListener="#{viewScope.adminBean.addActionType}">
+                    <af:clientAttribute name="iterName"
+                                        value="ActionTypeVOIterator"/>
+                    <af:clientAttribute name="refType" value="AAT"/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.ActionTypeVO.collectionModel}"
+                        var="row" rows="#{bindings.ActionTypeVO.rangeSize}"
+                        emptyText="#{bindings.ActionTypeVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.ActionTypeVO.rangeSize}"
+                        rowBandingInterval="1"
+                        selectedRowKeys="#{bindings.ActionTypeVO.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.ActionTypeVO.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t3" columnResizing="disabled"
+                        styleClass="AFStretchWidth"
+                        partialTriggers="cil61 cil711 cil81 ::ctb3"
+                        columnStretching="column:c6">
+                <af:column sortProperty="#{bindings.ActionTypeVO.hints.ReferenceDescription.name}"
+                           sortable="false" headerText="Description" id="c6"
+                           inlineStyle="#{row.bindings.deletable.inputValue?'background-color:Orange':''}">
+                  <af:inputText value="#{row.bindings.ReferenceDescription.inputValue}"
+                                label="#{bindings.ActionTypeVO.hints.ReferenceDescription.label}"
+                                required="#{bindings.ActionTypeVO.hints.ReferenceDescription.mandatory}"
+                                columns="#{bindings.ActionTypeVO.hints.ReferenceDescription.displayWidth}"
+                                maximumLength="#{bindings.ActionTypeVO.hints.ReferenceDescription.precision}"
+                                shortDesc="#{bindings.ActionTypeVO.hints.ReferenceDescription.tooltip}"
+                                readOnly="#{bindings.deletableActionType.inputValue}"
+                                id="it6">
+                    <f:validator binding="#{row.bindings.ReferenceDescription.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.ActionTypeVO.hints.EffectiveEndDate.label}"
+                           id="c24">
+                  <af:inputDate value="#{row.bindings.EffectiveEndDate.inputValue}"
+                                required="#{bindings.ActionTypeVO.hints.EffectiveEndDate.mandatory}"
+                                shortDesc="#{bindings.ActionTypeVO.hints.EffectiveEndDate.tooltip}"
+                                id="id4">
+                    <f:validator binding="#{row.bindings.EffectiveEndDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.ActionTypeVO.hints.EffectiveEndDate.format}"/>
+                  </af:inputDate>
+                  <!--af:inputDate value="#{row.bindings.EffectiveEndDate.inputValue}"
+                                label="#{bindings.ActionTypeVO.hints.EffectiveEndDate.label}"
+                                required="#{bindings.ActionTypeVO.hints.EffectiveEndDate.mandatory}"
+                                columns="#{bindings.ActionTypeVO.hints.EffectiveEndDate.displayWidth}"
+                                shortDesc="#{bindings.ActionTypeVO.hints.EffectiveEndDate.tooltip}"
+                                id="it12">
+                    <f:validator binding="#{row.bindings.EffectiveEndDate.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ActionTypeVO.hints.EffectiveEndDate.format}"/>
+                  </af:inputDate-->
+                </af:column>
+                <af:column id="c8" align="center"
+                           inlineStyle="#{row.bindings.deletable.inputValue?'background-color:Orange':''}">
+                  <af:commandImageLink id="cil61" icon="/images/edit.png"
+                                       shortDesc="Edit" partialSubmit="true"
+                                       rendered="#{!row.bindings.editable.inputValue}">
+                    <af:setPropertyListener from="#{true}"
+                                            to="#{row.bindings.editable.inputValue}"
+                                            type="action"/>
+                  </af:commandImageLink>
+                  <af:panelGroupLayout id="pgl71" halign="center"
+                                       layout="horizontal"
+                                       rendered="#{row.bindings.editable.inputValue}">
+                    <af:commandImageLink actionListener="#{viewScope.adminBean.commitActionType}"
+                                         partialSubmit="true" shortDesc="Save"
+                                         id="cil711" icon="/images/commit.png">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                      <af:setPropertyListener from="#{false}" type="action"
+                                              to="#{bindings.deletableActionType.inputValue}"/>
+                      <af:clientAttribute name="iterName"
+                                          value="ActionTypeVOIterator"/>
+                    </af:commandImageLink>
+                    <af:commandImageLink actionListener="#{bindings.Rollback.execute}"
+                                         shortDesc="Cancel" partialSubmit="true"
+                                         icon="/images/rollback.png"
+                                         immediate="true" id="cil81">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                      <!--af:setPropertyListener from="#{false}" type="action"
+                                              to="#{bindings.deletableActionType.inputValue}"/-->
+                    </af:commandImageLink>
+                    <f:facet name="separator">
+                      <af:spacer width="25" height="10" id="s51"/>
+                    </f:facet>
+                  </af:panelGroupLayout>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+            <af:componentDragSource/>
+          </af:panelBox>
+          <af:panelBox text="NAICS Code" id="pb2">
+            <f:facet name="toolbar"/>
+            <af:panelCollection id="pc3" styleClass="AFStretchWidth"
+                                featuresOff="viewMenu">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t9">
+                  <af:commandToolbarButton actionListener="#{viewScope.adminBean.addNaics}"
+                                           text="Add" id="ctb2"
+                                           partialSubmit="true">
+                    <af:clientAttribute name="iterName"
+                                        value="NAICSVOIterator"/>
+                    <af:clientAttribute name="refType" value="NAICS"/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.NAICSVO.collectionModel}" var="row"
+                        rows="#{bindings.NAICSVO.rangeSize}"
+                        emptyText="#{bindings.NAICSVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.NAICSVO.rangeSize}"
+                        rowBandingInterval="1"
+                        selectedRowKeys="#{bindings.NAICSVO.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.NAICSVO.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t4" columnResizing="disabled"
+                        styleClass="AFStretchWidth"
+                        partialTriggers="cil6 cil71 cil8 ::ctb2"
+                        columnStretching="column:c9">
+                <af:column sortProperty="#{bindings.NAICSVO.hints.ReferenceDescription.name}"
+                           sortable="false" headerText="Description" id="c9"
+                           inlineStyle="#{row.bindings.deletable.inputValue?'background-color:Orange':''}">
+                  <af:inputText value="#{row.bindings.ReferenceDescription.inputValue}"
+                                label="#{bindings.NAICSVO.hints.ReferenceDescription.label}"
+                                required="#{bindings.NAICSVO.hints.ReferenceDescription.mandatory}"
+                                columns="#{bindings.NAICSVO.hints.ReferenceDescription.displayWidth}"
+                                maximumLength="#{bindings.NAICSVO.hints.ReferenceDescription.precision}"
+                                shortDesc="#{bindings.NAICSVO.hints.ReferenceDescription.tooltip}"
+                                readOnly="#{bindings.deletable.inputValue}"
+                                id="it7">
+                    <f:validator binding="#{row.bindings.ReferenceDescription.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.NAICSVO.hints.EffectiveEndDate.label}"
+                           id="c25">
+                  <af:inputDate value="#{row.bindings.EffectiveEndDate.inputValue}"
+                                label="#{bindings.NAICSVO.hints.EffectiveEndDate.label}"
+                                required="#{bindings.NAICSVO.hints.EffectiveEndDate.mandatory}"
+                                shortDesc="#{bindings.NAICSVO.hints.EffectiveEndDate.tooltip}"
+                                id="id41">
+                    <f:validator binding="#{row.bindings.EffectiveEndDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.NAICSVO.hints.EffectiveEndDate.format}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="c11" align="center"
+                           inlineStyle="#{row.bindings.deletable.inputValue?'background-color:Orange':''}">
+                  <af:commandImageLink id="cil6" icon="/images/edit.png"
+                                       shortDesc="Edit" partialSubmit="true"
+                                       rendered="#{!row.bindings.editable.inputValue}">
+                    <af:setPropertyListener from="#{true}"
+                                            to="#{row.bindings.editable.inputValue}"
+                                            type="action"/>
+                  </af:commandImageLink>
+                  <af:panelGroupLayout id="pgl7" halign="center"
+                                       layout="horizontal"
+                                       rendered="#{row.bindings.editable.inputValue}">
+                    <af:commandImageLink partialSubmit="true" shortDesc="Save"
+                                         id="cil71" icon="/images/commit.png"
+                                         actionListener="#{viewScope.adminBean.commitNaicsCode}">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                      <af:clientAttribute name="iterName"
+                                          value="NAICSVOIterator"/>
+                    </af:commandImageLink>
+                    <af:commandImageLink actionListener="#{bindings.Rollback.execute}"
+                                         shortDesc="Cancel" partialSubmit="true"
+                                         icon="/images/rollback.png"
+                                         immediate="true" id="cil8">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                    </af:commandImageLink>
+                    <f:facet name="separator">
+                      <af:spacer width="25" height="10" id="s5"/>
+                    </f:facet>
+                  </af:panelGroupLayout>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+            <af:componentDragSource/>
+          </af:panelBox>
+          <af:panelBox text="Potential Contract Type" id="pb3">
+            <f:facet name="toolbar"/>
+            <af:componentDragSource/>
+            <af:panelCollection id="pc9" featuresOff="viewMenu">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t11">
+                  <af:commandToolbarButton text="Add" id="ctb4"
+                                           actionListener="#{viewScope.adminBean.addContractType}">
+                    <af:clientAttribute name="iterName"
+                                        value="PotentialContractTypeVOIterator"/>
+                    <af:clientAttribute name="refType" value="PCT"/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.PotentialContractTypeVO.collectionModel}"
+                        var="row" styleClass="AFStretchWidth"
+                        rows="#{bindings.PotentialContractTypeVO.rangeSize}"
+                        emptyText="#{bindings.PotentialContractTypeVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.PotentialContractTypeVO.rangeSize}"
+                        partialTriggers="cil62 cil712 cil82 ::ctb4"
+                        rowBandingInterval="1" columnResizing="disabled"
+                        columnStretching="column:c13"
+                        selectedRowKeys="#{bindings.PotentialContractTypeVO.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.PotentialContractTypeVO.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t6">
+                <af:column sortProperty="#{bindings.PotentialContractTypeVO.hints.ReferenceDescription.name}"
+                           sortable="false"
+                           inlineStyle="#{row.bindings.deletable.inputValue?'background-color:Orange':''}"
+                           headerText="#{bindings.PotentialContractTypeVO.hints.ReferenceDescription.label}"
+                           id="c13">
+                  <af:inputText value="#{row.bindings.ReferenceDescription.inputValue}"
+                                simple="true"
+                                readOnly="#{bindings.deletableContractType.inputValue}"
+                                required="#{bindings.PotentialContractTypeVO.hints.ReferenceDescription.mandatory}"
+                                columns="#{bindings.PotentialContractTypeVO.hints.ReferenceDescription.displayWidth}"
+                                maximumLength="#{bindings.PotentialContractTypeVO.hints.ReferenceDescription.precision}"
+                                shortDesc="#{bindings.PotentialContractTypeVO.hints.ReferenceDescription.tooltip}"
+                                id="it8">
+                    <f:validator binding="#{row.bindings.ReferenceDescription.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.PotentialContractTypeVO.hints.EffectiveEndDate.label}"
+                           id="c26">
+                  <af:inputDate value="#{row.bindings.EffectiveEndDate.inputValue}"
+                                autoSubmit="true"
+                                label="#{bindings.PotentialContractTypeVO.hints.EffectiveEndDate.label}"
+                                required="#{bindings.PotentialContractTypeVO.hints.EffectiveEndDate.mandatory}"
+                                shortDesc="#{bindings.PotentialContractTypeVO.hints.EffectiveEndDate.tooltip}"
+                                id="id5">
+                    <f:validator binding="#{row.bindings.EffectiveEndDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.PotentialContractTypeVO.hints.EffectiveEndDate.format}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="c17" align="center"
+                           inlineStyle="#{row.bindings.deletable.inputValue?'background-color:Orange':''}">
+                  <af:commandImageLink id="cil62" icon="/images/edit.png"
+                                       shortDesc="Edit" partialSubmit="true"
+                                       rendered="#{!row.bindings.editable.inputValue}">
+                    <af:setPropertyListener from="#{true}"
+                                            to="#{row.bindings.editable.inputValue}"
+                                            type="action"/>
+                  </af:commandImageLink>
+                  <af:panelGroupLayout id="pgl72" halign="center"
+                                       layout="horizontal"
+                                       partialTriggers="cil712"
+                                       rendered="#{row.bindings.editable.inputValue}">
+                    <af:commandImageLink partialSubmit="true" shortDesc="Save"
+                                         id="cil712" icon="/images/commit.png"
+                                         actionListener="#{viewScope.adminBean.commitContractType}">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                      <af:clientAttribute name="iterName"
+                                          value="PotentialContractTypeVOIterator"/>
+                    </af:commandImageLink>
+                    <af:commandImageLink actionListener="#{bindings.Rollback.execute}"
+                                         shortDesc="Cancel" partialSubmit="true"
+                                         icon="/images/rollback.png"
+                                         immediate="true" id="cil82">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                    </af:commandImageLink>
+                    <f:facet name="separator">
+                      <af:spacer width="25" height="10" id="s52"/>
+                    </f:facet>
+                  </af:panelGroupLayout>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelBox>
+          <af:panelBox text="Product Service Code" id="pb4">
+            <f:facet name="toolbar"/>
+            <af:panelCollection id="pc4" featuresOff="viewMenu">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t12">
+                  <af:commandToolbarButton text="Add" id="ctb5"
+                                           actionListener="#{viewScope.adminBean.addServiceCode}">
+                    <af:clientAttribute name="iterName"
+                                        value="ProductServiceCodeVOIterator"/>
+                    <af:clientAttribute name="refType" value="PSC"/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.ProductServiceCodeVO.collectionModel}"
+                        var="row" styleClass="AFStretchWidth"
+                        rowBandingInterval="1"
+                        rows="#{bindings.ProductServiceCodeVO.rangeSize}"
+                        emptyText="#{bindings.ProductServiceCodeVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.ProductServiceCodeVO.rangeSize}"
+                        columnResizing="disabled" columnStretching="column:c12"
+                        partialTriggers="cil88 cil68 cil718 ::ctb5"
+                        selectedRowKeys="#{bindings.ProductServiceCodeVO.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.ProductServiceCodeVO.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t5">
+                <af:column sortProperty="#{bindings.ProductServiceCodeVO.hints.ReferenceDescription.name}"
+                           sortable="false"
+                           inlineStyle="#{row.bindings.deletable.inputValue?'background-color:Orange':''}"
+                           headerText="#{bindings.ProductServiceCodeVO.hints.ReferenceDescription.label}"
+                           id="c12">
+                  <af:inputText value="#{row.bindings.ReferenceDescription.inputValue}"
+                                simple="true"
+                                readOnly="#{bindings.deletableServiceCode.inputValue}"
+                                required="#{bindings.ProductServiceCodeVO.hints.ReferenceDescription.mandatory}"
+                                columns="#{bindings.ProductServiceCodeVO.hints.ReferenceDescription.displayWidth}"
+                                maximumLength="#{bindings.ProductServiceCodeVO.hints.ReferenceDescription.precision}"
+                                shortDesc="#{bindings.ProductServiceCodeVO.hints.ReferenceDescription.tooltip}"
+                                id="it9">
+                    <f:validator binding="#{row.bindings.ReferenceDescription.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.ProductServiceCodeVO.hints.EffectiveEndDate.label}"
+                           id="c27">
+                  <af:inputDate value="#{row.bindings.EffectiveEndDate.inputValue}"
+                                label="#{bindings.ProductServiceCodeVO.hints.EffectiveEndDate.label}"
+                                required="#{bindings.ProductServiceCodeVO.hints.EffectiveEndDate.mandatory}"
+                                shortDesc="#{bindings.ProductServiceCodeVO.hints.EffectiveEndDate.tooltip}"
+                                id="id6">
+                    <f:validator binding="#{row.bindings.EffectiveEndDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.ProductServiceCodeVO.hints.EffectiveEndDate.format}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="c19" align="center"
+                           inlineStyle="#{row.bindings.deletable.inputValue?'background-color:Orange':''}">
+                  <af:commandImageLink id="cil68" icon="/images/edit.png"
+                                       shortDesc="Edit" partialSubmit="true"
+                                       rendered="#{!row.bindings.editable.inputValue}">
+                    <af:setPropertyListener from="#{true}"
+                                            to="#{row.bindings.editable.inputValue}"
+                                            type="action"/>
+                  </af:commandImageLink>
+                  <af:panelGroupLayout id="pgl78" halign="center"
+                                       layout="horizontal"
+                                       rendered="#{row.bindings.editable.inputValue}">
+                    <af:commandImageLink partialSubmit="true" shortDesc="Save"
+                                         id="cil718" icon="/images/commit.png"
+                                         actionListener="#{viewScope.adminBean.commitServiceCOde}">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                      <af:clientAttribute name="iterName"
+                                          value="ProductServiceCodeVOIterator"/>
+                    </af:commandImageLink>
+                    <af:commandImageLink actionListener="#{bindings.Rollback.execute}"
+                                         shortDesc="Cancel" partialSubmit="true"
+                                         icon="/images/rollback.png"
+                                         immediate="true" id="cil88">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                    </af:commandImageLink>
+                    <f:facet name="separator">
+                      <af:spacer width="25" height="10" id="s58"/>
+                    </f:facet>
+                  </af:panelGroupLayout>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelBox>
+          <af:panelBox text="Requirement Type" id="pb6">
+            <f:facet name="toolbar"/>
+            <af:panelCollection id="pc6" featuresOff="viewMenu">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t15">
+                  <af:commandToolbarButton text="Add" id="ctb8"
+                                           actionListener="#{viewScope.adminBean.addRequirementType}">
+                    <af:clientAttribute name="iterName"
+                                        value="RequirementTypeIterator"/>
+                    <af:clientAttribute name="refType" value="RT"/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.RequirementType.collectionModel}"
+                        var="row" rows="#{bindings.RequirementType.rangeSize}"
+                        emptyText="#{bindings.RequirementType.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.RequirementType.rangeSize}"
+                        rowBandingInterval="1" columnStretching="column:c14"
+                        columnResizing="disabled"
+                        partialTriggers="cil63 cil713 cil83 ::ctb8"
+                        selectedRowKeys="#{bindings.RequirementType.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.RequirementType.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t7"
+                        styleClass="AFStretchWidth">
+                <af:column sortProperty="#{bindings.RequirementType.hints.ReferenceDescription.name}"
+                           sortable="false"
+                           inlineStyle="#{row.bindings.deletable.inputValue?'background-color:Orange':''}"
+                           headerText="#{bindings.RequirementType.hints.ReferenceDescription.label}"
+                           id="c14">
+                  <af:inputText value="#{row.bindings.ReferenceDescription.inputValue}"
+                                simple="true"
+                                readOnly="#{bindings.deletableRequirementType.inputValue}"
+                                required="#{bindings.RequirementType.hints.ReferenceDescription.mandatory}"
+                                columns="#{bindings.RequirementType.hints.ReferenceDescription.displayWidth}"
+                                maximumLength="#{bindings.RequirementType.hints.ReferenceDescription.precision}"
+                                shortDesc="#{bindings.RequirementType.hints.ReferenceDescription.tooltip}"
+                                id="it10">
+                    <f:validator binding="#{row.bindings.ReferenceDescription.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.RequirementType.hints.EffectiveEndDate.label}"
+                           id="c28">
+                  <af:inputDate value="#{row.bindings.EffectiveEndDate.inputValue}"
+                                label="#{bindings.RequirementType.hints.EffectiveEndDate.label}"
+                                required="#{bindings.RequirementType.hints.EffectiveEndDate.mandatory}"
+                                shortDesc="#{bindings.RequirementType.hints.EffectiveEndDate.tooltip}"
+                                id="id7">
+                    <f:validator binding="#{row.bindings.EffectiveEndDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.RequirementType.hints.EffectiveEndDate.format}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="c21" align="center"
+                           inlineStyle="#{row.bindings.deletable.inputValue?'background-color:Orange':''}">
+                  <af:commandImageLink id="cil63" icon="/images/edit.png"
+                                       shortDesc="Edit" partialSubmit="true"
+                                       rendered="#{!row.bindings.editable.inputValue}">
+                    <af:setPropertyListener from="#{true}"
+                                            to="#{row.bindings.editable.inputValue}"
+                                            type="action"/>
+                  </af:commandImageLink>
+                  <af:panelGroupLayout id="pgl73" halign="center"
+                                       layout="horizontal"
+                                       rendered="#{row.bindings.editable.inputValue}">
+                    <af:commandImageLink partialSubmit="true" shortDesc="Save"
+                                         id="cil713" icon="/images/commit.png"
+                                         actionListener="#{viewScope.adminBean.commitRequirementType}">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                      <af:clientAttribute name="iterName"
+                                          value="RequirementTypeIterator"/>
+                    </af:commandImageLink>
+                    <af:commandImageLink actionListener="#{bindings.Rollback.execute}"
+                                         shortDesc="Cancel" partialSubmit="true"
+                                         icon="/images/rollback.png"
+                                         immediate="true" id="cil83">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                    </af:commandImageLink>
+                    <f:facet name="separator">
+                      <af:spacer width="25" height="10" id="s53"/>
+                    </f:facet>
+                  </af:panelGroupLayout>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelBox>
+          <af:panelBox text="Commodity Type" id="pb7">
+            <f:facet name="toolbar"/>
+            <af:panelCollection id="pc7" featuresOff="viewMenu">
+              <f:facet name="menus"/>
+              <af:table value="#{bindings.CommodityTypeVO.collectionModel}"
+                        columnStretching="column:c15" columnResizing="disabled"
+                        var="row" rows="#{bindings.CommodityTypeVO.rangeSize}"
+                        emptyText="#{bindings.CommodityTypeVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.CommodityTypeVO.rangeSize}"
+                        rowBandingInterval="1"
+                        partialTriggers="cil64 cil714 cil84 ::ctb7"
+                        selectedRowKeys="#{bindings.CommodityTypeVO.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.CommodityTypeVO.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t8"
+                        styleClass="AFStretchWidth">
+                <af:column sortProperty="#{bindings.CommodityTypeVO.hints.ReferenceDescription.name}"
+                           sortable="false"
+                           inlineStyle="#{row.bindings.deletable.inputValue?'background-color:Orange':''}"
+                           headerText="#{bindings.CommodityTypeVO.hints.ReferenceDescription.label}"
+                           id="c15">
+                  <af:inputText value="#{row.bindings.ReferenceDescription.inputValue}"
+                                simple="true"
+                                readOnly="#{bindings.deletableCommodityType.inputValue}"
+                                required="#{bindings.CommodityTypeVO.hints.ReferenceDescription.mandatory}"
+                                columns="#{bindings.CommodityTypeVO.hints.ReferenceDescription.displayWidth}"
+                                maximumLength="#{bindings.CommodityTypeVO.hints.ReferenceDescription.precision}"
+                                shortDesc="#{bindings.CommodityTypeVO.hints.ReferenceDescription.tooltip}"
+                                id="it11">
+                    <f:validator binding="#{row.bindings.ReferenceDescription.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.CommodityTypeVO.hints.EffectiveEndDate.label}"
+                           id="c29">
+                  <af:inputDate value="#{row.bindings.EffectiveEndDate.inputValue}"
+                                label="#{bindings.CommodityTypeVO.hints.EffectiveEndDate.label}"
+                                required="#{bindings.CommodityTypeVO.hints.EffectiveEndDate.mandatory}"
+                                shortDesc="#{bindings.CommodityTypeVO.hints.EffectiveEndDate.tooltip}"
+                                id="id8">
+                    <f:validator binding="#{row.bindings.EffectiveEndDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.CommodityTypeVO.hints.EffectiveEndDate.format}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="c23" align="center"
+                           inlineStyle="#{row.bindings.deletable.inputValue?'background-color:Orange':''}">
+                  <af:commandImageLink id="cil64" icon="/images/edit.png"
+                                       shortDesc="Edit" partialSubmit="true"
+                                       rendered="#{!row.bindings.editable.inputValue}">
+                    <af:setPropertyListener from="#{true}"
+                                            to="#{row.bindings.editable.inputValue}"
+                                            type="action"/>
+                  </af:commandImageLink>
+                  <af:panelGroupLayout id="pgl74" halign="center"
+                                       layout="horizontal"
+                                       rendered="#{row.bindings.editable.inputValue}">
+                    <af:commandImageLink partialSubmit="true" shortDesc="Save"
+                                         id="cil714" icon="/images/commit.png"
+                                         actionListener="#{viewScope.adminBean.commitCommodityType}">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                      <af:clientAttribute name="iterName"
+                                          value="CommodityTypeVOIterator"/>
+                    </af:commandImageLink>
+                    <af:commandImageLink actionListener="#{bindings.Rollback.execute}"
+                                         shortDesc="Cancel" partialSubmit="true"
+                                         icon="/images/rollback.png"
+                                         immediate="true" id="cil84">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                    </af:commandImageLink>
+                    <f:facet name="separator">
+                      <af:spacer width="25" height="10" id="s54"/>
+                    </f:facet>
+                  </af:panelGroupLayout>
+                </af:column>
+              </af:table>
+              <f:facet name="toolbar">
+                <af:toolbar id="t14">
+                  <af:commandToolbarButton text="Add" id="ctb7"
+                                           actionListener="#{viewScope.adminBean.addCommodityType}">
+                    <af:clientAttribute name="iterName"
+                                        value="CommodityTypeVOIterator"/>
+                    <af:clientAttribute name="refType" value="CT"/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+            </af:panelCollection>
+          </af:panelBox>
+          <af:panelBox text="Competition Type" id="pb8">
+            <af:panelCollection id="pc8">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="t141">
+                  <af:commandToolbarButton text="Add" id="ctb71"
+                                           actionListener="#{viewScope.adminBean.addCompetitionType}">
+                    <af:clientAttribute name="iterName"
+                                        value="CompetitionTypeVOIterator"/>
+                    <af:clientAttribute name="refType" value="AAM"/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.CompetitionTypeVO.collectionModel}"
+                        var="row" rows="#{bindings.CompetitionTypeVO.rangeSize}"
+                        styleClass="AFStretchWidth"
+                        emptyText="#{bindings.CompetitionTypeVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.CompetitionTypeVO.rangeSize}"
+                        rowBandingInterval="1" columnStretching="column:c7"
+                        partialTriggers="cil641 cil7141 cil841 ::ctb71"
+                        selectedRowKeys="#{bindings.CompetitionTypeVO.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.CompetitionTypeVO.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t13">
+                <af:column sortProperty="#{bindings.CompetitionTypeVO.hints.ReferenceDescription.name}"
+                           sortable="false"
+                           headerText="#{bindings.CompetitionTypeVO.hints.ReferenceDescription.label}"
+                           id="c7">
+                  <af:inputText value="#{row.bindings.ReferenceDescription.inputValue}"
+                                label="#{bindings.CompetitionTypeVO.hints.ReferenceDescription.label}"
+                                required="#{bindings.CompetitionTypeVO.hints.ReferenceDescription.mandatory}"
+                                columns="#{bindings.CompetitionTypeVO.hints.ReferenceDescription.displayWidth}"
+                                maximumLength="#{bindings.CompetitionTypeVO.hints.ReferenceDescription.precision}"
+                                shortDesc="#{bindings.CompetitionTypeVO.hints.ReferenceDescription.tooltip}"
+                                id="it12">
+                    <f:validator binding="#{row.bindings.ReferenceDescription.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.CompetitionTypeVO.hints.EffectiveEndDate.name}"
+                           sortable="false"
+                           headerText="#{bindings.CompetitionTypeVO.hints.EffectiveEndDate.label}"
+                           id="c10">
+                  <af:inputDate value="#{row.bindings.EffectiveEndDate.inputValue}"
+                                label="#{bindings.CompetitionTypeVO.hints.EffectiveEndDate.label}"
+                                required="#{bindings.CompetitionTypeVO.hints.EffectiveEndDate.mandatory}"
+                                shortDesc="#{bindings.CompetitionTypeVO.hints.EffectiveEndDate.tooltip}"
+                                id="id9">
+                    <f:validator binding="#{row.bindings.EffectiveEndDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.CompetitionTypeVO.hints.EffectiveEndDate.format}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="c16" align="center"
+                           inlineStyle="#{row.bindings.deletable.inputValue?'background-color:Orange':''}">
+                  <af:commandImageLink id="cil641" icon="/images/edit.png"
+                                       shortDesc="Edit" partialSubmit="true"
+                                       rendered="#{!row.bindings.editable.inputValue}">
+                    <af:setPropertyListener from="#{true}"
+                                            to="#{row.bindings.editable.inputValue}"
+                                            type="action"/>
+                  </af:commandImageLink>
+                  <af:panelGroupLayout id="pgl741" halign="center"
+                                       layout="horizontal"
+                                       rendered="#{row.bindings.editable.inputValue}">
+                    <af:commandImageLink partialSubmit="true" shortDesc="Save"
+                                         id="cil7141" icon="/images/commit.png"
+                                         actionListener="#{viewScope.adminBean.commitCommpetitionType}">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                      <af:clientAttribute name="iterName"
+                                          value="CommodityTypeVOIterator"/>
+                    </af:commandImageLink>
+                    <af:commandImageLink actionListener="#{bindings.Rollback.execute}"
+                                         shortDesc="Cancel" partialSubmit="true"
+                                         icon="/images/rollback.png"
+                                         immediate="true" id="cil841">
+                      <af:setPropertyListener from="#{false}"
+                                              to="#{row.bindings.editable.inputValue}"
+                                              type="action"/>
+                    </af:commandImageLink>
+                    <f:facet name="separator">
+                      <af:spacer width="25" height="10" id="s541"/>
+                    </f:facet>
+                  </af:panelGroupLayout>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelBox>
+        </af:panelDashboard>
+      </af:showDetailItem>
+      <af:showDetailItem text="AAP Start Date Setup" id="sdi3">
+        <af:panelGroupLayout id="pgl8" layout="horizontal" halign="start"
+                             styleClass="AFStretchWidth">
+          <af:panelFormLayout id="pfl5">
+            <af:inputDate value="#{bindings.EffectiveEndDate.inputValue}"
+                          label="AAP Start Date" partialTriggers="cb5 cb1 cb6"
+                          required="#{bindings.EffectiveEndDate.hints.mandatory}"
+                          shortDesc="#{bindings.EffectiveEndDate.hints.tooltip}"
+                          id="id10">
+              <f:validator binding="#{bindings.EffectiveEndDate.validator}"/>
+              <af:convertDateTime pattern="#{bindings.EffectiveEndDate.format}"/>
+            </af:inputDate>
+            <f:facet name="footer">
+              <af:group id="g2">
+                <af:panelGroupLayout id="pgl81" layout="horizontal"
+                                     halign="end">
+                  <af:commandButton text="Edit" id="cb5" partialSubmit="true">
+                    <af:setPropertyListener from="#{true}"
+                                            to="#{bindings.editableStartDate.inputValue}"
+                                            type="action"/>
+                  </af:commandButton>
+                  <af:spacer width="20" height="10" id="s6"/>
+                  <af:commandButton text="Save" id="cb1" partialSubmit="true"
+                                    actionListener="#{viewScope.adminBean.onCommitStartDate}">
+                  <af:setPropertyListener from="#{false}"
+                                            to="#{bindings.editableStartDate.inputValue}"
+                                            type="action"/>
+                <af:clientAttribute name="iterName"
+                                          value="StartDateSetupVOIterator"/>
+                  </af:commandButton>
+                  <af:spacer width="20" height="10" id="s7"/>
+                  <af:commandButton text="Cancel" id="cb6" partialSubmit="true" actionListener="#{bindings.Rollback.execute}">
+                    <af:setPropertyListener from="#{false}"
+                                            to="#{bindings.editableStartDate.inputValue}"
+                                            type="action"/>
+                  </af:commandButton>
+                </af:panelGroupLayout>
+              </af:group>
+            </f:facet>
+          </af:panelFormLayout>
+        </af:panelGroupLayout>
+        <!---->
+      </af:showDetailItem>
+    </af:panelTabbed>
+  </af:panelGroupLayout>
+</jsp:root>

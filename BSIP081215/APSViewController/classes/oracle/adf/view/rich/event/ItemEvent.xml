@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="ItemEvent" Package="oracle.adf.view.rich.event"
+          BeanClass="oracle.adf.view.rich.event.ItemEvent" isJavaBased="true">
+  <AccessorAttribute id="type" IsCollection="false"
+                     BeanClass="oracle.adf.view.rich.event.ItemEvent.Type"
+                     CollectionBeanClass="UpdateableSingleValue"/>
+  <AccessorAttribute id="component" IsCollection="false"
+                     BeanClass="javax.faces.component.UIComponent"
+                     CollectionBeanClass="UpdateableSingleValue"/>
+  <AccessorAttribute id="phaseId" IsCollection="false"
+                     BeanClass="javax.faces.event.PhaseId"
+                     CollectionBeanClass="UpdateableSingleValue"/>
+  <MethodAccessor IsCollection="false" Type="boolean" id="isAppropriateListener"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.event.FacesListener"
+                   isStructured="true"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="processListener"
+                  ReturnNodeName="Return">
+    <ParameterInfo id="p0" Type="javax.faces.event.FacesListener"
+                   isStructured="true"/>
+  </MethodAccessor>
+  <MethodAccessor IsCollection="false" Type="void" id="queue"
+                  ReturnNodeName="Return"/>
+  <ConstructorMethod IsCollection="true"
+                     Type="oracle.adf.view.rich.event.ItemEvent"
+                     BeanClass="oracle.adf.view.rich.event.ItemEvent"
+                     id="ItemEvent">
+    <ParameterInfo id="p0" Type="javax.faces.component.UIComponent"
+                   isStructured="true"/>
+    <ParameterInfo id="p1" Type="oracle.adf.view.rich.event.ItemEvent.Type"
+                   isStructured="true"/>
+  </ConstructorMethod>
+</JavaBean>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93"
+                id="budget_view_flow_definition_budget_view_flow_definition_SetCurrentRowWithKeyValue1PageDef"
+                Package="com.fda.aps.view.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="CenterItemNoROVO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="CenterItemNoROVOIterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="CenterItemNoROVOIterator"
+            id="setCurrentRowWithKeyValue" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKeyValue">
+      <NamedData NDName="rowKey" NDValue="#{pageFlowScope.requestId}"
+                 NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

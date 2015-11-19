@@ -1,0 +1,1057 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:train value="#{controllerContext.currentViewPort.taskFlowContext.trainModel}"
+              id="t4" styleClass="AFStretchWidth"/>
+    <af:panelGroupLayout id="pgl2" halign="center">
+      <af:decorativeBox id="db1" styleClass="AFStretchWidth"
+                        inlineStyle="height:1100px;">
+        <f:facet name="center">
+          <af:panelGroupLayout id="pgl4" layout="scroll"
+                               inlineStyle="height:auto;width:auto;"
+                               styleClass="AFStretchWidth">
+            <af:panelHeader text="#{bindings.CtrLnItmNo.inputValue}" id="ph1">
+              <f:facet name="legend"/>
+              <af:spacer width="10" height="20" id="s14"/>
+              <af:panelFormLayout id="pfl12" maxColumns="2" rows="1"
+                                  rendered="#{pageFlowScope.centerCode eq 'OC' || 
+                                                                                        pageFlowScope.centerCode eq 'Central'}"
+                                  fieldWidth="300" labelWidth="200">
+                <f:facet name="footer"/>
+                <af:panelLabelAndMessage label="Super Office" id="plam20"
+                                         helpTopicId="AAPHELP_SUPER_OFC">
+                  <af:selectOneChoice value="#{bindings.SuperOfc.inputValue}"
+                                      label="#{bindings.SuperOfc.label}"
+                                      required="#{bindings.SuperOfc.hints.mandatory}"
+                                      disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                      shortDesc="#{bindings.SuperOfc.hints.tooltip}"
+                                      id="soc19" simple="true"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{bindings.SuperOfc.items}"
+                                   id="si28"/>
+                  </af:selectOneChoice>
+                </af:panelLabelAndMessage>
+                <af:panelLabelAndMessage label="Sub Office" id="plam21"
+                                         visible="#{bindings.SuperOfc.inputValue != null}"
+                                         partialTriggers="soc19"
+                                         helpTopicId="AAPHELP_SUB_OFC">
+                  <af:selectOneChoice value="#{bindings.SubOfc.inputValue}"
+                                      label="#{bindings.SubOfc.label}"
+                                      required="#{bindings.SubOfc.hints.mandatory}"
+                                      shortDesc="#{bindings.SubOfc.hints.tooltip}"
+                                      id="soc20" simple="true">
+                    <f:selectItems value="#{bindings.SubOfc.items}" id="si29"/>
+                  </af:selectOneChoice>
+                </af:panelLabelAndMessage>
+              </af:panelFormLayout>
+              <af:spacer width="10" height="20" id="s21"/>
+              <af:panelGroupLayout id="pgl5" halign="left" layout="horizontal">
+                <af:panelFormLayout id="pfl4" rows="1" labelAlignment="start"
+                                    maxColumns="2" fieldWidth="300"
+                                    labelWidth="200">
+                  <af:panelLabelAndMessage label="#{pageFlowScope.reqType eq 'Grant'?'Grant Status':'Acquisition Status'}"
+                                           id="plam7" showRequired="true"
+                                           for="soc5"
+                                           helpTopicId="AAPHELP_ACQUISITION_STATUS">
+                    <af:selectOneChoice value="#{bindings.AcquisitionStatus.inputValue}"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        label="#{bindings.AcquisitionStatus.label}"
+                                        required="true" showRequired="true"
+                                        shortDesc="#{bindings.AcquisitionStatus.hints.tooltip}"
+                                        id="soc5" simple="true">
+                      <f:selectItems value="#{bindings.AcquisitionStatus.items}"
+                                     id="si5"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="Priority Level" id="plam3"
+                                           showRequired="true" for="soc3"
+                                           helpTopicId="AAPHELP_PRIORITY_STATUS">
+                    <af:selectOneChoice value="#{bindings.PriorityLevel.inputValue}"
+                                        label="#{bindings.PriorityLevel.label}"
+                                        simple="true" required="true"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        shortDesc="#{bindings.PriorityLevel.hints.tooltip}"
+                                        id="soc3">
+                      <f:selectItems value="#{bindings.PriorityLevel.items}"
+                                     id="si3"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="Recurring Item" id="plam8"
+                                           showRequired="true"
+                                           helpTopicId="AAPHELP_RECURRING_ITEM">
+                    <!--<af:selectOneChoice label="Recurring Item" id="soc16"
+                                        simple="true" required="true">
+                      <af:selectItem label="Yes" value="Y" id="si18"/>
+                      <af:selectItem label="No" value="N" id="si19"/>
+                    </af:selectOneChoice>-->
+                    <af:selectOneChoice value="#{bindings.RecurringItem.inputValue}"
+                                        label="#{bindings.RecurringItem.label}"
+                                        simple="true"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        required="#{bindings.RecurringItem.hints.mandatory}"
+                                        shortDesc="#{bindings.RecurringItem.hints.tooltip}"
+                                        id="soc16">
+                      <f:selectItems value="#{bindings.RecurringItem.items}"
+                                     id="si18"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                </af:panelFormLayout>
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="s2"/>
+                </f:facet>
+              </af:panelGroupLayout>
+              <af:spacer width="10" height="20" id="s3"/>
+              <af:panelGroupLayout id="pgl6" layout="horizontal">
+                <af:panelFormLayout id="pfl1" maxColumns="2" rows="2"
+                                    fieldWidth="300" labelWidth="200">
+                  <af:selectOneChoice value="#{bindings.ZeroDollarReqn.inputValue}"
+                                      label="#{bindings.ZeroDollarReqn.label}"
+                                      simple="false"
+                                      disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                      helpTopicId="AAPHELP_ZERO_DOLLAR"
+                                      required="#{bindings.ZeroDollarReqn.hints.mandatory}"
+                                      rendered="#{pageFlowScope.reqType eq 'Contract' || requestScope.lineItmCode eq 'C' || pageFlowScope.lineItmCode eq 'C'}"
+                                      shortDesc="#{bindings.ZeroDollarReqn.hints.tooltip}"
+                                      id="it11">
+                    <f:selectItems value="#{bindings.ZeroDollarReqn.items}"
+                                   id="si191"/>
+                  </af:selectOneChoice>
+                  <!--<af:inputText value="#{bindings.ZeroDollarReqn.inputValue}"
+                                styleClass="contentInputText"
+                                label="#{bindings.ZeroDollarReqn.hints.label}"
+                                required="#{bindings.ZeroDollarReqn.hints.mandatory}"
+                                columns="#{bindings.ZeroDollarReqn.hints.displayWidth}"
+                                maximumLength="#{bindings.ZeroDollarReqn.hints.precision}"
+                                rendered="#{pageFlowScope.reqType eq 'Contract' || requestScope.lineItmCode eq 'C'}"
+                                shortDesc="#{bindings.ZeroDollarReqn.hints.tooltip}"
+                                id="it11" helpTopicId="AAPHELP_ZERO_DOLLAR">
+                    <f:validator binding="#{bindings.ZeroDollarReqn.validator}"/>
+                  </af:inputText>-->
+                  <af:inputText value="#{bindings.RequisitionNo.inputValue}"
+                                label="#{bindings.RequisitionNo.hints.label}"
+                                disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                shortDesc="#{bindings.RequisitionNo.hints.tooltip}"
+                                id="it23" helpTopicId="AAPHELP_REQUISITION_NO">
+                    <f:validator binding="#{bindings.RequisitionNo.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.ExistingDocNo.inputValue}"
+                                label="#{(pageFlowScope.reqType eq 'Grant' || requestScope.lineItmCode eq 'G' || pageFlowScope.lineItmCode eq 'G')?'Existing Grant Number':((pageFlowScope.reqType eq 'Contract' || requestScope.lineItmCode eq 'C' || pageFlowScope.lineItmCode eq 'C')? bindings.ExistingDocNo.hints.label:'Existing IAA Number')}"
+                                required="#{bindings.ExistingDocNo.hints.mandatory}"
+                                disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                shortDesc="#{bindings.ExistingDocNo.hints.tooltip}"
+                                id="it14" helpTopicId="AAPHELP_EXISTING_DOC_NO">
+                    <f:validator binding="#{bindings.ExistingDocNo.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.ReleaseNumber.inputValue}"
+                                label="#{bindings.ReleaseNumber.hints.label}"
+                                styleClass="contentInputText"
+                                disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                rendered="#{pageFlowScope.reqType eq 'Contract' || requestScope.lineItmCode eq 'C' || pageFlowScope.lineItmCode eq 'C'}"
+                                required="#{bindings.ReleaseNumber.hints.mandatory}"
+                                shortDesc="#{bindings.ReleaseNumber.hints.tooltip}"
+                                id="it1" helpTopicId="AAPHELP_TASK_ORDER">
+                    <f:validator binding="#{bindings.ReleaseNumber.validator}"/>
+                  </af:inputText>
+                </af:panelFormLayout>
+              </af:panelGroupLayout>
+              <af:spacer width="10" height="20" id="s4"/>
+              <af:panelGroupLayout id="pgl7" layout="horizontal">
+                <af:panelFormLayout id="pfl2" maxColumns="2" rows="2"
+                                    fieldWidth="300" labelWidth="200">
+                  <f:facet name="footer">
+                    <af:group id="g1">
+                      <af:inputText value="#{bindings.DetailedDescription.inputValue}"
+                                    label="#{bindings.DetailedDescription.hints.label}"
+                                    styleClass="contentInputText"
+                                    disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                    required="true" rows="5"
+                                    contentStyle="height:75px;" columns="100"
+                                    maximumLength="1024"
+                                    shortDesc="#{bindings.DetailedDescription.hints.tooltip}"
+                                    id="it7"
+                                    helpTopicId="AAPHELP_COMPLETE_DETAILED_DESCRIPTION">
+                        <f:validator binding="#{bindings.DetailedDescription.validator}"/>
+                      </af:inputText>
+                    </af:group>
+                  </f:facet>
+                  <af:panelLabelAndMessage label="Option Year Exercise"
+                                           id="plam9" showRequired="true"
+                                           rendered="#{!(pageFlowScope.reqType eq 'Grant' || requestScope.lineItmCode eq 'G')}"
+                                           helpTopicId="AAPHELP_OPTION_YEAR">
+                    <af:selectOneChoice value="#{bindings.OptionYrExercise.inputValue}"
+                                        label="#{bindings.OptionYrExercise.label}"
+                                        required="true"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        shortDesc="#{bindings.OptionYrExercise.hints.tooltip}"
+                                        id="soc6" simple="true">
+                      <f:selectItems value="#{bindings.OptionYrExercise.items}"
+                                     id="si6"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                  <af:inputDate value="#{bindings.RequiredAwardDate.inputValue}"
+                                label="#{pageFlowScope.reqType eq 'Grant'?'Budget Start Date':(bindings.RequiredAwardDate.hints.label)}"
+                                required="true" minValue="04/02/2015"
+                                shortDesc="#{bindings.RequiredAwardDate.hints.tooltip}"
+                                disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                id="id2"
+                                helpTopicId="AAPHELP_REQUIRED_AWARD_DATE"
+                                autoSubmit="true"
+                                validator="#{pageFlowScope.requestDetail.validateRequiredAwardDate}">
+                    <f:validator binding="#{bindings.RequiredAwardDate.validator}"/>
+                    <af:convertDateTime pattern="MMM dd, yyyy"/>
+                  </af:inputDate>
+                  <af:inputDate value="#{bindings.CurrYrPopEndDate.inputValue}"
+                                label="#{pageFlowScope.reqType eq 'Grant'?'Budget End Date':(bindings.CurrYrPopEndDate.hints.label)}"
+                                required="#{bindings.CurrYrPopEndDate.hints.mandatory}"
+                                disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                shortDesc="#{bindings.CurrYrPopEndDate.hints.tooltip}"
+                                id="id5"
+                                helpTopicId="AAPHELP_CURRENT_YEAR_POP_DATE">
+                    <f:validator binding="#{bindings.CurrYrPopEndDate.validator}"/>
+                    <af:convertDateTime pattern="MMM dd, yyyy"/>
+                  </af:inputDate>
+                </af:panelFormLayout>
+              </af:panelGroupLayout>
+              <af:spacer width="10" height="20" id="s5"/>
+              <af:panelGroupLayout id="pgl3">
+                <af:panelFormLayout id="pfl3" maxColumns="2" rows="4"
+                                    fieldWidth="300" labelWidth="200" rendered="#{pageFlowScope.reqType eq 'Contract' || requestScope.lineItmCode eq 'C' ||
+                                    pageFlowScope.lineItmCode eq 'C'}">
+                  <f:facet name="footer"/>
+                  <af:panelLabelAndMessage label="Anticipated Action Type"
+                                           id="plam10" showRequired="true"
+                                           helpTopicId="AAPHELP_ANTICIPATED_ACTION_TYPE">
+                    <af:selectOneChoice value="#{bindings.AnticipatedActionType.inputValue}"
+                                        label="#{bindings.AnticipatedActionType.label}"
+                                        required="true"
+                                        shortDesc="#{bindings.AnticipatedActionType.hints.tooltip}"
+                                        id="soc7" simple="true"
+                                        contentStyle="width:300px;"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        styleClass="width:300px;"
+                                        inlineStyle="width:300px;"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.requestDetail.onAnticpatedActionTypeSelected}">
+                      <f:selectItems value="#{bindings.AnticipatedActionType.items}"
+                                     id="si7"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="Potential Contract Type"
+                                           id="plam11" showRequired="true"
+                                           helpTopicId="AAPHELP_POTENTIAL_CONTRACT_TYPE">
+                    <af:selectOneChoice value="#{bindings.PotentialContractType.inputValue}"
+                                        label="#{bindings.PotentialContractType.label}"
+                                        required="true"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        shortDesc="#{bindings.PotentialContractType.hints.tooltip}"
+                                        id="soc8" simple="true">
+                      <f:selectItems value="#{bindings.PotentialContractType.items}"
+                                     id="si8"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="Requirement Type" id="plam12"
+                                           helpTopicId="AAPHELP_REQUIREMENT_TYPE"
+                                           showRequired="true">
+                    <af:selectOneChoice value="#{bindings.RequirementType.inputValue}"
+                                        label="#{bindings.RequirementType.label}"
+                                        required="true"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        shortDesc="#{bindings.RequirementType.hints.tooltip}"
+                                        id="soc9" simple="true">
+                      <f:selectItems value="#{bindings.RequirementType.items}"
+                                     id="si9"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="Commodity Type" id="plam13"
+                                           showRequired="true"
+                                           helpTopicId="AAPHELP_COMMODITY_TYPE">
+                    <af:selectOneChoice value="#{bindings.CommodityType.inputValue}"
+                                        label="#{bindings.CommodityType.label}"
+                                        required="true"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        shortDesc="#{bindings.CommodityType.hints.tooltip}"
+                                        id="soc10" simple="true"
+                                        valueChangeListener="#{pageFlowScope.requestDetail.onCommoditySelected}"
+                                        autoSubmit="true">
+                      <f:selectItems value="#{bindings.CommodityType.items}"
+                                     id="si10"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="Competition Type" id="plam14"
+                                           showRequired="true"
+                                           helpTopicId="AAPHELP_COMPETITION_TYPE">
+                    <af:selectOneChoice value="#{bindings.AnticipatedAcquisitionMethod.inputValue}"
+                                        label="#{bindings.AnticipatedAcquisitionMethod.label}"
+                                        required="true"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        shortDesc="#{bindings.AnticipatedAcquisitionMethod.hints.tooltip}"
+                                        id="soc11" simple="true"
+                                        contentStyle="width:300px;"
+                                        styleClass="width:300px;"
+                                        inlineStyle="width:300px;">
+                      <f:selectItems value="#{bindings.AnticipatedAcquisitionMethod.items}"
+                                     id="si11"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="Product Service Code"
+                                           id="plam15" showRequired="true"
+                                           helpTopicId="AAPHELP_PRODUCT_SERVICE_CODE">
+                    <af:selectOneChoice value="#{bindings.ProductServiceCode.inputValue}"
+                                        label="#{bindings.ProductServiceCode.label}"
+                                        required="true"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        shortDesc="#{bindings.ProductServiceCode.hints.tooltip}"
+                                        id="soc12" simple="true"
+                                        inlineStyle="width:300px;"
+                                        styleClass="width:300px;"
+                                        contentStyle="width:300px;">
+                      <f:selectItems value="#{bindings.ProductServiceCode.items}"
+                                     id="si12"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="NAICS Code" id="plam1"
+                                           helpTopicId="AAPHELP_NAICS_CODE">
+                    <af:selectOneChoice value="#{bindings.NaicsCode.inputValue}"
+                                        label="#{bindings.NaicsCode.label}"
+                                        required="true"
+                                        shortDesc="#{bindings.NaicsCode.hints.tooltip}"
+                                        id="soc1" simple="true"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        contentStyle="width:300px;"
+                                        styleClass="width:300px;"
+                                        inlineStyle="width:300px;">
+                      <f:selectItems value="#{bindings.NaicsCode.items}"
+                                     id="si1"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                </af:panelFormLayout>
+              </af:panelGroupLayout>
+              <af:spacer width="10" height="20" id="s6"/>
+              <af:panelGroupLayout id="pgl9">
+                <af:panelFormLayout id="pfl7" fieldWidth="300" labelWidth="200"
+                                    rows="2">
+                  <f:facet name="footer"/>
+                  <af:inputDate value="#{bindings.EstimatedRfaRelDate.inputValue}"
+                                rendered="#{pageFlowScope.reqType eq 'Grant' || requestScope.lineItmCode eq 'G'}"
+                                label="Estimated RFA Release Date"
+                                disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                shortDesc="#{bindings.EstimatedRfaRelDate.hints.tooltip}"
+                                id="id1" helpTopicId="AAPHELP_RFA_RELEASE_DATE">
+                    <f:validator binding="#{bindings.EstimatedRfaRelDate.validator}"/>
+                    <af:convertDateTime pattern="MMM dd, yyyy"/>
+                  </af:inputDate>
+                  <af:panelLabelAndMessage label="#{pageFlowScope.reqType eq 'Contract'?'Estimated Funding Amount for Total Contract':'Estimated Total Project Value'}"
+                                           id="plam16"
+                                           helpTopicId="AAPHELP_ESTIMATED_TOTAL_PROJECT_VALUE"
+                                           showRequired="true">
+                    <af:selectOneChoice value="#{bindings.EstimatedTotalProjValue.inputValue}"
+                                        label="#{bindings.EstimatedTotalProjValue.label}"
+                                        required="true" valuePassThru="true"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        shortDesc="#{bindings.EstimatedTotalProjValue.hints.tooltip}"
+                                        id="soc13" simple="true"
+                                        valueChangeListener="#{pageFlowScope.requestDetail.onEstimatedProjectChanged}"
+                                        autoSubmit="true">
+                      <f:selectItems value="#{bindings.EstimatedTotalProjValue.items}"
+                                     id="si13"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                  <af:inputText value="#{bindings.TotalDlarsForCurtFy.inputValue}"
+                                label="Actual Funding Amount for the Current FY ($)"
+                                required="true" autoSubmit="true"
+                                disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                columns="#{bindings.TotalDlarsForCurtFy.hints.displayWidth}"
+                                styleClass="contentInputText"
+                                maximumLength="#{bindings.TotalDlarsForCurtFy.hints.precision}"
+                                shortDesc="#{bindings.TotalDlarsForCurtFy.hints.tooltip}"
+                                id="it35"
+                                helpTopicId="AAPHELP_ESTIMATED_TOTAL_DOLLARS_FOR_CURRENT_FY"
+                                validator="#{pageFlowScope.requestDetail.validateEstimatedValue}">
+                    <!--<f:validator binding="#{bindings.TotalDlarsForCurtFy.validator}"/>-->
+                    <!--<af:convertNumber groupingUsed="true"
+                                      minfractionDigits="2"/>-->
+                    <af:convertNumber groupingUsed="true" type="currency"/>
+                  </af:inputText>
+                  <af:selectOneChoice label="Estimate Funding Amount for the Current FY ($)"
+                                      id="soc18">
+                    <af:selectItem label="$25,000 to $50,000" value="1"
+                                   id="si26"/>
+                    <af:selectItem label="$50,001 to $75,000" value="2"
+                                   id="si22"/>
+                    <af:selectItem label="$75,001 to $100,000" value="3"
+                                   id="si21"/>
+                    <af:selectItem label="$100,001 to $125,000" value="4"
+                                   id="si19"/>
+                    <af:selectItem label="$125,001 to $150,000" value="5"
+                                   id="si20"/>
+                    <af:selectItem label="$150,001 to $500,000" value="6"
+                                   id="si25"/>
+                    <af:selectItem label="$1,000,001 to $5,000,000" value="7"
+                                   id="si24"/>
+                    <af:selectItem label="$5,000,001 to $10,000,000" value="8"
+                                   id="si23"/>
+                    <af:selectItem label=">$10,000,000" value="9" id="si27"/>
+                  </af:selectOneChoice>
+                </af:panelFormLayout>
+                <af:panelFormLayout id="pfl8" fieldWidth="300" labelWidth="200"
+                                    rendered="#{pageFlowScope.reqType eq 'Contract' || requestScope.lineItmCode eq 'C'}">
+                  <f:facet name="footer"/>
+                  <af:inputDate value="#{bindings.ProjectPopStartDate.inputValue}"
+                                label="#{bindings.ProjectPopStartDate.hints.label}"
+                                required="#{bindings.ProjectPopStartDate.hints.mandatory}"
+                                shortDesc="#{bindings.ProjectPopStartDate.hints.tooltip}"
+                                id="id4"
+                                disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                helpTopicId="AAPHELP_PROJECT_POP_START_DATE"
+                                autoSubmit="true"
+                                valueChangeListener="#{pageFlowScope.requestDetail.onStartDateChanged}">
+                    <f:validator binding="#{bindings.ProjectPopStartDate.validator}"/>
+                    <af:convertDateTime pattern="MMM dd, yyyy"/>
+                  </af:inputDate>
+                  <af:spacer width="10" height="10" id="s17"/>
+                  <af:inputDate value="#{bindings.ProjectPopEndDate.inputValue}"
+                                label="#{bindings.ProjectPopEndDate.hints.label}"
+                                required="#{bindings.ProjectPopEndDate.hints.mandatory}"
+                                shortDesc="#{bindings.ProjectPopEndDate.hints.tooltip}"
+                                id="id3"
+                                disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                helpTopicId="AAPHELP_PROJECT_POP_END_DATE"
+                                validator="#{pageFlowScope.requestDetail.validatePoPDates}"
+                                autoSubmit="true">
+                    <f:validator binding="#{bindings.ProjectPopEndDate.validator}"/>
+                    <af:convertDateTime pattern="MMM dd, yyyy"/>
+                  </af:inputDate>
+                  <af:inputText value="#{bindings.AnticipatedPop.inputValue}"
+                                label="#{bindings.AnticipatedPop.hints.label}"
+                                required="#{bindings.AnticipatedPop.hints.mandatory}"
+                                styleClass="contentInputText"
+                                disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                columns="#{bindings.AnticipatedPop.hints.displayWidth}"
+                                maximumLength="#{bindings.AnticipatedPop.hints.precision}"
+                                shortDesc="#{bindings.AnticipatedPop.hints.tooltip}"
+                                id="it4"
+                                helpTopicId="AAPHELP_PLACE_OF_PERFORMANCE">
+                    <f:validator binding="#{bindings.AnticipatedPop.validator}"/>
+                  </af:inputText>
+                </af:panelFormLayout>
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="s12"/>
+                </f:facet>
+              </af:panelGroupLayout>
+              <af:spacer width="10" height="10" id="s7"/>
+              <af:spacer width="10" height="10" id="s8"/>
+              <af:panelGroupLayout id="pgl11" layout="horizontal"
+                                   rendered="#{pageFlowScope.reqType eq 'Grant' || requestScope.lineItmCode eq 'G'}">
+                <af:panelFormLayout id="pfl13" rows="2" maxColumns="2"
+                                    fieldWidth="300" labelWidth="200">
+                  <f:facet name="footer"/>
+                  <af:panelLabelAndMessage label="Grants Type" id="plam17"
+                                           showRequired="true"
+                                           helpTopicId="AAPHELP_GRANTS_COMMODITY">
+                    <af:selectOneChoice value="#{bindings.GrantsCommodity.inputValue}"
+                                        label="#{bindings.GrantsCommodity.label}"
+                                        required="#{bindings.GrantsCommodity.hints.mandatory}"
+                                        shortDesc="#{bindings.GrantsCommty.hints.tooltip}"
+                                        id="soc14" simple="true"
+                                        contentStyle="width:300px;"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        styleClass="width:300px;"
+                                        inlineStyle="width:300px;">
+                      <f:selectItems value="#{bindings.GrantsCommodity.items}"
+                                     id="si14"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                  <af:panelLabelAndMessage label="#{bindings.NciboardReviewRequired1.label}"
+                                           id="plam19">
+                    <af:selectOneChoice value="#{bindings.NciboardReviewRequired1.inputValue}"
+                                        label="#{bindings.NciboardReviewRequired1.label}"
+                                        helpTopicId="AAPHELP_NCI_BOARD_REVIEW_REQUIRED"
+                                        simple="true"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        required="#{bindings.NciboardReviewRequired1.hints.mandatory}"
+                                        shortDesc="#{bindings.NciboardReviewRequired1.hints.tooltip}"
+                                        id="soc17">
+                      <f:selectItems value="#{bindings.NciboardReviewRequired1.items}"
+                                     id="si192"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                  <af:inputText value="#{bindings.AnticipatedNoOfAwards.inputValue}"
+                                label="Anticipated Number of Awards"
+                                styleClass="contentInputText"
+                                disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                required="#{bindings.AnticipatedNoOfAwards.hints.mandatory}"
+                                columns="#{bindings.AnticipatedNoOfAwards.hints.displayWidth}"
+                                maximumLength="#{bindings.AnticipatedNoOfAwards.hints.precision}"
+                                shortDesc="#{bindings.AnticipatedNoOfAwards.hints.tooltip}"
+                                id="it17">
+                    <f:validator binding="#{bindings.AnticipatedNoOfAwards.validator}"/>
+                  </af:inputText>
+                </af:panelFormLayout>
+              </af:panelGroupLayout>
+              <af:spacer width="10" height="10" id="s9"/>
+              <af:panelGroupLayout id="pgl12" layout="horizontal" valign="top"
+                                   rendered="#{pageFlowScope.reqType eq 'IAA' || requestScope.lineItmCode eq 'I'}">
+                <af:panelGroupLayout id="pgl13" layout="vertical">
+                  <af:panelFormLayout id="pfl5" fieldWidth="300"
+                                      labelWidth="200">
+                    <af:panelLabelAndMessage label="Service or Reimbursable"
+                                             showRequired="true" id="plam4"
+                                             helpTopicId="AAPHELP_SERVICE_OR_REIMBURSABLE">
+                      <af:selectOneChoice value="#{bindings.ServiceOrReimbursable.inputValue}"
+                                          label="#{bindings.ServiceOrReimbursable.label}"
+                                          disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                          required="#{bindings.ServiceOrReimbursable.hints.mandatory}"
+                                          shortDesc="#{bindings.ServiceOrReimbursable.hints.tooltip}"
+                                          id="soc4" simple="true">
+                        <f:selectItems value="#{bindings.ServiceOrReimbursable.items}"
+                                       id="si4"/>
+                      </af:selectOneChoice>
+                    </af:panelLabelAndMessage>
+                  </af:panelFormLayout>
+                </af:panelGroupLayout>
+                <af:spacer width="10" height="10" id="s15"/>
+                <af:panelGroupLayout id="pgl14" layout="vertical">
+                  <af:panelFormLayout id="pfl6">
+                    <af:inputText value="#{bindings.ReimbursableAmt.inputValue}"
+                                  label="#{bindings.ReimbursableAmt.hints.label}"
+                                  required="true" styleClass="contentInputText"
+                                  disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                  columns="#{bindings.ReimbursableAmt.hints.displayWidth}"
+                                  maximumLength="#{bindings.ReimbursableAmt.hints.precision}"
+                                  shortDesc="#{bindings.ReimbursableAmt.hints.tooltip}"
+                                  id="it10"
+                                  helpTopicId="AAPHELP_REIMBURSABLE_AMT">
+                      <f:validator binding="#{bindings.ReimbursableAmt.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.ReimbursableAgency.inputValue}"
+                                  label="#{bindings.ReimbursableAgency.hints.label}"
+                                  required="#{bindings.ReimbursableAgency.hints.mandatory}"
+                                  styleClass="contentInputText"
+                                  disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                  columns="#{bindings.ReimbursableAgency.hints.displayWidth}"
+                                  maximumLength="#{bindings.ReimbursableAgency.hints.precision}"
+                                  shortDesc="#{bindings.ReimbursableAgency.hints.tooltip}"
+                                  id="it36"
+                                  helpTopicId="AAPHELP_REIMBURSABLE_AGENCY">
+                      <f:validator binding="#{bindings.ReimbursableAgency.validator}"/>
+                    </af:inputText>
+                  </af:panelFormLayout>
+                </af:panelGroupLayout>
+              </af:panelGroupLayout>
+              <af:spacer width="10" height="10" id="s10"/>
+              <af:panelGroupLayout id="pgl10" layout="horizontal"
+                                   inlineStyle="margin-left:100.0px;">
+                <!--af:panelFormLayout id="pfl12" labelWidth="50" fieldWidth="580"
+                                    rows="1" maxColumns="2"-->
+                <!--f:facet name="footer"/-->
+                <af:panelFormLayout id="pfl11" rows="1" labelWidth="10"
+                                    fieldWidth="113">
+                  <f:facet name="footer"/>
+                  <af:panelGroupLayout id="pgl19" layout="horizontal">
+                    <af:panelLabelAndMessage label="Collaboration" id="plam6"
+                                             for="it25"
+                                             helpTopicId="AAPHELP_COLLABORATION"/>
+                    <af:selectBooleanCheckbox label="#{bindings.CollaborationFlag1.label}"
+                                              id="it25" autoSubmit="true"
+                                              styleClass="width:100px;"
+                                              disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                              valueChangeListener="#{pageFlowScope.requestDetail.onCollaborationChanged}"
+                                              simple="true"
+                                              value="#{bindings.CollaborationFlag1.inputValue}"
+                                              immediate="true"/>
+                  </af:panelGroupLayout>
+                </af:panelFormLayout>
+                <af:panelGroupLayout id="pgl8" layout="horizontal"
+                                     visible="#{bindings.CollaborationFlag1.inputValue}"
+                                     partialTriggers="it25">
+                  <af:panelLabelAndMessage label="Collaboration Partners"
+                                           id="plam5"
+                                           visible="#{bindings.CollaborationFlag1.inputValue}"
+                                           binding="#{pageFlowScope.requestDetail.collabPanelLabel}"
+                                           helpTopicId="AAPHELP_COLLABORATION_ITEM_NO">
+                    <!--af:panelFormLayout id="pfl9" rows="3" labelAlignment="start" fieldWidth="100">
+                      <f:facet name="footer"/>
+                      <af:iterator value="#{bindings.CollaborationReference.collectionModel}"
+                                   var="row"
+                                   rows="#{bindings.CollaborationReference.rangeSize}"
+                                   varStatus="i" id="i2">
+                        <af:selectBooleanCheckbox label="#{bindings.CollaborationReference.hints.ReferenceDescription.label}" id="sbc1"/>
+                      </af:iterator>
+                    </af:panelFormLayout-->
+                    <af:panelFormLayout id="pfl9" partialTriggers="it25"
+                                        rendered="#{bindings.CollaborationFlag1.inputValue}"
+                                        labelAlignment="start" fieldWidth="100"
+                                        rows="3"
+                                        binding="#{pageFlowScope.requestDetail.collabFormLayout}">
+                      <af:selectBooleanCheckbox text="CBER" simple="true"
+                                                label="Label 1" id="sbc1"/>
+                      <af:selectBooleanCheckbox text="CDER" label="Label 2"
+                                                id="sbc2" simple="true"/>
+                      <af:selectBooleanCheckbox text="CVM" label="Label 3"
+                                                id="sbc3" simple="true"/>
+                      <af:selectBooleanCheckbox text="CDRH" label="Label 4"
+                                                id="sbc4" simple="true"/>
+                      <af:selectBooleanCheckbox text="ORA" label="Label 5"
+                                                id="sbc5" simple="true"/>
+                      <af:selectBooleanCheckbox text="CFSAN" label="Label 6"
+                                                id="sbc6" simple="true"/>
+                      <af:selectBooleanCheckbox text="NCTR" label="Label 7"
+                                                id="sbc7" simple="true"/>
+                      <af:selectBooleanCheckbox text="CTP" label="Label 7"
+                                                id="sbc8" simple="true"/>
+                      <af:selectBooleanCheckbox text="OC" label="Label 7"
+                                                id="sbc9" simple="true"/>
+                      <af:selectBooleanCheckbox text="OO" label="Label 8"
+                                                id="sbc11" simple="true"/>
+                      <af:selectBooleanCheckbox text="OIMT" label="Label 7"
+                                                id="sbc10" simple="true"/>
+                    </af:panelFormLayout>
+                  </af:panelLabelAndMessage>
+                </af:panelGroupLayout>
+                <!--/af:panelFormLayout-->
+                <f:facet name="separator">
+                  <af:spacer width="330" height="10" id="s13"/>
+                </f:facet>
+              </af:panelGroupLayout>
+              <af:panelGroupLayout id="pgl15" layout="horizontal" valign="top"
+                                   styleClass="AFStretchWidth">
+                <af:panelFormLayout id="pfl10" fieldWidth="300" labelWidth="200"
+                                    rows="1">
+                  <af:panelLabelAndMessage label="Lead Managing Center"
+                                           id="plam2" partialTriggers="it25"
+                                           helpTopicId="AAPHELP_LEAD_MANAGING_CENTER">
+                    <af:selectOneChoice value="#{bindings.LeadMngCenter.inputValue}"
+                                        label="#{bindings.LeadMngCenter.label}"
+                                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                        required="#{bindings.LeadMngCenter.hints.mandatory}"
+                                        shortDesc="#{bindings.LeadMngCenter.hints.tooltip}"
+                                        id="soc2" simple="true">
+                      <f:selectItems value="#{bindings.LeadMngCenter.items}"
+                                     id="si2"/>
+                    </af:selectOneChoice>
+                  </af:panelLabelAndMessage>
+                  <!--af:inputText value="#{bindings.OwnerNmTelNo.inputValue}"
+                                label="#{bindings.OwnerNmTelNo.hints.label}"
+                                required="true" styleClass="contentInputText"
+                                columns="#{bindings.OwnerNmTelNo.hints.displayWidth}"
+                                maximumLength="#{bindings.OwnerNmTelNo.hints.precision}"
+                                shortDesc="#{bindings.OwnerNmTelNo.hints.tooltip}"
+                                id="it27"
+                                helpTopicId="AAPHELP_OWNER_NAME_TEL_NOS">
+                    <f:validator binding="#{bindings.OwnerNmTelNo.validator}"/>
+                  </af:inputText-->
+                  <f:facet name="footer"/>
+                </af:panelFormLayout>
+              </af:panelGroupLayout>
+              <af:spacer width="10" height="30" id="s18"/>
+              <af:panelGroupLayout id="pgl21" partialTriggers="cb10 ::t1:cil2">
+                <af:panelHeader text="Point of Contact" id="ph2"
+                                styleClass="AFStretchWidth">
+                  <f:facet name="context"/>
+                  <f:facet name="menuBar"/>
+                  <f:facet name="toolbar"/>
+                  <f:facet name="legend"/>
+                  <f:facet name="info"/>
+                  <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                                      featuresOff="viewMenu">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="t3">
+                        <af:commandToolbarButton text="Add POC" id="ctb1"
+                        disabled="#{bindings.AcquisitionStatus.selectedValue.attributeValues[1] eq 'Awarded'}"
+                                                 actionListener="#{bindings.CreateInsert.execute}"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar"/>
+                    <af:table value="#{bindings.PointOfContactView.collectionModel}"
+                              var="row" autoHeightRows="0"
+                              rows="#{bindings.PointOfContactView.rangeSize}"
+                              emptyText="#{bindings.PointOfContactView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.PointOfContactView.rangeSize}"
+                              rowBandingInterval="0" columnStretching="multiple"
+                              selectedRowKeys="#{bindings.PointOfContactView.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.PointOfContactView.collectionModel.makeCurrent}"
+                              rowSelection="single" id="t2"
+                              partialTriggers=":::cb10 :::t1:cil2 ::t3 ::ctb1"
+                              styleClass="AFStretchWidth">
+                      <af:column sortProperty="#{bindings.PointOfContactView.hints.PocFirstName.name}"
+                                 sortable="false"
+                                 headerText="#{bindings.PointOfContactView.hints.PocFirstName.label}"
+                                 id="c7" width="25%">
+                        <af:inputText value="#{row.bindings.PocFirstName.inputValue}"
+                                      label="#{bindings.PointOfContactView.hints.PocFirstName.label}"
+                                      required="true"
+                                      columns="#{bindings.PointOfContactView.hints.PocFirstName.displayWidth}"
+                                      maximumLength="#{bindings.PointOfContactView.hints.PocFirstName.precision}"
+                                      shortDesc="#{bindings.PointOfContactView.hints.PocFirstName.tooltip}"
+                                      id="it6">
+                          <f:validator binding="#{row.bindings.PocFirstName.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column sortProperty="#{bindings.PointOfContactView.hints.PocLastName.name}"
+                                 sortable="false"
+                                 headerText="#{bindings.PointOfContactView.hints.PocLastName.label}"
+                                 id="c8" width="25%">
+                        <af:inputText value="#{row.bindings.PocLastName.inputValue}"
+                                      label="#{bindings.PointOfContactView.hints.PocLastName.label}"
+                                      required="true"
+                                      columns="#{bindings.PointOfContactView.hints.PocLastName.displayWidth}"
+                                      maximumLength="#{bindings.PointOfContactView.hints.PocLastName.precision}"
+                                      shortDesc="#{bindings.PointOfContactView.hints.PocLastName.tooltip}"
+                                      id="it5">
+                          <f:validator binding="#{row.bindings.PocLastName.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column sortProperty="#{bindings.PointOfContactView.hints.PocEmail.name}"
+                                 sortable="false"
+                                 headerText="#{bindings.PointOfContactView.hints.PocEmail.label}"
+                                 id="c10" width="25%">
+                        <af:inputText value="#{row.bindings.PocEmail.inputValue}"
+                                      label="#{bindings.PointOfContactView.hints.PocEmail.label}"
+                                      required="true"
+                                      columns="#{bindings.PointOfContactView.hints.PocEmail.displayWidth}"
+                                      maximumLength="#{bindings.PointOfContactView.hints.PocEmail.precision}"
+                                      shortDesc="#{bindings.PointOfContactView.hints.PocEmail.tooltip}"
+                                      id="it2">
+                          <f:validator binding="#{row.bindings.PocEmail.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column sortProperty="#{bindings.PointOfContactView.hints.PocTel.name}"
+                                 sortable="false"
+                                 headerText="#{bindings.PointOfContactView.hints.PocTel.label}"
+                                 id="c9" width="20%">
+                        <af:inputText value="#{row.bindings.PocTel.inputValue}"
+                                      label="#{bindings.PointOfContactView.hints.PocTel.label}"
+                                      required="true"
+                                      columns="#{bindings.PointOfContactView.hints.PocTel.displayWidth}"
+                                      maximumLength="#{bindings.PointOfContactView.hints.PocTel.precision}"
+                                      shortDesc="#{bindings.PointOfContactView.hints.PocTel.tooltip}"
+                                      id="it3">
+                          <f:validator binding="#{row.bindings.PocTel.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="c11" align="center"
+                                 inlineStyle="text-align:center;">
+                        <af:commandImageLink icon="/images/searchBtn.png"
+                                             id="i1" shortDesc="Search"
+                                             partialSubmit="true"
+                                             immediate="true">
+                          <af:showPopupBehavior popupId=":::p3"/>
+                        </af:commandImageLink>
+                      </af:column>
+                      <af:column id="c12" align="center"
+                                 inlineStyle="text-align:center;">
+                        <af:commandImageLink id="cil1"
+                                             icon="/images/deleteIcon.png"
+                                             actionListener="#{bindings.removeRowWithKey.execute}"
+                                             immediate="true"/>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelHeader>
+              </af:panelGroupLayout>
+              <af:spacer width="10" height="30" id="s22"/>
+              <af:panelGroupLayout id="pgl24">
+                <af:panelHeader text="Comment History" id="ph3">
+                  <f:facet name="context"/>
+                  <f:facet name="menuBar"/>
+                  <f:facet name="toolbar"/>
+                  <f:facet name="legend"/>
+                  <f:facet name="info"/>
+                  <af:panelCollection id="pc2" styleClass="AFStretchWidth"
+                                      featuresOff="viewMenu">
+                    <f:facet name="menus"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="statusbar"/>
+                    <af:table value="#{bindings.CommentsVO.collectionModel}"
+                              var="row" rows="#{bindings.CommentsVO.rangeSize}"
+                              emptyText="#{bindings.CommentsVO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.CommentsVO.rangeSize}"
+                              rowBandingInterval="1" autoHeightRows="0"
+                              filterModel="#{bindings.CommentsVOQuery.queryDescriptor}"
+                              queryListener="#{bindings.CommentsVOQuery.processQuery}"
+                              filterVisible="false" varStatus="vs" id="t5"
+                              styleClass="AFStretchWidth"
+                              columnStretching="column:c14"
+                              partialTriggers=":::cb8 :::cb9">
+                      <af:column sortProperty="#{bindings.CommentsVO.hints.CommentText.name}"
+                                 filterable="true" sortable="false"
+                                 noWrap="false"
+                                 headerText="#{bindings.CommentsVO.hints.CommentText.label}"
+                                 id="c14">
+                        <af:outputText value="#{row.CommentText}" id="ot8"/>
+                      </af:column>
+                      <af:column sortProperty="#{bindings.CommentsVO.hints.CreatedBy.name}"
+                                 filterable="true" sortable="false"
+                                 headerText="#{bindings.CommentsVO.hints.CreatedBy.label}"
+                                 id="c15">
+                        <af:outputText value="#{row.CreatedBy}" id="ot2"/>
+                      </af:column>
+                      <af:column sortProperty="#{bindings.CommentsVO.hints.CreatedDate.name}"
+                                 filterable="true" sortable="false"
+                                 headerText="#{bindings.CommentsVO.hints.CreatedDate.label}"
+                                 id="c13">
+                        <f:facet name="filter">
+                          <af:inputDate value="#{vs.filterCriteria.CreatedDate}"
+                                        id="id6"/>
+                        </f:facet>
+                        <af:outputText value="#{row.CreatedDate}" id="ot9">
+                          <af:convertDateTime pattern="MMM dd, yyyy HH:mm:ss"/>
+                        </af:outputText>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelHeader>
+              </af:panelGroupLayout>
+              <af:spacer width="10" height="90" id="s11"/>
+              <af:panelGridLayout id="pgl23">
+                <af:gridRow marginTop="5px" marginBottom="5px" height="auto"
+                            id="gr1">
+                  <af:gridCell marginStart="5px" width="50%" id="gc2"
+                               valign="middle">
+                    <af:panelGroupLayout id="pgl22">
+                      <af:commandButton actionListener="#{bindings.CreateInsert.execute}"
+                                        text="Add POC" id="cb10"
+                                        rendered="false" partialSubmit="true"
+                                        immediate="true"/>
+                    </af:panelGroupLayout>
+                  </af:gridCell>
+                  <af:gridCell marginStart="5px" marginEnd="5px" width="50%"
+                               id="gc1" halign="end" valign="middle">
+                    <af:panelGroupLayout id="pgl18" layout="horizontal"
+                                         halign="end">
+                      <af:commandButton text="Save" id="cb1" immediate="true"
+                                        action="#{pageFlowScope.requestDetail.saveRequest}"
+                                        styleClass="navigationButton"/>
+                      <af:commandButton text="Save &amp; Submit" id="cb2"
+                                        action="#{pageFlowScope.requestDetail.saveAndSubmitRequest}"
+                                        styleClass="navigationButton"
+                                        actionListener="#{pageFlowScope.requestDetail.SubmitRequest}"/>
+                      <af:commandButton text="Exit" id="cb3"
+                                        partialSubmit="true" immediate="true"
+                                        action="#{pageFlowScope.requestDetail.navigateTo}"
+                                        styleClass="navigationButton"/>
+                      <af:commandButton text="Approve" id="cb4"
+                                        partialSubmit="true" immediate="true"
+                                        styleClass="navigationButton"
+                                        rendered="#{(pageFlowScope.comingFrom eq 'dashboard' and (pageFlowScope.requestDetail.acquisitionLead || pageFlowScope.requestDetail.budgetLead) or pageFlowScope.requestDetail.budgetLead)}"
+                                        actionListener="#{pageFlowScope.requestDetail.launchApprovePopup}">
+                        <!--<af:showPopupBehavior popupId="p2"
+                                              triggerType="action"/>-->
+                      </af:commandButton>
+                      <af:commandButton text="Reject" id="cb5"
+                                        partialSubmit="true" immediate="true"
+                                        styleClass="navigationButton"
+                                        rendered="#{pageFlowScope.comingFrom eq 'dashboard' and (pageFlowScope.requestDetail.acquisitionLead || pageFlowScope.requestDetail.budgetLead)}"
+                                        actionListener="#{pageFlowScope.requestDetail.launchRejectPopup}">
+                        <!--<af:showPopupBehavior popupId="p1"
+                                              triggerType="action"/>-->
+                      </af:commandButton>
+                      <f:facet name="separator">
+                        <af:spacer width="20" height="10" id="s16"/>
+                      </f:facet>
+                    </af:panelGroupLayout>
+                  </af:gridCell>
+                </af:gridRow>
+              </af:panelGridLayout>
+            </af:panelHeader>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:decorativeBox>
+      <af:popup id="p1" contentDelivery="lazyUncached"
+                binding="#{pageFlowScope.requestDetail.rejectRequestPopup}">
+        <af:panelWindow id="pw1">
+          <af:panelGroupLayout id="pgl16" layout="vertical">
+            <af:panelFormLayout id="pfl14">
+              <af:inputText value="#{bindings.CommentText.inputValue}" rows="5"
+                            clientComponent="true"
+                            label="#{bindings.CommentText.hints.label}"
+                            required="#{bindings.CommentText.hints.mandatory}"
+                            columns="40"
+                            maximumLength="#{bindings.CommentText.hints.precision}"
+                            shortDesc="#{bindings.CommentText.hints.tooltip}"
+                            id="it12">
+                <f:validator binding="#{bindings.CommentText.validator}"/>
+              </af:inputText>
+              <f:facet name="footer">
+                <af:panelGroupLayout id="pgl17" layout="horizontal"
+                                     halign="end">
+                  <f:facet name="separator">
+                    <af:spacer width="20" height="20" id="s19"/>
+                  </f:facet>
+                  <af:commandButton text="Submit" id="cb7"
+                                    styleClass="navigationButton"
+                                    partialSubmit="true"
+                                    action="#{pageFlowScope.requestDetail.navigateFromApprove}"
+                                    actionListener="#{pageFlowScope.requestDetail.rejectAacqusitionRequest}"/>
+                  <af:commandButton text="Cancel" id="cb6"
+                                    styleClass="navigationButton"
+                                    partialSubmit="true"/>
+                </af:panelGroupLayout>
+              </f:facet>
+              <af:panelLabelAndMessage label="Rejection Reason" id="plam18">
+                <af:selectOneChoice label="Rejection Reason" id="soc15"
+                                    autoSubmit="true" simple="true"
+                                    valueChangeListener="#{pageFlowScope.requestDetail.onRejectReasonChanged}">
+                  <af:selectItem label="Lack of Funding" value="A" id="si16"/>
+                  <af:selectItem label="Vague Allotment" value="B" id="si15"/>
+                  <af:selectItem label="Others" value="C" id="si17"/>
+                </af:selectOneChoice>
+              </af:panelLabelAndMessage>
+              <af:inputText label="Other Reason" id="it8" rows="5"
+                            disabled="#{pageFlowScope.rejectReason eq 'C'}"
+                            contentStyle="height:75px;" columns="40"
+                            binding="#{pageFlowScope.requestDetail.rejectReasonText}"
+                            maximumLength="1024" partialTriggers="soapc15"/>
+            </af:panelFormLayout>
+          </af:panelGroupLayout>
+        </af:panelWindow>
+      </af:popup>
+      <af:popup id="p2" contentDelivery="lazyUncached"
+                binding="#{pageFlowScope.requestDetail.approveRequestPopup}">
+        <af:panelWindow id="pw2">
+          <af:panelGroupLayout id="pgl162" layout="vertical">
+            <af:panelFormLayout id="pfl142">
+              <af:panelLabelAndMessage label="Comment" id="plam22">
+                <af:inputText value="#{bindings.CommentText.inputValue}"
+                              simple="true" columns="40" clientComponent="true"
+                              rows="5"
+                              required="#{bindings.CommentText.hints.mandatory}"
+                              maximumLength="#{bindings.CommentText.hints.precision}"
+                              shortDesc="#{bindings.CommentText.hints.tooltip}"
+                              id="it9">
+                  <f:validator binding="#{bindings.CommentText.validator}"/>
+                </af:inputText>
+              </af:panelLabelAndMessage>
+              <f:facet name="footer">
+                <af:panelGroupLayout id="pgl20" layout="horizontal"
+                                     halign="end">
+                  <af:commandButton text="Submit" id="cb8"
+                                    styleClass="navigationButton"
+                                    partialSubmit="true"
+                                    actionListener="#{pageFlowScope.requestDetail.approveRequest}"
+                                    action="#{pageFlowScope.requestDetail.navigateFromApprove}"/>
+                  <af:commandButton text="Cancel" id="cb9"
+                                    styleClass="navigationButton"
+                                    partialSubmit="true"
+                                    actionListener="#{pageFlowScope.requestDetail.cancelApproveRequest}"/>
+                  <f:facet name="separator">
+                    <af:spacer width="20" height="20" id="s20"/>
+                  </f:facet>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelFormLayout>
+          </af:panelGroupLayout>
+        </af:panelWindow>
+      </af:popup>
+      <af:popup id="p3" binding="#{pageFlowScope.requestDetail.empPopup}"
+                contentDelivery="lazyUncached">
+        <af:dialog id="d1" resize="off" okVisible="false">
+          <af:panelGroupLayout id="pgl25">
+            <af:table value="#{bindings.AapEmployeeView.collectionModel}"
+                      var="row" rows="#{bindings.AapEmployeeView.rangeSize}"
+                      emptyText="#{bindings.AapEmployeeView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.AapEmployeeView.rangeSize}"
+                      rowBandingInterval="1"
+                      filterModel="#{bindings.AapEmployeeViewQuery.queryDescriptor}"
+                      queryListener="#{bindings.AapEmployeeViewQuery.processQuery}"
+                      filterVisible="true" varStatus="vs"
+                      selectedRowKeys="#{bindings.AapEmployeeView.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.AapEmployeeView.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t1" styleClass="AFStretchWidth">
+              <af:column sortProperty="#{bindings.AapEmployeeView.hints.EmpNum.name}"
+                         filterable="true" sortable="true"
+                         headerText="#{bindings.AapEmployeeView.hints.EmpNum.label}"
+                         id="c2">
+                <af:outputText value="#{row.EmpNum}" id="ot6"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.AapEmployeeView.hints.FirstName.name}"
+                         filterable="true" sortable="true"
+                         headerText="#{bindings.AapEmployeeView.hints.FirstName.label}"
+                         id="c3">
+                <af:outputText value="#{row.FirstName}" id="ot4"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.AapEmployeeView.hints.LastName.name}"
+                         filterable="true" sortable="true"
+                         headerText="#{bindings.AapEmployeeView.hints.LastName.label}"
+                         id="c5">
+                <af:outputText value="#{row.LastName}" id="ot3"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.AapEmployeeView.hints.MdlIntlName.name}"
+                         filterable="true" sortable="true"
+                         headerText="#{bindings.AapEmployeeView.hints.MdlIntlName.label}"
+                         id="c4">
+                <af:outputText value="#{row.MdlIntlName}" id="ot7"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.AapEmployeeView.hints.Email.name}"
+                         filterable="true" sortable="true"
+                         headerText="#{bindings.AapEmployeeView.hints.Email.label}"
+                         id="c1">
+                <af:outputText value="#{row.Email}" id="ot5"/>
+              </af:column>
+              <af:column id="c6">
+                <af:commandImageLink text="Select" id="cil2"
+                                     partialSubmit="true"
+                                     actionListener="#{pageFlowScope.requestDetail.populatePoc}"/>
+              </af:column>
+            </af:table>
+          </af:panelGroupLayout>
+        </af:dialog>
+      </af:popup>
+      <!--<af:panelFormLayout id="pfl2" rows="15" maxColumns="4">
+        <af:inputText value="#{bindings.Column1.inputValue}"
+                      label="#{bindings.Column1.hints.label}"
+                      required="#{bindings.Column1.hints.mandatory}"
+                      columns="#{bindings.Column1.hints.displayWidth}"
+                      maximumLength="#{bindings.Column1.hints.precision}"
+                      shortDesc="#{bindings.Column1.hints.tooltip}" id="it15">
+          <f:validator binding="#{bindings.Column1.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.ExistingIaaNumber.inputValue}"
+                      label="#{bindings.ExistingIaaNumber.hints.label}"
+                      required="#{bindings.ExistingIaaNumber.hints.mandatory}"
+                      columns="#{bindings.ExistingIaaNumber.hints.displayWidth}"
+                      maximumLength="#{bindings.ExistingIaaNumber.hints.precision}"
+                      shortDesc="#{bindings.ExistingIaaNumber.hints.tooltip}"
+                      id="it19">
+          <f:validator binding="#{bindings.ExistingIaaNumber.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.SubmitFlag.inputValue}"
+                      label="#{bindings.SubmitFlag.hints.label}"
+                      required="#{bindings.SubmitFlag.hints.mandatory}"
+                      columns="#{bindings.SubmitFlag.hints.displayWidth}"
+                      maximumLength="#{bindings.SubmitFlag.hints.precision}"
+                      shortDesc="#{bindings.SubmitFlag.hints.tooltip}" id="it6">
+          <f:validator binding="#{bindings.SubmitFlag.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.RowID.inputValue}"
+                      label="#{bindings.RowID.hints.label}"
+                      required="#{bindings.RowID.hints.mandatory}"
+                      columns="#{bindings.RowID.hints.displayWidth}"
+                      maximumLength="#{bindings.RowID.hints.precision}"
+                      shortDesc="#{bindings.RowID.hints.tooltip}" id="it33">
+          <f:validator binding="#{bindings.RowID.validator}"/>
+        </af:inputText>
+        <f:facet name="footer">
+          <af:group id="g1">
+            <af:panelGroupLayout id="pgl3">
+              <f:facet name="separator">
+                <af:spacer width="20" height="40" id="s2"/>
+              </f:facet>
+            </af:panelGroupLayout>
+          </af:group>
+        </f:facet>
+        <af:panelLabelAndMessage label="Center Line Item No" id="plam1">
+          <af:outputText value="#{bindings.CtrLnItmNo.inputValue}"
+                         shortDesc="#{bindings.CtrLnItmNo.hints.tooltip}"
+                         id="it21"/>
+        </af:panelLabelAndMessage>
+      </af:panelFormLayout>-->
+      <f:facet name="separator">
+        <af:spacer width="20" height="40" id="s1"/>
+      </f:facet>
+    </af:panelGroupLayout>
+  </af:panelGroupLayout>
+</jsp:root>

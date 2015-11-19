@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="testPageDef"
+                Package="com.fda.aps.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SubmittedRequestsView" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="SubmittedRequestsViewIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="DetailedExpensesView" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="DetailedExpensesViewIterator" ChangeEventPolicy="ppr"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SubmittedRequestsViewIterator"
+          id="SubmittedRequestsView">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.RequestsView"
+                      Name="SubmittedRequestsView0">
+        <AttrNames>
+          <Item Value="RequestSequence"/>
+          <Item Value="AcquisitionStatus"/>
+          <Item Value="AnticipatedAcquisitionMethod"/>
+          <Item Value="AnticipatedActionType"/>
+          <Item Value="AnticipatedNoOfAwards"/>
+          <Item Value="AnticipatedPop"/>
+          <Item Value="CenterId"/>
+          <Item Value="CollaborationFlag"/>
+          <Item Value="CollaborationItemNo"/>
+          <Item Value="CommodityType"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="CtrLnItmNo"/>
+          <Item Value="CurrYrPopEndDate"/>
+          <Item Value="DetailedDescription"/>
+          <Item Value="EstimatedNumberOfActions"/>
+          <Item Value="EstimatedRfaRelDate"/>
+          <Item Value="EstimatedTotalProjValue"/>
+          <Item Value="ExistingDocNo"/>
+          <Item Value="ExistingIaaNumber"/>
+          <Item Value="FiscalYear"/>
+          <Item Value="GrantsCommodity"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+          <Item Value="LeadMngCenter"/>
+          <Item Value="NaicsCode"/>
+          <Item Value="NciboardReviewRequired"/>
+          <Item Value="OptionYrExercise"/>
+          <Item Value="OwnerNmTelNo"/>
+          <Item Value="PotentialContractType"/>
+          <Item Value="PriorityLevel"/>
+          <Item Value="ProductServiceCode"/>
+          <Item Value="ProjectPopEndDate"/>
+          <Item Value="ProjectPopStartDate"/>
+          <Item Value="Purpose"/>
+          <Item Value="RecurringItem"/>
+          <Item Value="ReimbursableAgency"/>
+          <Item Value="ReimbursableAmt"/>
+          <Item Value="ReleaseNumber"/>
+          <Item Value="RequestId"/>
+          <Item Value="RequiredAwardDate"/>
+          <Item Value="RequirementType"/>
+          <Item Value="RequisitionNo"/>
+          <Item Value="ServiceOrReimbursable"/>
+          <Item Value="SubmitFlag"/>
+          <Item Value="TotalDlarsForCurtFy"/>
+          <Item Value="ZeroDollarReqn"/>
+          <Item Value="TotalAmountRemaining"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="DetailedExpensesViewIterator" id="First"
+            RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="DetailedExpensesViewIterator" id="Previous"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="DetailedExpensesViewIterator" id="Next"
+            RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="DetailedExpensesViewIterator" id="Last"
+            RequiresUpdateModel="true" Action="last"/>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="Allowance">
+      <AttrNames>
+        <Item Value="Allowance"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator"
+                     id="CenterItmNo">
+      <AttrNames>
+        <Item Value="CenterItmNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="Cost">
+      <AttrNames>
+        <Item Value="Cost"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="CostCenter">
+      <AttrNames>
+        <Item Value="CostCenter"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="ExpensesId">
+      <AttrNames>
+        <Item Value="ExpensesId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="Fund">
+      <AttrNames>
+        <Item Value="Fund"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator"
+                     id="FundingObjCode">
+      <AttrNames>
+        <Item Value="FundingObjCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="RequestId">
+      <AttrNames>
+        <Item Value="RequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator"
+                     id="SubAllowance">
+      <AttrNames>
+        <Item Value="SubAllowance"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="TotalCost">
+      <AttrNames>
+        <Item Value="TotalCost"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="TotAmtRem">
+      <AttrNames>
+        <Item Value="TotAmtRem"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

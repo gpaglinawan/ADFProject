@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">massapproval</property>
+      <property
+         name="page">/pagefragments/massapproval.jsff</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>massapproval&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">445.6953</property>
+      <property
+         name="x">600.3506</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall6"
+      to="View2">
+      <property
+         name="fromOutcome">toMassApprovalView</property>
+      <property
+         name="sdm:polyPoints">R50,292.37207,665.09766,559.3506,445.34473,L50</property>
+   </ControlFlowCase>
+   <MethodCall
+      id="MethodCall6">
+      <property
+         name="activityId">initializeMassApprovalRejection</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>initializeMassApprovalRejection&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">665.44824</property>
+      <property
+         name="x">251.37207</property>
+   </MethodCall>
+</SDM>

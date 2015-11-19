@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="searchPageDef"
+                Package="pagefragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="APSSearchView" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="APSSearchViewIterator"/>
+    <searchRegion Criteria="APSSearchViewCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="APSSearchViewIterator"
+                  id="APSSearchViewCriteriaQuery"/>
+    <iterator id="SubmittedRequestsViewIterator" Binds="SubmittedRequestsView"
+              DataControl="APSApplicationModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <methodAction id="navigateToRequestDetail"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="navigateToRequestDetail"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="requestId" NDValue="#{row.CtrLnItmNo}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="cloneRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="cloneRequest" IsViewObjectMethod="false">
+      <NamedData NDName="requestId" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="APSSearchViewIterator" id="APSSearchView">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.APSSearchView"
+                      Name="APSSearchView0">
+        <AttrNames>
+          <Item Value="CtrLnItmNo"/>
+          <Item Value="RequisitionNo"/>
+          <Item Value="ExistingDocNo"/>
+          <Item Value="RequiredAwardDate"/>
+          <Item Value="DetailedDescription"/>
+          <Item Value="TotalDlarsForCurtFy"/>
+          <Item Value="WfStatus"/>
+          <Item Value="FiscalYear"/>
+          <Item Value="AcquisitionStatus"/>
+          <Item Value="PriorityLevel"/>
+          <Item Value="RecurringItem"/>
+          <Item Value="ZeroDollarReqn"/>
+          <Item Value="ReleaseNumber"/>
+          <Item Value="RequirementType"/>
+          <Item Value="OptionYrExercise"/>
+          <Item Value="CurrYrPopEndDate"/>
+          <Item Value="AnticipatedActionType"/>
+          <Item Value="PotentialContractType"/>
+          <Item Value="CommodityType"/>
+          <Item Value="AnticipatedAcquisitionMethod"/>
+          <Item Value="ProductServiceCode"/>
+          <Item Value="NaicsCode"/>
+          <Item Value="EstimatedTotalProjValue"/>
+          <Item Value="ProjectPopStartDate"/>
+          <Item Value="ProjectPopEndDate"/>
+          <Item Value="AnticipatedPop"/>
+          <Item Value="CollaborationFlag"/>
+          <Item Value="CollaborationItemNo"/>
+          <Item Value="LeadMngCenter"/>
+          <Item Value="OwnerNmTelNo"/>
+          <Item Value="EstimatedRfaRelDate"/>
+          <Item Value="GrantsCommodity"/>
+          <Item Value="NciboardReviewRequired"/>
+          <Item Value="AnticipatedNoOfAwards"/>
+          <Item Value="ExistingIaaNumber"/>
+          <Item Value="Purpose"/>
+          <Item Value="EstimatedNumberOfActions"/>
+          <Item Value="ServiceOrReimbursable"/>
+          <Item Value="ReimbursableAmt"/>
+          <Item Value="ReimbursableAgency"/>
+          <Item Value="SubmitFlag"/>
+          <Item Value="CenterId"/>
+          <Item Value="RequestId"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+          <Item Value="RequestTitle"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

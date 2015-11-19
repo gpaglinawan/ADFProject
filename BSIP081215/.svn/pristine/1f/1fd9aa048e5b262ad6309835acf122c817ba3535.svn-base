@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="budgetUserViewPageDef"
+                Package="pagefragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DetailedExpensesView" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="DetailedExpensesViewIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="RequestsView" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="RequestsViewIterator"/>
+    <iterator Binds="SubmittedRequestsView" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="SubmittedRequestsViewIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="CenterItemNoROVO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="CenterItemNoROVOIterator"/>
+    <iterator Binds="FdaCanROVO" RangeSize="15"
+              DataControl="APSApplicationModuleDataControl"
+              id="FdaCanROVOIterator"/>
+    <searchRegion Binds="FdaCanROVOIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="FdaCanROVOQuery"/>
+    <iterator Binds="CommentsVO" RangeSize="25"
+              DataControl="APSApplicationModuleDataControl"
+              id="CommentsVOIterator" ChangeEventPolicy="ppr"/>
+  </executables>
+  <bindings>
+    <list IterBinding="RequestsViewIterator" ListOperMode="navigation"
+          ListIter="RequestsViewIterator" id="RequestsView"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="CtrLnItmNo"/>
+      </AttrNames>
+    </list>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="Allowance">
+      <AttrNames>
+        <Item Value="Allowance"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator"
+                     id="SubAllowance">
+      <AttrNames>
+        <Item Value="SubAllowance"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="CostCenter">
+      <AttrNames>
+        <Item Value="CostCenter"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="Cost">
+      <AttrNames>
+        <Item Value="Cost"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="DetailedExpensesViewIterator" id="DetailedExpensesView">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.DetailedExpensesView"
+                      Name="DetailedExpensesView0">
+        <AttrNames>
+          <Item Value="CenterItmNo"/>
+          <Item Value="FundingObjCode"/>
+          <Item Value="Fund"/>
+          <Item Value="Allowance"/>
+          <Item Value="SubAllowance"/>
+          <Item Value="CostCenter"/>
+          <Item Value="Cost"/>
+          <Item Value="Center"/>
+          <Item Value="TotAmtRem"/>
+          <Item Value="Bap"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="TotalDlarsForCurtFy">
+      <AttrNames>
+        <Item Value="TotalDlarsForCurtFy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="TotAmtRem">
+      <AttrNames>
+        <Item Value="TotAmtRem"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="executeSubmittedRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executeSubmittedRequest"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="requestId" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="TotAmtRem1">
+      <AttrNames>
+        <Item Value="TotAmtRem"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="DetailedExpensesViewIterator" id="addBudgetDetail"
+            InstanceName="APSApplicationModuleDataControl.DetailedExpensesView"
+            DataControl="APSApplicationModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="Commit" DataControl="APSApplicationModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator" id="RequestId">
+      <AttrNames>
+        <Item Value="RequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedRequestsViewIterator"
+                     id="CtrLnItmNo">
+      <AttrNames>
+        <Item Value="CtrLnItmNo"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="submitBudgetRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="submitBudgetRequest" IsViewObjectMethod="false">
+      <NamedData NDName="centerItemNo"
+                 NDValue="#{bindings.CtrLnItmNo.inputValue}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="requestId" NDValue="#{bindings.RequestId.inputValue}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="isBudgetLead"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="isBudgetLead" IsViewObjectMethod="false"
+                  ReturnName="data.APSApplicationModuleDataControl.methodResults.isBudgetLead_APSApplicationModuleDataControl_dataProvider_isBudgetLead_result">
+      <NamedData NDName="user" NDValue="#{securityContext.userName}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <list IterBinding="CenterItemNoROVOIterator" ListOperMode="navigation"
+          ListIter="CenterItemNoROVOIterator" id="CenterItemNoROVO"
+          DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="CenterItemNo"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="DetailedExpensesViewIterator" StaticList="false"
+          Uses="LOV_FundingObjCode" id="FundingObjCode" DTSupportsMRU="true"/>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="Bap">
+      <AttrNames>
+        <Item Value="Bap"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DetailedExpensesViewIterator" id="Fund">
+      <AttrNames>
+        <Item Value="Fund"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="FdaCanROVOIterator" id="FdaCanROVO">
+      <nodeDefinition DefName="com.fda.aps.model.viewobject.FdaAapCanROVO"
+                      Name="FdaCanROVO0">
+        <AttrNames>
+         <Item Value="Can"/>
+          <Item Value="FdaFund"/>
+          <Item Value="FdaFundDescription"/>
+          <Item Value="FdaBap"/>
+          <Item Value="FdaAllowance"/>
+          <Item Value="FdaAllowanceDescription"/>
+          <Item Value="FdaSubAllowance"/>
+          <Item Value="FdaSubAllowanceDescription"/>
+          <Item Value="FdaCostCenter"/>
+          <Item Value="FdaCostCenterDescription"/>
+          <Item Value="Center"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="DetailedExpensesViewIterator" id="removeRowWithKey"
+            RequiresUpdateModel="false" Action="removeRowWithKey">
+      <NamedData NDName="rowKey" NDValue="#{row.rowKeyStr}"
+                 NDType="java.lang.String"/>
+    </action>
+    <methodAction id="rejectAquisitionLeadRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="rejectAquisitionLeadRequest"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="centerItemNo"
+                 NDValue="#{bindings.CtrLnItmNo.inputValue}" NDType="java.lang.String"/>
+      <NamedData NDName="requestId" NDValue="#{bindings.RequestId.inputValue}" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="CommentsVOIterator" id="CommentText">
+      <AttrNames>
+        <Item Value="CommentText"/>
+      </AttrNames>
+    </attributeValues>
+     <action IterBinding="CommentsVOIterator" id="insertComment"
+            InstanceName="APSApplicationModuleDataControl.CommentsVO"
+            DataControl="APSApplicationModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <methodAction id="filterCanSearch"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterCanSearch" IsViewObjectMethod="false">
+      <NamedData NDName="center" NDType="java.lang.String"/>
+      <NamedData NDName="requestId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="insertNewComment"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="insertNewComment" IsViewObjectMethod="false"/>
+    <methodAction id="approveBudgetRequest"
+                  InstanceName="APSApplicationModuleDataControl.dataProvider"
+                  DataControl="APSApplicationModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="approveBudgetRequest" IsViewObjectMethod="false">
+      <NamedData NDName="centerItemNo" NDType="java.lang.String"
+                 NDValue="#{bindings.CtrLnItmNo.inputValue}"/>
+      <NamedData NDName="requestId" NDType="java.lang.String"
+                 NDValue="#{bindings.RequestId.inputValue}"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,28 @@
+package com.fda.aps;
+
+public class StringUtils {
+    public StringUtils() {
+        super();
+    }
+    
+    public static void main(String[] args){
+        String year = "2015";
+        System.err.println(year.substring(2));
+        
+        String originalCenterItemNo = "OC-C-15-234";
+        int dashFirstIndex = originalCenterItemNo.indexOf("-");
+        System.err.println(originalCenterItemNo.substring(0, dashFirstIndex));
+//        int dashLastIndex = originalCenterItemNo.lastIndexOf("-");
+//        String newCenterLine = originalCenterItemNo.substring(0, dashLastIndex);
+//        System.err.println(newCenterLine);
+    }
+    
+    public static int nthOccurrence(String str, char c, int n) {
+        int pos = str.indexOf(c, 0);
+        while (n-- > 0 && pos != -1)
+            pos = str.indexOf(c, pos+1) + 1;
+        return pos;
+    }
+    
+    
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="mass-approve-flow-definition">
+    <default-activity id="__1">initializeDashboard</default-activity>
+    <managed-bean id="__10">
+      <managed-bean-name id="__11">massApprovalBean</managed-bean-name>
+      <managed-bean-class id="__9">com.fda.aps.view.managedbean.MassApprovalRejectionBean</managed-bean-class>
+      <managed-bean-scope id="__8">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="massapproval">
+      <page>/pagefragments/massapproval.jsff</page>
+    </view>
+    <method-call id="initializeDashboard">
+      <method>#{bindings.initializeDashboard.execute}</method>
+      <outcome id="__2">
+        <fixed-outcome>toMassApprovalView</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__3">
+      <from-activity-id id="__4">initializeDashboard</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome id="__7">toMassApprovalView</from-outcome>
+        <to-activity-id id="__5">massapproval</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>
