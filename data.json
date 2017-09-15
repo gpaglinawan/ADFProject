@@ -1,0 +1,207 @@
+[
+  {
+    "icisClientId": "233949762",
+    "permResidenceCountry": "JP",
+    "businessDescription": "Manufacture of fruit and vegetable juice",
+    "officer": "OFC05",
+    "verifyEffectiveDate": "11062016",
+    "sourceofWealth": "ACCBX",
+    "ecn": "001426723751954",
+    "timeToLive": "0",
+    "adfstate": "WI",
+    "ssnTaxIdType": "2",
+    "addressLine0": "",
+    "addressLine1": "",
+    "addressLine2": "5161 Dorsett Rd",
+    "idDescription": "G2283352185",
+    "adfcity": "East-Windsor-Hill",
+    "adfZipCode": "84044",
+    "rau": "2977707",
+    "riskCode": "NU",
+    "pubTrade": "Y",
+    "verifyMethod": "ACCBX",
+    "ssnTaxId": "014871426",
+    "cifName2": "The AES Corporation",
+    "verificationDate": "02032017",
+    "cifName1": "*The AES Corporation",
+    "firstName": "Mark",
+    "cifSubType": "GJ",
+    "nationality": "IN",
+    "usStockExchangeName": "AMEX",
+    "foreignStockExchange": "Sapporo Securities Exchange SO",
+    "idIssuingCountry": "JP",
+    "lastName": "Scott",
+    "cifBusinessType": "B",
+    "corpType": "S",
+    "couvQuestion": "Y",
+    "mktCountry2": "JP",
+    "customerStatus": "SUBMITTED_TO_CRSTN",
+    "mktCountry3": "",
+    "mktCountry1": "JP",
+    "verifyStatus": "N",
+    "countryCode": "CH",
+    "stockExchangeCountry": "JP",
+    "key": "001426723751954",
+    "pepStatus": "ACCBX",
+    "customerRelationships": [
+      {
+        "icisClientId": "235032515",
+        "ecn": "000387045221957",
+        "cifName1": "LOVETTA W MCQUIRE",
+        "status": "SUBMITTED_TO_CRSTN"
+      },
+      {
+        "icisClientId": "240697074",
+        "ecn": "060726311941512",
+        "cifName1": "*NEW CHANELL REAL ESTATE SAWALLICH INC",
+        "status": "SUBMITTED_TO_CRSTN"
+      },
+      {
+        "cifName1": "*GULL GROUP, LLC",
+        "cucuRelCode": "088",
+        "ecn": "598406372021618",
+        "percentageOwned": "0000000",
+        "relatedCifName1": "LOVETTA W MCQUIRE",
+        "relatedCustomerECN": "000007036446047"
+
+      }
+    ],
+    "idTypeCode": "DL",
+    "cifCustomerType": "",
+    "customerAccounts": [
+      {
+        "ecn": "001426723751954",
+        "companyId": "55035",
+        "accountOfficerNumber": "ZSNPT",
+        "productId": "PST",
+        "accountRAUNumber": "641172673",
+        "accountOpenDate": "09162017",
+        "accountNumber": "RRKWQIFEQOIZSHLRXOIFJOY",
+        "accountRelationshipCode": "PST",
+        "customerName": "*Administaff, Inc."
+      }
+    ],
+    "wcisResponselst": [
+      {
+        "wcisId": "233949762",
+        "ecnId": "000000010819459",
+        "legalName": "Welch Forsman Associates Incorporated"
+      },
+      {
+        "wcisId": "233949760",
+        "ecnId": "000000010819459",
+        "legalName": "Broadrick Associates Ltd."
+      }
+    ],
+    "dateOfBirth": "01301973",
+    "occupationCode": "HA",
+    "idExpDate": "09192019",
+    "middleName": "Alexander",
+    "regState": "MH",
+    "naic3": "",
+    "naic2": "01",
+    "naic1": "01",
+    "regCountry": "JP"
+  },
+  {
+    "icisClientId": "233949762",
+    "permResidenceCountry": "JP",
+    "businessDescription": "Manufacture of fruit and vegetable juice",
+    "officer": "OFC05",
+    "verifyEffectiveDate": "11062016",
+    "sourceofWealth": "ACCBX",
+    "ecn": "001426723751953",
+    "timeToLive": "0",
+    "adfstate": "WI",
+    "ssnTaxIdType": "2",
+    "addressLine0": "",
+    "addressLine1": "",
+    "addressLine2": "5161 Dorsett Rd",
+    "idDescription": "G2283352185",
+    "adfcity": "East-Windsor-Hill",
+    "adfZipCode": "84044",
+    "rau": "2977707",
+    "riskCode": "NU",
+    "pubTrade": "Y",
+    "verifyMethod": "ACCBX",
+    "ssnTaxId": "014871426",
+    "cifName2": "The AES Corporation",
+    "verificationDate": "02032017",
+    "cifName1": "*The AES Corporation",
+    "firstName": "Mark",
+    "cifSubType": "GJ",
+    "nationality": "IN",
+    "usStockExchangeName": "AMEX",
+    "foreignStockExchange": "Sapporo Securities Exchange SO",
+    "idIssuingCountry": "JP",
+    "lastName": "Scott",
+    "cifBusinessType": "B",
+    "corpType": "S",
+    "couvQuestion": "Y",
+    "mktCountry2": "JP",
+    "customerStatus": "SUBMITTED_TO_CRSTN",
+    "mktCountry3": "",
+    "mktCountry1": "JP",
+    "verifyStatus": "N",
+    "countryCode": "CH",
+    "stockExchangeCountry": "JP",
+    "key": "001426723751954",
+    "pepStatus": "ACCBX",
+    "customerRelationships": [
+      {
+        "icisClientId": "235032515",
+        "ecn": "000387045221957",
+        "cifName1": "LOVETTA W MCQUIRE",
+        "status": "SUBMITTED_TO_CRSTN"
+      },
+      {
+        "icisClientId": "240697074",
+        "ecn": "060726311941512",
+        "cifName1": "*NEW CHANELL REAL ESTATE SAWALLICH INC",
+        "status": "SUBMITTED_TO_CRSTN"
+      },
+      {
+        "icisClientId": "235074221",
+        "ecn": "093458562138317",
+        "cifName1": "*GULL GROUP, LLC",
+        "status": "SUBMITTED_TO_CRSTN"
+      }
+    ],
+    "idTypeCode": "DL",
+    "cifCustomerType": "",
+    "customerAccounts": [
+      {
+        "ecn": "001426723751954",
+        "companyId": "55035",
+        "accountOfficerNumber": "ZSNPT",
+        "productId": "PST",
+        "accountRAUNumber": "641172673",
+        "accountOpenDate": "09162017",
+        "accountNumber": "RRKWQIFEQOIZSHLRXOIFJOY",
+        "accountRelationshipCode": "PST",
+        "customerName": "*Administaff, Inc."
+      }
+    ],
+    "wcisResponselst": [
+      {
+        "wcisId": "233949762",
+        "ecnId": "000000010819459",
+        "legalName": "Welch Forsman Associates Incorporated"
+      },
+      {
+        "wcisId": "233949760",
+        "ecnId": "000000010819459",
+        "legalName": "Broadrick Associates Ltd."
+      }
+    ],
+    "dateOfBirth": "01301973",
+    "occupationCode": "HA",
+    "idExpDate": "09192019",
+    "middleName": "Alexander",
+    "regState": "MH",
+    "naic3": "",
+    "naic2": "01",
+    "naic1": "01",
+    "regCountry": "JP"
+  }
+]
