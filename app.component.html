@@ -1,0 +1,170 @@
+<md-toolbar color="primary" width="100%">
+<span> <img src="./assets/wf-logo - Copy.png" height="60" width="100%"/></span>
+<div height="30"></div>
+</md-toolbar>
+<md-toolbar color="primary" width="100%">
+<span>
+<h1>DAD - Data Analyst Dashboard</h1></span>
+<script>
+function formatStatus(status)
+{
+	return  status;
+}
+document.getElementById("demo").innerHTML = "My First JavaScript";
+</script>
+</md-toolbar>
+
+
+      <kendo-grid #clientGrid [kendoGridBinding]="gridData" [height]="550" [pageSize]="pageSize"
+          [filterable]="true" [selectable]="true"
+                    [pageable]="true" [skip]="skip" (selectionChange)="clientGridChange(clientGrid, $event)">
+          <kendo-grid-column field="cifName2" title="Client Name" width="130">
+            <ng-template kendoGridHeaderTemplate  let-group let-field="field" let-value="value">
+               <div style="text-align:center">  <strong>Main Party Name</strong></div>
+              </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="customerStatus" title="Status" width="120">
+            <ng-template kendoGridHeaderTemplate  let-group let-field="field" let-value="value">
+                 <div style="text-align:center"> <strong>MP Status</strong></div>
+              </ng-template>
+              <ng-template kendoGridCellTemplate let-dataItem>
+                  <div style="text-align:center" [class]=getStatusRowFormat(dataItem.customerStatus)>
+
+						{{ dataItem.customerStatus }} <b>[ {{ dataItem.crstnProcessId }} ]</b>
+
+				</div>
+            </ng-template>
+
+          </kendo-grid-column>
+          <kendo-grid-column field="ecn" title="Main Party ECN ID" width="80" >
+            <ng-template kendoGridHeaderTemplate  let-group let-field="field" let-value="value">
+                 <div style="text-align:center"><strong>MP ECN ID</strong></div>
+              </ng-template>
+              <ng-template kendoGridCellTemplate let-dataItem>
+                  <div style="text-align:center">{{ dataItem.ecn}} </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="ecnForWcis" title="ECN ID for WCIS" width="80">
+            <ng-template kendoGridHeaderTemplate  let-group let-field="field" let-value="value">
+                 <div style="text-align:center"><strong>ECN ID for WCIS</strong></div>
+              </ng-template>
+              <ng-template kendoGridCellTemplate let-dataItem>
+                  <div style="text-align:center">{{ dataItem.ecnForWcis}} </div>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="wcisId" title="WCIS ID" width="130"  [filterable]="true">
+            <ng-template kendoGridHeaderTemplate  let-group let-field="field" let-value="value">
+                 <div style="text-align:center"><strong>MP WCIS ID</strong></div>
+              </ng-template>
+
+          <ng-template kendoGridCellTemplate let-dataItem >
+            <md-select *ngIf="dataItem.wcisResponselst?.length > 0 && dataItem.wcisResponselst?.length > 1" style="width: 90%" (change)="selectWcisId($event, dataItem.ecn)">
+                <md-option [value]="'none'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   WCIS ID &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      LEGAL NAME</md-option>
+                <md-option *ngFor="let c of dataItem.wcisResponselst" [value]="c.wcisId">&nbsp;&nbsp;&nbsp; {{c.wcisId}}&nbsp;&nbsp;&nbsp; {{c.legalName}}</md-option>
+                <md-option [value]="'new'">&nbsp;&nbsp;&nbsp;&nbsp;Create New WCIS ID</md-option>
+            </md-select>
+          <!--select *ngIf="dataItem.wcisResponselst?.length > 0 && dataItem.wcisResponselst?.length > 1" (change)="selectWcisId($event.target.value)"  style="width: 90%">
+              <option>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   WCIS ID &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      LEGAL NAME<option disabled="true">
+              <option *ngFor="let c of dataItem.wcisResponselst" value="{{c.wcisId}}">&nbsp;&nbsp;&nbsp; {{c.wcisId}}&nbsp;&nbsp;&nbsp; {{c.legalName}}</option>
+              <option value="new">&nbsp;&nbsp;&nbsp;&nbsp;Create New WCIS ID</option>
+         </select-->
+         <!--kendo-dropdownlist [data]="dataItem.wcisResponselst" [valueField]="'ecnId'"  [textField]="'legalName'" >
+         </kendo-dropdownlist-->
+
+          <div *ngIf="!(dataItem.wcisResponselst?.length > 0 && dataItem.wcisResponselst?.length > 1)" style="text-align:center">{{dataItem.icisClientId}}</div>
+          <!--input [readonly]="true" value="{{dataItem.icisClientId}}" *ngIf="!(dataItem.wcisResponselst?.length > 0)" type="text"/-->
+          </ng-template>
+
+          </kendo-grid-column>
+
+          <!--kendo-grid-column field="wcisStatus" title="WCIS Status" width="80">
+          </kendo-grid-column-->
+
+          <kendo-grid-column field="Discontinued" title="Action" width="30" [filterable]="false">
+            <ng-template kendoGridHeaderTemplate  let-group let-field="field" let-value="value">
+                 <div style="text-align:center"><strong>Action</strong></div>
+              </ng-template>
+          <ng-template kendoGridCellTemplate let-dataItem>
+          <!--button md-raised-button *ngIf="dataItem.wcisResponselst?.length > 0">Submit</button-->
+          <div style="text-align:center"><button md-fab  [style]="{'background-color': '#888','halign':'center'}" *ngIf="((dataItem.wcisResponselst?.length > 0 && dataItem.wcisResponselst?.length > 1 && buttonShown == 'true'+dataItem.ecn && selectedValue != 'none'))"(click)="updateWcisId(dataItem.ecn)"><md-icon>save</md-icon></button></div>
+          <!--md-icon>save-svg</md-icon-->
+          </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="timeToLive" title="Time to Live" width="40" >
+            <ng-template kendoGridHeaderTemplate  let-group let-field="field" let-value="value">
+                 <div style="text-align:center"><strong>Time to Live</strong></div>
+              </ng-template>
+              <ng-template kendoGridCellTemplate let-dataItem>
+                  <div style="text-align:center">{{ dataItem.timeToLive}} </div>
+            </ng-template>
+          </kendo-grid-column>
+          <ng-template kendoGridDetailTemplate let-dataItem>
+    <kendo-grid
+        #relationshipGrid
+        [skip]="skip" 
+        [data]="dataItem.customerRelationships"
+        [selectable]="true"
+        (selectionChange)="relationshipGridChange(relationshipGrid, $event)"
+        style="margin-left:28px;"
+        >
+<kendo-grid-column  title="MP ECN" width="100" [filterable]="false" [hidden]="true" field="ecn">
+  <ng-template kendoGridCellTemplate  let-dataItem>
+     <div style="text-align:center"> <strong>data</strong></div>
+  </ng-template>
+</kendo-grid-column>
+
+<kendo-grid-column field="cifName1" title="Name" width="100" [filterable]="false"><ng-template kendoGridHeaderTemplate  let-group let-field="field" let-value="value">
+     <div style="text-align:center"> <strong>Related Party Name</strong></div>
+  </ng-template>
+</kendo-grid-column>
+<kendo-grid-column field="status" width="120" title="Account Number">
+  <ng-template kendoGridHeaderTemplate  let-group let-field="field" let-value="value">
+       <div style="text-align:center"> <strong>RP Status</strong></div>
+    </ng-template>
+
+	<ng-template kendoGridCellTemplate let-dataItem>
+                  <div style="text-align:center" [class]=getStatusRowFormat(dataItem.status)>{{ dataItem.status }} </div>
+  </ng-template>
+</kendo-grid-column>
+<kendo-grid-column field="relatedCustomerECN" title="ECN" width="60" [filterable]="false"><ng-template kendoGridHeaderTemplate  let-group let-field="field" let-value="value">
+      <div style="text-align:center"><strong>RP ECN ID</strong></div>
+  </ng-template>
+</kendo-grid-column>
+
+<kendo-grid-column field="" title="ECN ID for WCIS" width="80">
+            <ng-template kendoGridHeaderTemplate  let-group let-field="field" let-value="value">
+                 <div style="text-align:center"><strong>ECN ID for WCIS</strong></div>
+              </ng-template>
+
+          </kendo-grid-column>
+<kendo-grid-column field="icisClientId" title="Open Date" width="60" [filterable]="false">
+  <ng-template kendoGridHeaderTemplate  let-group let-field="field" let-value="value">
+       <strong>RP WCIS ID </strong>
+    </ng-template>
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <md-select #{{dataItem.ecn}} *ngIf="dataItem.wcisResponselst?.length > 0 && dataItem.wcisResponselst?.length > 1" style="width: 90%" (change)="selectRelWcisId($event, dataItem.relatedCustomerECN, dataItem.ecn)"
+          ngModel="selectedWcis{{dataItem.ecn}}">
+          <md-option [value]="'none'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   WCIS ID &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      LEGAL NAME</md-option>
+          <md-option *ngFor="let c of dataItem.wcisResponselst" [value]="c.wcisId">&nbsp;&nbsp;&nbsp; {{c.wcisId}}&nbsp;&nbsp;&nbsp; {{c.legalName}}</md-option>
+          <md-option [value]="'new'+dataItem.relatedCustomerECN">&nbsp;&nbsp;&nbsp;&nbsp;Create New WCIS ID</md-option>
+      </md-select>
+      <div style="text-align:center" *ngIf="!(dataItem.wcisResponselst?.length > 0 && dataItem.wcisResponselst?.length > 1)">{{dataItem.icisClientId}}</div>
+  </ng-template>
+</kendo-grid-column>
+<kendo-grid-column field="Discontinued" title="Action" width="30" [filterable]="false">
+  <ng-template kendoGridHeaderTemplate  let-group let-field="field" let-value="value">
+       <div style="text-align:center"><strong>Action</strong></div>
+    </ng-template>
+<ng-template kendoGridCellTemplate let-dataItem>
+<!--button md-raised-button *ngIf="dataItem.wcisResponselst?.length > 0">Submit</button-->
+<div style="text-align:center"><button md-fab  [style]="{'background-color': '#888','halign':'center'}" *ngIf="(dataItem.wcisResponselst?.length > 0 && dataItem.wcisResponselst?.length > 1 && selectedRelValue == 'new'+dataItem.relatedCustomerECN) && buttonShown != 'true'+dataItem.ecn" (click)="updateWcisId(dataItem.ecn,dataItem.relatedCustomerECN)"><md-icon>save</md-icon></button></div>
+
+<!--md-icon>save-svg</md-icon-->
+</ng-template>
+</kendo-grid-column>
+
+
+
+      </kendo-grid>
+</ng-template>
+</kendo-grid>
