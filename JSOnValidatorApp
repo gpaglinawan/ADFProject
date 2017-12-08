@@ -1,0 +1,63 @@
+package com.wellsfargo.loader.domain.validator;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
+import org.everit.json.schema.Schema;
+import org.everit.json.schema.loader.SchemaLoader;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+public class JSonValidatorApp {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		try{
+		String date = "10192016";	
+			
+		File initialFile = new File("C:/Users/U594490/BBG-CRSTN-Loader_Pre_Processing/loader-pre-processing/src/main/resources/ldrRecordValidator_Corporate.json");
+	    InputStream targetStream = new FileInputStream(initialFile);
+	    JSONObject rawSchema = new JSONObject(new JSONTokener(targetStream));
+	    String content = new String(Files.readAllBytes(Paths.get("C:/Users/U594490/BBG-CRSTN-Loader_Pre_Processing/loader-pre-processing/src/main/resources/sampleCust.json")));
+	    //File custFile = new File("C:/Users/U594490/BBG-CRSTN-Loader_Pre_Processing/loader-pre-processing/src/main/resources/sampleCust.json");
+	    @SuppressWarnings("deprecation")
+		SchemaLoader schemaLoader = SchemaLoader.builder()
+	    		.schemaJson(rawSchema) // rawSchema is the JSON representation of the schema utilizing the "evenlength" non-standard format
+	    		.addFormatValidator(new CornerstoneDateValidator()) // the EvenCharNumValidator gets bound to the "evenlength" keyword
+	    		.build();
+	    
+	    Schema schema = schemaLoader.load().build();
+	    schema.validate(new JSONObject(new JSONTokener(content)));
+		}
+		catch(org.everit.json.schema.ValidationException e)
+		{
+			if (e.getCausingExceptions().isEmpty()){
+				System.out.println(e.getPointerToViolation()+" "+ e.getErrorMessage()+" "+e.getViolatedSchema().getTitle());
+			}
+			for (org.everit.json.schema.ValidationException exception : e.getCausingExceptions()) {
+				//prepareAuditLog(auditLogs, exception);
+				System.out.println(exception.getErrorMessage());
+				
+				List<org.everit.json.schema.ValidationException> detailExceptions = exception.getCausingExceptions();
+				if (detailExceptions != null && detailExceptions.size() > 0)
+				{
+					for (org.everit.json.schema.ValidationException detailException:detailExceptions)
+					{
+						System.out.println(detailException.getLocalizedMessage()+" "+ detailException.getPointerToViolation()+" "+ detailException.getErrorMessage());
+						
+					}
+					
+				}
+			}
+			
+		}
+
+	}
+
+}
