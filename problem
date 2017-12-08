@@ -1,0 +1,4 @@
+6 schema violations found : #/idDescription: string [FOREIGN OTHER] does not match pattern ^([a-zA-Z0-9_-]){1,40}$
+2 schema violations found : #/customerRelationships/0/idDescription: string [23 279 393] does not match pattern 
+ #/idExpDate: string [99999999] does not match pattern ^[0-1]{1}[0-9]{1}[0-3]{1}[0-9]{1}[0-9]{4}$, #/idExpDate: expected: null, found: String, #/idIssuingCountry: ZZ is not a valid enum value 
+ 5 schema violations found : #/customerRelationships/0/adfcity: string [EDMONTON, AB, T8E 1E] does not match pattern ^([a-zA-Z]+[,.]?[ ]?|[a-zA-Z]+['-]?)+$, #/customerRelationships/2/adfZipCode: string [T6P 1L7] does not match pattern ^\d{1,5}([0-9]{4})?$, #/customerRelationships/3/adfcity: string [EDMONTON AB T6T 0M5] does not match pattern ^([a-zA-Z]+[,.]?[ ]?|[a-zA-Z]+['-]?)+$, #/customerAccounts/1: required key [accountOfficerNumber] not found, #/customerAccounts/1: required key 
